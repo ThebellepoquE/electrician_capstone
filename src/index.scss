@@ -1,3 +1,4 @@
+@import './styles/variables';
 @import './styles/mixins';
 
 * {
@@ -7,9 +8,14 @@
   }
   
 body {
-  font-family: 'Futura PT', sans-serif;
-  background-color: #FFFFFF;
-  color: #090909;
+  font-family: $font-family-principal;
+  color: $color-texto-principal;
+}
+
+h1 {
+  font-size: $font-size-titulo;
+  font-weight: $font-weight-bold;
+  color: $color-texto-secundario;
 }
 
 .App {
