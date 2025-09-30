@@ -18,12 +18,12 @@ function App() {
               <div className='nav-wrapper'>
                 <nav className='navigation'>
                   <Link to='/'>INICIO</Link>
-                  <Link to='/servicios'>SERVICIOS</Link>
                   <Link to='/acerca-de'>ACERCA DE</Link>
+                  <Link to='/servicios'>SERVICIOS</Link> 
                   <Link to='/contacto'>CONTACTO</Link>
                 </nav>
                 <div className='cta-wrapper'>
-                  <a href='tel:+34123456789' className='cta-btn'>Llama al 123 456 789</a>
+                  <a href='tel:+34123456789' className='cta-btn'>Contacto 123456789</a>
                 </div>
               </div>
           </header>
