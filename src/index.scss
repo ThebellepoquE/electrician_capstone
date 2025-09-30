@@ -1,0 +1,105 @@
+@import './styles/mixins';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+body {
+  font-family: 'Futura PT', sans-serif;
+  background-color: #FFFFFF;
+  color: #090909;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+}
+
+.header-wrapper {
+  display: flex;
+  background-color: #090909;
+  align-items: center;
+  height: 83px;
+  padding: 0 1rem;
+  width: 100%;
+}
+
+.header {
+  padding: 1rem 0;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: auto;      /* o prueba con width: 120px; */
+  flex: 0 0 auto;   /* evita que crezca demasiado */
+  margin-left: 1rem; /* ajusta según lo que necesites */
+}
+
+.logo {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+  margin-left: 2rem; /* Ajusta el valor según lo que necesites */
+}
+
+/* Centra el menú y coloca el botón a la derecha */
+.nav-wrapper {
+  display: flex;
+  align-items: center; 
+  justify-content: space-between;
+  width: 100%;
+  margin-left: 14rem; /* Puedes aumentar el valor si quieres más espacio */
+}
+/* Botón alineado a la derecha */
+.cta-wrapper {
+  display: flex;
+  flex: 0 0 auto;
+  justify-content: flex-end;
+  margin-right: 2rem; /* Ajusta el valor según lo que necesites */
+}
+
+.navigation {
+  display: flex;
+  gap: 3rem;
+  align-items: space-around;
+  margin-right: 2rem;
+}
+.navigation a {
+  color: #fcfcfb;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.2s, border 0.2s;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  padding: 0.7rem 1.5rem;
+}
+.navigation a:hover {
+  color: #6ECED0;
+  text-decoration: none;
+  font-weight: bold;
+  border: 2px solid #fff;
+}
+
+.cta-btn {
+  @include btn-style;
+}
+.cta-btn:hover {
+  background: #090909;
+  color: #FFFFFF !important;
+  border: 2px solid #6ECED0;
+}
+
+
+
+
+
+
+
+
