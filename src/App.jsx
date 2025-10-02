@@ -3,6 +3,8 @@ import AcercaDe from './pages/AcercaDe.jsx';
 import Servicios from './pages/Servicios.jsx';
 import Contacto from './pages/Contacto.jsx';
 import Auth from './pages/Auth.jsx';
+import Admin from './pages/Admin.jsx';
+import ProtectedRoute from './components/ProtectedRoute.jsx';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import logo from './assets/logo.png';
 import './index.scss';
@@ -36,7 +38,9 @@ function App() {
           <Route path='/servicios' element={<Servicios />} />
           <Route path='/contacto' element={<Contacto />} />
           <Route path='/auth' element={<Auth />} />
+          <Route path='/admin' element={<ProtectedRoute><Admin /></ProtectedRoute>} />
         </Routes>
+        
       </div>
     </BrowserRouter>
   );
