@@ -1,7 +1,8 @@
 import Home from './pages/Home.jsx';
-import Servicios from './pages/Servicios.jsx';
 import AcercaDe from './pages/AcercaDe.jsx';
+import Servicios from './pages/Servicios.jsx';
 import Contacto from './pages/Contacto.jsx';
+import Auth from './pages/Auth.jsx';
 import './index.scss';
 import logo from './assets/logo.png';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
@@ -21,9 +22,10 @@ function App() {
                   <Link to='/acerca-de'>ACERCA DE</Link>
                   <Link to='/servicios'>SERVICIOS</Link> 
                   <Link to='/contacto'>CONTACTO</Link>
+                  <Link to='/auth'>LOGIN</Link>
                 </nav>
                 <div className='cta-wrapper'>
-                  <a href='tel:+34123456789' className='cta-btn'>Contacto 123456789</a>
+                  <a href='tel:123456789' className='cta-btn'>Contacto 123456789</a>
                 </div>
               </div>
           </header>
@@ -33,6 +35,7 @@ function App() {
           <Route path='/acerca-de' element={<AcercaDe />} />
           <Route path='/servicios' element={<Servicios />} />
           <Route path='/contacto' element={<Contacto />} />
+          <Route path='/auth' element={<Auth />} />
         </Routes>
       </div>
     </BrowserRouter>
