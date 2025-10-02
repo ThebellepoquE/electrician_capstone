@@ -24,9 +24,15 @@ dist-ssr
 *.sln
 *.sw?
 
-backend/
-.env
 # Backend
 backend/node_modules/
 backend/.env
 backend/*.log
+
+# Local environment files (avoid committing secrets)
+.env
+.env.local
+
+# env locals
+.env.local
+.env
