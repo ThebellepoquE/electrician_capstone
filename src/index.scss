@@ -30,77 +30,96 @@ h1 {
   height: 83px;
   padding: 0 1rem;
   width: 100%;
-}
 
-.header {
-  padding: 1rem 0;
-  display: flex;
-  align-items: center;
-  width: 100%;
-}
+  .header {
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    position: relative;
 
-.logo-section {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  width: auto;      /* o prueba con width: 120px; */
-  flex: 0 0 auto;   /* evita que crezca demasiado */
-  margin-left: 1rem; /* ajusta según lo que necesites */
-}
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      /* extender fuera del padding para que llegue de borde a borde */
+      left: -1rem;
+      right: -1rem;
+      height: 1px; /* más sutil */
+      background-color: rgba(255,255,255,0.15); /* línea tenue */
+    }
 
-.logo {
-  height: 48px;
-  width: auto;
-  object-fit: contain;
-  margin-left: 2rem;
-}
+    .logo-section {
+      flex: 0 0 auto;
 
-/* Centra el menú y coloca el botón a la derecha */
-.nav-wrapper {
-  display: flex;
-  align-items: center; 
-  justify-content: space-between;
-  width: 100%;
-  margin-left: 14rem; /* Puedes aumentar el valor si quieres más espacio */
-}
-/* Botón alineado a la derecha */
-.cta-wrapper {
-  display: flex;
-  flex: 0 0 auto;
-  justify-content: flex-end;
-  margin-right: 2rem; /* Ajusta el valor según lo que necesites */
-}
+      .logo {
+        height: 48px;
+        width: auto;
+        object-fit: contain;
+      }
+    }
+    .nav-wrapper {
+      display: flex;
+      align-items: center;
+      flex: 1; /* ocupa el espacio entre logo y CTA */
+      position: relative;
 
-.navigation {
-  display: flex;
-  gap: 3rem;
-  align-items: space-around;
-  margin-right: 2rem;
-}
-.navigation a {
-  color: variables.$color-texto;
-  text-decoration: none;
-  font-size: variables.$font-size-base;
-  display: inline-block;
-  transition: variables.$transition-boton;
-  border: 2px solid transparent;
-  border-radius: variables.$border-radius-total;
-  padding: variables.$padding-boton;
-}
-.navigation a:hover {
-  color: variables.$color-primario;
-  text-decoration: none;
-  font-weight: variables.$font-weight-bold;
-  border: 2px solid variables.$color-borde-hover;
-}
+      .navigation {
+        margin: 0 auto; /* centra el menú dentro del espacio disponible */
+        display: flex;
+        gap: 3rem;
+        align-items: center;
+      }
 
-.cta-btn {
-  @include mixins.btn-style;
-}
-.cta-btn:hover {
-  background: variables.$color-boton-hover;
-  color: variables.$color-texto !important;
-  border: 2px solid variables.$color-boton-borde-hover;
+      .cta-wrapper {
+        margin-left: auto; /* empuja el botón a la derecha */
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    .navigation {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      /* Pequeño desplazamiento a la derecha: ajusta este valor según necesites */
+      transform: translateX(0.75rem);
+
+      a {
+        color: variables.$color-texto;
+        text-decoration: none;
+        font-size: variables.$font-size-base;
+        font-weight: variables.$font-weight-bold;
+        display: inline-block;
+        transition: variables.$transition-boton;
+        border: 2px solid transparent;
+        border-radius: variables.$border-radius-total;
+        padding: variables.$padding-boton;
+
+        &:hover {
+          color: variables.$color-primario;
+          text-decoration: none;
+          border-color: variables.$color-borde-hover;
+        }
+      }
+    }
+
+    .cta-wrapper {
+      flex: 0 0 auto;
+
+      .cta-btn {
+        @include mixins.btn-style;
+        border-color: variables.$color-borde-hover;
+
+        &:hover {
+          background: variables.$color-boton-hover;
+          color: variables.$color-texto !important;
+          border: 2px solid variables.$color-boton-borde-hover;
+        }
+      }
+    }
+  }
 }
 
 

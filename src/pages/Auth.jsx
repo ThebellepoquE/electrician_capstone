@@ -1,4 +1,5 @@
 import React, { useState} from 'react';
+import '../styles/auth.scss';
 
 function Auth() {
     const [isLogin, setIslogin] = useState(true);
@@ -38,6 +39,8 @@ function Auth() {
         }
     };
 
+    // (removed show/hide password toggle)
+
     return (
         <div className="auth-container">
             {/* Seccion de imagen */}
@@ -75,14 +78,15 @@ function Auth() {
                                 required
                         />
                     </div>
-                    <div className="form-group">
-                        <label>Contraseña</label>
+                    <div className="form-group password-group">
+                        <label htmlFor="password">Contraseña</label>
                         <input
+                            id="password"
                             type="password"
                             name="password"
                             value={formData.password}
                             onChange={handleChange}
-                            placeholder='........'
+                            placeholder="••••••••" /* visual: bullets; actual masking is handled by the browser */
                             required
                         />
                     </div>
