@@ -1,21 +1,21 @@
-@import './styles/variables';
-@import './styles/mixins';
+@use './styles/variables';
+@use './styles/mixins';
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-  font-family: $font-family-principal;
-  color: $color-texto-principal;
+  font-family: variables.$font-family-principal;
+  color: variables.$color-texto-principal;
 }
 
 h1 {
-  font-size: $font-size-titulo;
-  font-weight: $font-weight-bold;
-  color: $color-texto-secundario;
+  font-size: variables.$font-size-titulo;
+  font-weight: variables.$font-weight-bold;
+  color: variables.$color-texto-secundario;
 }
 
 .App {
@@ -25,7 +25,7 @@ h1 {
 
 .header-wrapper {
   display: flex;
-  background-color: #090909;
+  background-color: variables.$color-fondo;
   align-items: center;
   height: 83px;
   padding: 0 1rem;
@@ -52,7 +52,7 @@ h1 {
   height: 48px;
   width: auto;
   object-fit: contain;
-  margin-left: 2rem; /* Ajusta el valor según lo que necesites */
+  margin-left: 2rem;
 }
 
 /* Centra el menú y coloca el botón a la derecha */
@@ -78,29 +78,29 @@ h1 {
   margin-right: 2rem;
 }
 .navigation a {
-  color: #fcfcfb;
+  color: variables.$color-texto;
   text-decoration: none;
-  font-size: 1rem;
+  font-size: variables.$font-size-base;
   display: inline-block;
-  transition: color 0.2s, border 0.2s;
+  transition: variables.$transition-boton;
   border: 2px solid transparent;
-  border-radius: 999px;
-  padding: 0.7rem 1.5rem;
+  border-radius: variables.$border-radius-total;
+  padding: variables.$padding-boton;
 }
 .navigation a:hover {
-  color: #6ECED0;
+  color: variables.$color-primario;
   text-decoration: none;
-  font-weight: bold;
-  border: 2px solid #fff;
+  font-weight: variables.$font-weight-bold;
+  border: 2px solid variables.$color-borde-hover;
 }
 
 .cta-btn {
-  @include btn-style;
+  @include mixins.btn-style;
 }
 .cta-btn:hover {
-  background: #090909;
-  color: #FFFFFF !important;
-  border: 2px solid #6ECED0;
+  background: variables.$color-boton-hover;
+  color: variables.$color-texto !important;
+  border: 2px solid variables.$color-boton-borde-hover;
 }
 
 

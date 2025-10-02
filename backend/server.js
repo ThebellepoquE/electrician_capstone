@@ -3,7 +3,13 @@ import cors from 'cors';
 import db from './database.js';
 
 const app = express();
-app.use(cors());
+
+// Configuración de CORS específica
+app.use(cors({
+  origin: 'https://musical-waddle-g47wj5v56ppg2vxg9-5173.app.github.dev',
+  credentials: true
+}));
+
 app.use(express.json());
 
 app.get('/', (req, res) => {
