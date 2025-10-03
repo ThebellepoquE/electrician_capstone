@@ -20,7 +20,8 @@ h1 {
 
 .App {
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* colocar header arriba y contenido debajo */
+  min-height: 100vh;
 }
 
 .header-wrapper {
@@ -83,7 +84,7 @@ h1 {
       display: flex;
       justify-content: center;
       gap: 3rem;
-      /* Pequeño desplazamiento a la derecha: ajusta este valor según necesites */
+      /* Pequeño desplazamiento a la derecha: se ajusta este valor según necesites */
       transform: translateX(0.75rem);
 
       a {
@@ -100,7 +101,7 @@ h1 {
         &:hover {
           color: variables.$color-primario;
           text-decoration: none;
-          border-color: variables.$color-borde-hover;
+          border-color: variables.$color-primario;
         }
       }
     }
@@ -110,12 +111,16 @@ h1 {
 
       .cta-btn {
         @include mixins.btn-style;
-        border-color: variables.$color-borde-hover;
+        /* Forzar los colores del CTA según variables: borde azul, interior negro */
+        background: variables.$color-boton-bg-default;
+        color: variables.$color-boton-text-default;
+        border: 2px solid variables.$color-boton-border-default;
 
         &:hover {
-          background: variables.$color-boton-hover;
-          color: variables.$color-texto !important;
-          border: 2px solid variables.$color-boton-borde-hover;
+          /* Invertir: fondo azul, texto negro, borde negro */
+          background: variables.$color-boton-bg-hover;
+          color: variables.$color-boton-text-hover !important;
+          border: 2px solid variables.$color-boton-border-hover;
         }
       }
     }

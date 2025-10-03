@@ -2,7 +2,7 @@ const AcercaDe = () => {
     return (
         <div>
             <h1>Acerca De</h1>
-            <p>Bienvenido a la página Acerca De. Aquí encontrarás información sobre nuestro proyecto.</p>
+            <p>Bienvenido a la página Acerca De.</p>
         </div>
     );
 };

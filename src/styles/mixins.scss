@@ -1,14 +1,14 @@
 @use './variables';
 
 @mixin btn-style {
-  background: #6ECED0;
-  color: #FFFFFF;
-  border: 2px solid transparent;
+  background: variables.$color-boton-bg-default;
+  color: variables.$color-boton-text-default;
+  border: 2px solid variables.$color-boton-border-default;
   border-radius: 999px;
   padding: 0.5rem 1.5rem;
   font-weight: bold;
   margin-left: 2rem;
   cursor: pointer;
   text-decoration: none;
-  transition: background 0.2s, color 0.2s;
+  transition: variables.$transition-boton;
 }

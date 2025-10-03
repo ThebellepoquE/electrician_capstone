@@ -91,15 +91,19 @@
 
             button {
                 @include mixins.btn-style; /* Usar el mixin para estilos de botón */
-                border-color: variables.$color-borde-hover; /* Borde blanco por defecto */
+                /* Forzar colores coherentes con el CTA: borde azul, fondo negro por defecto */
+                background: variables.$color-boton-bg-default;
+                color: variables.$color-boton-text-default;
+                border: 2px solid variables.$color-boton-border-default;
                 font-size: variables.$font-size-boton; /* Usar la variable para tamaño de fuente */
                 padding: variables.$padding-boton; /* Usar la variable para padding */
                 border-radius: variables.$border-radius-total; /* Usar la variable para border-radius */
 
                 &:hover {
-                    background-color: variables.$color-boton-hover;
-                    color: variables.$color-boton-borde-hover;
-                    border-color: variables.$color-borde-hover; /* Borde blanco en hover */
+                    /* Invertir colores en hover: fondo azul, texto negro, borde negro */
+                    background: variables.$color-boton-bg-hover;
+                    color: variables.$color-boton-text-hover !important;
+                    border: 2px solid variables.$color-boton-border-hover;
                 }
             }
 
@@ -151,6 +155,7 @@
 
             &:hover {
                 background-color: variables.$color-primario; /* hover usando color primario para contraste */
+                border-color: variables.$color-boton-border-hover; /* mostrar borde blanco en hover */
             }
 
             &:focus {
