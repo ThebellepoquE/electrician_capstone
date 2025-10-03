@@ -66,10 +66,33 @@ h1 {
       position: relative;
 
       .navigation {
+        /* Unificada: ocupa espacio y centra el menú */
+        flex: 1;
         margin: 0 auto; /* centra el menú dentro del espacio disponible */
         display: flex;
         gap: 3rem;
         align-items: center;
+        justify-content: center;
+        /* Pequeño desplazamiento a la derecha: se ajusta este valor según necesites */
+        transform: translateX(0.75rem);
+
+        a {
+          color: variables.$color-texto;
+          text-decoration: none;
+          font-size: variables.$font-size-base;
+          font-weight: variables.$font-weight-bold;
+          display: inline-block;
+          transition: variables.$transition-boton;
+          border: 2px solid transparent;
+          border-radius: variables.$border-radius-total;
+          padding: variables.$padding-boton;
+
+          &:hover {
+            color: variables.$color-primario;
+            text-decoration: none;
+            border-color: variables.$color-primario;
+          }
+        }
       }
 
       .cta-wrapper {
@@ -79,47 +102,14 @@ h1 {
       }
     }
 
-    .navigation {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      gap: 3rem;
-      /* Pequeño desplazamiento a la derecha: se ajusta este valor según necesites */
-      transform: translateX(0.75rem);
-
-      a {
-        color: variables.$color-texto;
-        text-decoration: none;
-        font-size: variables.$font-size-base;
-        font-weight: variables.$font-weight-bold;
-        display: inline-block;
-        transition: variables.$transition-boton;
-        border: 2px solid transparent;
-        border-radius: variables.$border-radius-total;
-        padding: variables.$padding-boton;
-
-        &:hover {
-          color: variables.$color-primario;
-          text-decoration: none;
-          border-color: variables.$color-primario;
-        }
-      }
-    }
-
+    
     .cta-wrapper {
       flex: 0 0 auto;
 
-      .cta-btn {
-        @include mixins.btn-style;
-        /* Forzar los colores del CTA según variables: borde azul, interior negro */
-        background: variables.$color-boton-bg-default;
-        color: variables.$color-boton-text-default;
-        border: 2px solid variables.$color-boton-border-default;
+        .cta-btn {
+          @include mixins.btn-light;
 
         &:hover {
-          /* Invertir: fondo azul, texto negro, borde negro */
-          background: variables.$color-boton-bg-hover;
-          color: variables.$color-boton-text-hover !important;
           border: 2px solid variables.$color-boton-border-hover;
         }
       }

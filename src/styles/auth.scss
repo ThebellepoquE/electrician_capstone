@@ -90,21 +90,15 @@
             /* password toggle removed - inputs keep default padding */
 
             button {
-                @include mixins.btn-style; /* Usar el mixin para estilos de botón */
-                /* Forzar colores coherentes con el CTA: borde azul, fondo negro por defecto */
-                background: variables.$color-boton-bg-default;
-                color: variables.$color-boton-text-default;
-                border: 2px solid variables.$color-boton-border-default;
+                @include mixins.btn-dark; /* Usar el mixin dark para botones dentro del form */
                 font-size: variables.$font-size-boton; /* Usar la variable para tamaño de fuente */
                 padding: variables.$padding-boton; /* Usar la variable para padding */
                 border-radius: variables.$border-radius-total; /* Usar la variable para border-radius */
 
-                &:hover {
-                    /* Invertir colores en hover: fondo azul, texto negro, borde negro */
-                    background: variables.$color-boton-bg-hover;
-                    color: variables.$color-boton-text-hover !important;
-                    border: 2px solid variables.$color-boton-border-hover;
-                }
+                    &:hover {
+                        /* Invertir colores en hover: azul de light y borde blanco */
+                        @include mixins.btn-light;
+                    }
             }
 
             /* Botón de envío: ocupar la misma largura que los inputs */
