@@ -1,35 +1,22 @@
 // Variables de colores y estilos globales
-$color-primario: #6ECED0;
-$color-secundario: #f4ce24;
-$color-terceario: #FFFFFF;
-$color-fondo: #090909;
-$color-texto: #FFFFFF;
-$color-texto-principal: $color-texto;
-$color-texto-secundario: $color-fondo;
-$color-hover: #fff200;
-$color-borde-hover-primario: #090909;
-$color-borde-hover-secundario: #6ED0CE;
-$color-boton-borde-hover-primario: #FFFFFF;
-$color-boton-borde-hover: #6ED0CE;
 
+// Colores principales
+$blue: #207B88;           // Color principal
+$light-blue: #6ECED0;     // Color de acentos
+$dark: #090909;           // Texto principal
+$charcoal: #1A1A2E;       // Fondo oscuro
+$offwhite: #F7F9FC;       // Fondo claro
+$warning: #FF6B6B;        // Estados de error
+$grey: #95A5A6;           // Texto secundario
+
+// Tipografía
+$font-family-principal: 'Futura PT', sans-serif;
+$font-size-base: 1rem;
+$font-size-titulo: 2rem;
+$font-weight-bold: 700;
+
+// Botones y elementos de formulario
 $border-radius-total: 999px;
 $padding-boton: 0.7rem 1.5rem;
-$font-size-boton: 0.9375rem;
+$font-size-boton: 1rem;
 $transition-boton: background 0.2s, color 0.2s, border 0.2s;
-
-// CTA button colors: por defecto borde azul, interior negro; hover invierte
-$color-boton-bg-default: $color-fondo; // fondo negro
-$color-boton-text-default: $color-texto; // texto claro sobre fondo negro (usa $color-texto existente)
-$color-boton-border-default: $color-primario; // borde azul
-
-$color-boton-bg-hover: $color-primario; // fondo azul al hover
-$color-boton-text-hover: $color-fondo; // texto negro sobre azul (usa $color-fondo existente)
-$color-boton-border-hover: $color-terceario; // borde blanco al hover
-
-// Nuevas variables para tipografía y colores de texto
-$font-family-principal: 'Futura PT', sans-serif;
-$font-size-titulo: 2rem;
-$font-size-base: 1rem;
-$font-weight-bold: 700;
-$color-texto-principal: #FFFFFF;
-$color-texto-secundario: #090909;

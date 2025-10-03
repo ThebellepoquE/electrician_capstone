@@ -40,7 +40,9 @@ function App() {
           <Route path='/auth' element={<Auth />} />
           <Route path='/admin' element={<ProtectedRoute><Admin /></ProtectedRoute>} />
         </Routes>
-        
+        <footer className='footer'>
+          <p>© 2025 Electrician <WebsiteLink /></p>
+        </footer>
       </div>
     </BrowserRouter>
   );

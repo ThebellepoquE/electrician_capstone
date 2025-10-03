@@ -1,34 +1,43 @@
 @use './variables';
 
-@mixin btn-style {
-  // Por compatibilidad, btn-style usa la variante 'dark' por defecto
-  @include btn-dark;
-}
-
-// Botón variante 'dark' (fondo negro, borde blanco, texto blanco)
+// Mixin para botones con fondo oscuro (por defecto)
 @mixin btn-dark {
-  background: variables.$color-boton-bg-default;
-  color: variables.$color-boton-text-default;
-  border: 2px solid variables.$color-terceario; /* borde blanco */
-  border-radius: 999px;
-  padding: 0.5rem 1.5rem;
-  font-weight: bold;
-  margin-left: 2rem;
+  background: variables.$charcoal;
+  color: variables.$offwhite;
+  border: 2px solid transparent;
+  border-radius: variables.$border-radius-total;
+  padding: variables.$padding-boton;
+  font-size: variables.$font-size-boton;
   cursor: pointer;
   text-decoration: none;
   transition: variables.$transition-boton;
+
+  &:hover {
+    background: variables.$dark;
+    color: variables.$light-blue;
+    border-color: variables.$light-blue;
+  }
 }
 
-// Botón variante 'primary' (fondo azul, borde blanco, texto negro)
+// Mixin para botones con fondo claro/azul
 @mixin btn-light {
-  background: variables.$color-boton-bg-hover; /* azul */
-  color: variables.$color-boton-text-hover;   /* texto negro sobre azul */
-  border: 2px solid variables.$color-terceario; /* borde blanco */
-  border-radius: 999px;
-  padding: 0.5rem 1.5rem;
-  font-weight: bold;
-  margin-left: 2rem;
+  background: variables.$blue;
+  color: variables.$offwhite;
+  border: 2px solid transparent;
+  border-radius: variables.$border-radius-total;
+  padding: variables.$padding-boton;
+  font-size: variables.$font-size-boton;
   cursor: pointer;
   text-decoration: none;
   transition: variables.$transition-boton;
+
+  &:hover {
+    background: variables.$light-blue;
+    border-color: variables.$blue;
+  }
+}
+
+// Alias para compatibilidad con código antiguo
+@mixin btn-style {
+  @include btn-dark;
 }

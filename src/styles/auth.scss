@@ -1,5 +1,5 @@
-@use '../styles/variables';
-@use '../styles/mixins';
+@use './variables';
+@use './mixins';
 
 .auth-container {
     display: grid;
@@ -19,7 +19,7 @@
         justify-content: center;
         padding: 2rem;
         height: 100%;
-        border-top: solid 2px variables.$color-primario;;
+        border-top: solid 2px variables.$blue;
 
         img {
             max-width: 100%;
@@ -37,15 +37,15 @@
         justify-content: center;
         align-items: center;
         padding: 2rem;
-        background-color: variables.$color-fondo;
+        background-color: variables.$offwhite;
         height: 100%;
-        border-top: solid 2px variables.$color-terceario;
-        border-bottom: solid 2px variables.$color-primario;
+        border-top: solid 2px variables.$light-blue;
+        border-bottom: solid 2px variables.$blue;
 
         h2 {
             font-size: variables.$font-size-titulo;
             font-weight: variables.$font-weight-bold;
-            color: variables.$color-texto-principal;
+            color: variables.$dark;
             margin-bottom: 1.5rem;
         }
 
@@ -64,9 +64,9 @@
 
             label {
                 font-size: variables.$font-size-base;
-                color: variables.$color-texto-principal;
+                color: variables.$dark;
                 margin-bottom: 0.5rem;
-                display: block; /* asegura que el label ocupe toda la línea */
+                display: block;
             }
 
             input {
@@ -82,7 +82,7 @@
 
                 &:focus {
                     outline: none;
-                    border-color: variables.$color-primario;
+                    border-color: variables.$blue;
                     box-shadow: 0 0 5px rgba(110, 206, 208, 0.5);
                 }
             }
@@ -116,10 +116,10 @@
         /* ===== Light variant: cuando quites el fondo, añade la clase .light a .auth-form */
         &.light {
             background: transparent;
-            color: variables.$color-texto-secundario; /* texto oscuro para fondo claro */
+            color: variables.$grey; /* texto oscuro para fondo claro */
 
             label, h2 {
-                color: variables.$color-texto-secundario;
+                color: variables.$grey;
             }
 
             input {
@@ -129,15 +129,15 @@
             }
 
             .auth-switch, .auth-button {
-                color: variables.$color-texto-secundario;
+                color: variables.$dark; /* texto oscuro para fondo claro */
             }
         }
         
         /* Botón de cambio (fuera del form) - ocupa ancho opcional y separado del submit */
         > .auth-switch {
             display: inline-block;
-            background-color: variables.$color-fondo; /* fondo oscuro del proyecto */
-            color: variables.$color-texto; /* texto blanco del proyecto */
+            background-color: variables.$offwhite; /* fondo oscuro del proyecto */
+            color: variables.$dark; /* texto blanco del proyecto */
             padding: 0.5rem 1rem;
             border-radius: variables.$border-radius-total;
             border: 1px solid transparent;
@@ -148,12 +148,12 @@
             align-self: center; /* centrar respecto al formulario */
 
             &:hover {
-                background-color: variables.$color-primario; /* hover usando color primario para contraste */
-                border-color: variables.$color-boton-border-hover; /* mostrar borde blanco en hover */
+                background-color: variables.$blue; /* hover usando color primario para contraste */
+                border-color: variables.$offwhite; /* mostrar borde blanco en hover */
             }
 
             &:focus {
-                outline: 2px solid variables.$color-primario;
+                outline: 2px solid variables.$blue;
                 outline-offset: 2px;
             }
         }

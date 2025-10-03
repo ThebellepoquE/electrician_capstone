@@ -9,28 +9,31 @@
 
 body {
   font-family: variables.$font-family-principal;
-  color: variables.$color-texto-principal;
+  color: variables.$offwhite;
 }
 
 h1 {
   font-size: variables.$font-size-titulo;
   font-weight: variables.$font-weight-bold;
-  color: variables.$color-texto-secundario;
+  color: variables.$grey;
 }
 
 .App {
   display: flex;
-  flex-direction: column; /* colocar header arriba y contenido debajo */
+  flex-direction: column; 
   min-height: 100vh;
 }
 
 .header-wrapper {
   display: flex;
-  background-color: variables.$color-fondo;
+  background-color: variables.$dark;
   align-items: center;
   height: 83px;
   padding: 0 1rem;
   width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 
   .header {
     padding: 1rem;
@@ -59,6 +62,7 @@ h1 {
         object-fit: contain;
       }
     }
+
     .nav-wrapper {
       display: flex;
       align-items: center;
@@ -74,23 +78,25 @@ h1 {
         align-items: center;
         justify-content: center;
         /* Pequeño desplazamiento a la derecha: se ajusta este valor según necesites */
-        transform: translateX(0.75rem);
+        transform: translateX(0.55rem);
 
         a {
-          color: variables.$color-texto;
-          text-decoration: none;
+          color: variables.$offwhite;
+          text-decoration: underline;
+          text-decoration-color: rgba(variables.$light-blue, 0.5);
+          text-decoration-thickness: 1px;
+          text-underline-offset: 4px;
           font-size: variables.$font-size-base;
-          font-weight: variables.$font-weight-bold;
-          display: inline-block;
-          transition: variables.$transition-boton;
-          border: 2px solid transparent;
-          border-radius: variables.$border-radius-total;
+          font-weight: normal;
+          //display: inline-block;
+          transition: opacity 0.2s ease, text-decoration-color 0.3s ease, transform 0.1s ease;
           padding: variables.$padding-boton;
 
           &:hover {
-            color: variables.$color-primario;
-            text-decoration: none;
-            border-color: variables.$color-primario;
+            color: variables.$offwhite;
+            opacity: 0.4;
+            transform: scale(1.05);
+            text-decoration-color: variables.$light-blue;
           }
         }
       }
@@ -110,7 +116,7 @@ h1 {
           @include mixins.btn-light;
 
         &:hover {
-          border: 2px solid variables.$color-boton-border-hover;
+          border: 2px solid variables.$blue;
         }
       }
     }
