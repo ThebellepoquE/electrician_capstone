@@ -9,7 +9,7 @@
 
   h1 {
     color: v.$charcoal;
-    margin-bottom: 2rem;
+    margin-bottom: 2 rem;
     text-align: center;
     font-size: v.$font-size-titulo;
     font-family: v.$font-family-principal;
@@ -30,11 +30,15 @@
 
   .form-group {
     display: flex;
+    color: v.$charcoal;
+    font-family: v.$font-family-principal;
+  }
+
+  .form-group {
+    display: flex;
     gap: 1rem;
     align-items: flex-end;
     flex-wrap: wrap;
-    color: v.$charcoal;
-    font-family: v.$font-family-principal;
   }
 
   .form-input {
@@ -51,7 +55,7 @@
   }
 
   .form-select {
-    padding: 0.75rem;
+    padding: 0.75;
     border: 1px solid v.$grey;
     border-radius: 4px;
     font-size: v.$font-size-base;
@@ -71,7 +75,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  border: 1px solid v.$grey;
+  border: 1px solid lighten(v.$grey, 20%);
   border-radius: 8px;
   padding: 1.5rem;
   margin-bottom: 1rem;
@@ -82,7 +86,7 @@
 
     h4 {
       margin: 0 0 0.5rem 0;
-      color: v.$charcoal;
+      color: v.$font-family-principal;
       font-family: v.$font-family-principal;
     }
 
@@ -101,29 +105,29 @@
 }
 
 .categoria {
-  background: v.$grey;
+  background: lighten(v.$grey, 30%);
   padding: 0.25rem 0.5rem;
   border-radius: 4px;
   font-size: 0.875rem;
   color: v.$charcoal;
 
   &.reparación {
-    background: v.$warning;
-    color: white;
+    background: lighten(v.$warning, 30%);
+    color: darken(v.$warning, 20%);
   }
   &.instalación {
-    background: v.$blue;
-    color: white;
+    background: lighten(v.$blue, 40%);
+    color: v.$blue;
   }
   &.emergencia {
-    background: v.$warning;
-    color: white;
+    background: lighten(v.$warning, 20%);
+    color: darken(v.$warning, 30%);
   }
 }
 
 .emergencia-tag {
-  background: v.$warning;
-  color: white;
+  background: lighten(v.$warning, 20%);
+  color: darken(v.$warning, 30%);
   padding: 0.25rem 0.5rem;
   border-radius: 4px;
   font-size: 0.875rem;
@@ -133,7 +137,17 @@
   @include m.btn-dark;
 }
 
-.btn-danger {
+btn-danger {
   @include m.btn-dark;
   background: v.$warning;
+  font-family: v.$font-family-principal;
+
+  &:hover {
+    background: darken(v.$warning-principal);
+    border-color: v.$warning;
+  }
 }
+
+
+
+

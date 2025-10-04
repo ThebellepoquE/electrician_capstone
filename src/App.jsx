@@ -25,6 +25,7 @@ function App() {
                   <Link to='/servicios'>SERVICIOS</Link> 
                   <Link to='/contacto'>CONTACTO</Link>
                   <Link to='/auth'>LOGIN</Link>
+                  <Link to='/admin'>ADMIN</Link>
                 </nav>
                 <div className='cta-wrapper'>
                   <a href='tel:123456789' className='cta-btn'>Contacto 123456789</a>
@@ -38,8 +39,16 @@ function App() {
           <Route path='/servicios' element={<Servicios />} />
           <Route path='/contacto' element={<Contacto />} />
           <Route path='/auth' element={<Auth />} />
-          <Route path='/admin' element={<ProtectedRoute><Admin /></ProtectedRoute>} />
+          <Route 
+            path='/admin' 
+            element={
+            <ProtectedRoute>
+              <Admin />
+            </ProtectedRoute>
+            } 
+            />
         </Routes>
+        
         <footer className='footer'>
           <p>© 2025 Electrician Services</p>
         </footer>
