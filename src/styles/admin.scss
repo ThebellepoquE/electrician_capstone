@@ -9,7 +9,7 @@
 
   h1 {
     color: v.$charcoal;
-    margin-bottom: 2 rem;
+    margin-bottom: 2rem;
     text-align: center;
     font-size: v.$font-size-titulo;
     font-family: v.$font-family-principal;
@@ -30,15 +30,11 @@
 
   .form-group {
     display: flex;
-    color: v.$charcoal;
-    font-family: v.$font-family-principal;
-  }
-
-  .form-group {
-    display: flex;
     gap: 1rem;
     align-items: flex-end;
     flex-wrap: wrap;
+    color: v.$charcoal;
+    font-family: v.$font-family-principal;
   }
 
   .form-input {
@@ -55,7 +51,7 @@
   }
 
   .form-select {
-    padding: 0.75;
+    padding: 0.75rem;
     border: 1px solid v.$grey;
     border-radius: 4px;
     font-size: v.$font-size-base;
@@ -71,4 +67,73 @@
   }
 }
 
+.servicio-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border: 1px solid v.$grey;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  background: white;
 
+  .servicio-info {
+    flex: 1;
+
+    h4 {
+      margin: 0 0 0.5rem 0;
+      color: v.$charcoal;
+      font-family: v.$font-family-principal;
+    }
+
+    .servicio-descripcion {
+      color: v.$grey;
+      margin: 0 0 1rem 0;
+      line-height: 1.4;
+    }
+
+    .servicio-meta {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+  }
+}
+
+.categoria {
+  background: v.$grey;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  color: v.$charcoal;
+
+  &.reparación {
+    background: v.$warning;
+    color: white;
+  }
+  &.instalación {
+    background: v.$blue;
+    color: white;
+  }
+  &.emergencia {
+    background: v.$warning;
+    color: white;
+  }
+}
+
+.emergencia-tag {
+  background: v.$warning;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+}
+
+.btn-primary {
+  @include m.btn-dark;
+}
+
+.btn-danger {
+  @include m.btn-dark;
+  background: v.$warning;
+}

@@ -4,7 +4,7 @@
 .auth-container {
     display: grid;
     grid-template-columns: 1fr 1fr;  /* Izquierda: imagen, Derecha: formulario */
-    height: calc(100vh - 83px);     /* Resta la altura del header */
+    height: calc(100vh - 83px);  /* Resta la altura del header */
     width: 100%;
     overflow: hidden;
     position: fixed;
@@ -90,13 +90,12 @@
             /* password toggle removed - inputs keep default padding */
 
             button {
-                @include m.btn-dark; /* Usar el mixin dark para botones dentro del form */
-                font-size: v.$font-size-boton; /* Usar la variable para tamaño de fuente */
-                padding: v.$padding-boton; /* Usar la variable para padding */
-                border-radius: v.$border-radius-total; /* Usar la variable para border-radius */
+                @include m.btn-dark;
+                font-size: v.$font-size-boton;
+                padding: v.$padding-boton;
+                border-radius: v.$border-radius-total;
 
                     &:hover {
-                        /* Invertir colores en hover: azul de light y borde blanco */
                         @include m.btn-light;
                     }
             }
@@ -107,16 +106,16 @@
                 display: block;
                 text-align: center;
                 margin-top: 0.5rem;
-                margin-left: 0; /* anula margin-left del mixin */
+                margin-left: 0; 
             }
 
             /* auth-switch (styles moved out of form scope) */
         }
 
-        /* ===== Light variant: cuando quites el fondo, añade la clase .light a .auth-form */
+        /* Light variant: cuando quites el fondo, añade la clase .light a .auth-form */
         &.light {
             background: transparent;
-            color: v.$grey; /* texto oscuro para fondo claro */
+            color: v.$grey; 
 
             label, h2 {
                 color: v.$grey;
@@ -129,15 +128,15 @@
             }
 
             .auth-switch, .auth-button {
-                color: v.$dark; /* texto oscuro para fondo claro */
+                color: v.$dark; 
             }
         }
         
         /* Botón de cambio (fuera del form) - ocupa ancho opcional y separado del submit */
         > .auth-switch {
             display: inline-block;
-            background-color: v.$offwhite; /* fondo oscuro del proyecto */
-            color: v.$dark; /* texto blanco del proyecto */
+            background-color: v.$offwhite; 
+            color: v.$dark; 
             padding: 0.5rem 1rem;
             border-radius: v.$border-radius-total;
             border: 1px solid transparent;
@@ -148,8 +147,8 @@
             align-self: center; /* centrar respecto al formulario */
 
             &:hover {
-                background-color: v.$blue; /* hover usando color primario para contraste */
-                border-color: v.$offwhite; /* mostrar borde blanco en hover */
+                background-color: v.$blue;
+                border-color: v.$offwhite; 
             }
 
             &:focus {
