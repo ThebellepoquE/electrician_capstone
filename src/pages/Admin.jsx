@@ -85,15 +85,28 @@ function Admin() {
 
             {/* Lista de servicios */}
             <div className="servicios-list">
-                <h2>Servicios Existentes ({servicios.length})</h2>
+                <h3>Servicios Existentes ({servicios.length})</h3>
                 {servicios.map((servicio) => (
-                    <div key={servicio.id} className="servicio-item">
-                        <h3>{servicio.name}</h3>
-                        <p>{servicio.description}</p>
-                        <span className="category">{servicio.category}</span>
-                        <button onClick={() => eliminarServicio(servicio.id)} className="btn-delete">
-                            Eliminar
-                        </button>
+                    <div key={servicio.id} className="servicio-card">
+                    <div className="servicio-info">
+                        <h4>{servicio.name}</h4>
+                        <p className="servicio-descripcion">{servicio.descripcion}</p>
+                        <div className="servicio-meta">
+                            <span className={`categoria ${servicio.category}`}>
+                                {servicio.category}
+                            </span>
+                            {servicio.is_emergency && (
+                            <span className="emergencia-tag"> 
+                                🆘 Emergencia
+                            </span>
+                            )}
+                        </div>
+                    </div>
+                    <button
+                        onClick={() => eliminarServicio(servicio.id)}
+                        className="brn-danger">
+                        Eliminar
+                    </button>
                     </div>
                 ))}
             </div>

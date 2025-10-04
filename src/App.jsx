@@ -1,12 +1,12 @@
+import ProtectedRoute from './components/ProtectedRoute.jsx';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import logo from './assets/logo.png';
 import Home from './pages/Home.jsx';
 import AcercaDe from './pages/AcercaDe.jsx';
 import Servicios from './pages/Servicios.jsx';
 import Contacto from './pages/Contacto.jsx';
 import Auth from './pages/Auth.jsx';
 import Admin from './pages/Admin.jsx';
-import ProtectedRoute from './components/ProtectedRoute.jsx';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-import logo from './assets/logo.png';
 import './index.scss';
 
 function App() {
