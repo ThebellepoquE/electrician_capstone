@@ -1,5 +1,6 @@
+import { useState, useEffect } from 'react';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link, useNavigate, Navigate } from 'react-router-dom';
 import logo from './assets/logo.png';
 import Home from './pages/Home.jsx';
 import AcercaDe from './pages/AcercaDe.jsx';
@@ -7,9 +8,26 @@ import Servicios from './pages/Servicios.jsx';
 import Contacto from './pages/Contacto.jsx';
 import Auth from './pages/Auth.jsx';
 import Admin from './pages/Admin.jsx';
-import './index.scss';
 
 function App() {
+  const [userData, setUserData] = useState(null);
+  const navigate = useNavigate();
+
+  // Verificar si hay usuario logueado al cargar app
+  useEffect(() => {
+    const user = localStorage.getItem('userData');
+    if (user)
+      setUserData(JSON.parse(user));
+  }, []);
+
+  // Función para cerrar sesión
+  const cerrarSesion = () => {
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('userData');
+    setUserData(null);
+    navigate('/');
+  };
+  
   return (
     <BrowserRouter>
       <div className='App'>
@@ -27,6 +45,28 @@ function App() {
                   <Link to='/auth'>LOGIN</Link>
                   <Link to='/admin'>ADMIN</Link>
                 </nav>
+
+                {/* NAVEGACION INTELIGENTE AQUÍ */}
+                {!userData ? (
+                  // Usuario NO logueado - ve LOGIN
+                  <Link to='/auth'>Login</Link>
+                ) : (
+                  // Usuario SI logueado 
+                  <>
+                    {/* solo admin ve ADMIN */}
+                    {userData.role === 'admin' && (
+                      <Link to='/admin'>Admin</Link>
+                    )}
+                    {/* todos ven LOGOUT */}
+                    <button
+                      onClick={cerrarSesion}
+                      className='logout-btn'
+                      >
+                      CERRAR SESIÓN
+                    </button>
+                  </>
+                )}
+                
                 <div className='cta-wrapper'>
                   <a href='tel:123456789' className='cta-btn'>Contacto 123456789</a>
                 </div>
@@ -39,14 +79,15 @@ function App() {
           <Route path='/servicios' element={<Servicios />} />
           <Route path='/contacto' element={<Contacto />} />
           <Route path='/auth' element={<Auth />} />
+          <Route path='/admin' element={<Admin />} />
           <Route 
             path='/admin' 
             element={
-            <ProtectedRoute>
-              <Admin />
-            </ProtectedRoute>
+              <ProtectedRoute>
+                <Admin />
+              </ProtectedRoute>
             } 
-            />
+          />
         </Routes>
         
         <footer className='footer'>
@@ -56,7 +97,5 @@ function App() {
     </BrowserRouter>
   );
 }
-
-
 
 export default App;
