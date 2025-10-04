@@ -41,7 +41,7 @@ function App() {
           <Route path='/admin' element={<ProtectedRoute><Admin /></ProtectedRoute>} />
         </Routes>
         <footer className='footer'>
-          <p>© 2025 Electrician <WebsiteLink /></p>
+          <p>© 2025 Electrician Services</p>
         </footer>
       </div>
     </BrowserRouter>
