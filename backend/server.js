@@ -141,6 +141,19 @@ app.put('/api/services/:id', (req, res) => {
   }
 });
 
+app.delete('/api/services/:id', (req, res) => {
+  const id = parseInt(req.params.id);
+  const index = mockServices.findIndex(s => s.id === id);
+
+  if (index !== -1) {
+    mockServices.splice(index, 1);
+    res.json({ success: true, message: 'Servicio eliminado' });
+  } else {
+    res.status(404).json({ success: false, message: 'Servicio no encontrado' });
+  }
+});
+
+// PUERTO ( luego )
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Servidor corriendo en puerto ${PORT}`);

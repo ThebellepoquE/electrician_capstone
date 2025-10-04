@@ -35,8 +35,20 @@ function Auth() {
 
             const data = await response.json();
             console.log('Respuesta del servidor:', data);
+
+            // guardar token si login exitoso
+            if (data.success) {
+                localStorage.setItem('authToken', data.token);
+                localStorage.setItem('userData', JSON.stringify(data.user));
+                alert(`¡${isLogin ? 'Login' : 'Registro'} exitoso! Bienvenid@ ${data.user.nombre}`);
+                // redirigir a la página principal
+            } else {
+                alert(`Error: ${data.message}`);
+            }
+        
         } catch (error) {
             console.error('Error al conectar con el servidor:', error);
+            alert('Error al conectar con el servidor. Intenta nuevamente.');
         }
     };
 
