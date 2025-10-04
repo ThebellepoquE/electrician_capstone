@@ -20,12 +20,9 @@ function Auth() {
         e.preventDefault();
         console.log('Enviando:', formData);
 
-    const API_BASE = 'http://localhost:3001';
-    const API_URL = `${API_BASE}/api/auth`;
-
         try {
             const endpoint = isLogin ? '/login' : '/register';
-            const response = await fetch(API_URL + endpoint, {
+            const response = await fetch(`/api/auth${endpoint}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
