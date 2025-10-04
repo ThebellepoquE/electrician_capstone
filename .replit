@@ -6,3 +6,6 @@ channel = "stable-22_11"
 
 [deployment]
 run = ["sh", "-c", "cd backend && USE_MOCK_DB=1 npm run dev"]
+
+[agent]
+expertMode = true
