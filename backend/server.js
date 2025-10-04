@@ -145,12 +145,12 @@ app.delete('/api/services/:id', (req, res) => {
   const id = parseInt(req.params.id);
   const index = mockServices.findIndex(s => s.id === id);
 
-  if (index !== -1)
+  if (index !== -1) {
     mockServices.splice(index, 1);
     res.json({ success: true, message: 'Servicio eliminado' });
-} else {
+  } else {
     res.status(404).json({ success: false, message: 'Servicio no encontrado' });
-}
+  }
 });
 
 // PUERTO ( luego )
