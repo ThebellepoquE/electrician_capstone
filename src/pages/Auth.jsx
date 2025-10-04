@@ -1,10 +1,12 @@
 import React, { useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/auth.scss';
 
 function Auth() {
+    const navigate = useNavigate();
     const [isLogin, setIslogin] = useState(true);
     const [formData, setFormData] = useState({
-        username: '',
+        nombre: '',
         email: '',
         password: ''
     });
@@ -18,29 +20,42 @@ function Auth() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Enviando:', formData);
 
+        console.log(' 1. Iniciando submit...')
+
+        const API_BASE = 'http://localhost:3001';
+        const API_URL = '${API_BASE}/api/auth'
+        
         try {
             const endpoint = isLogin ? '/login' : '/register';
-            const response = await fetch(`/api/auth${endpoint}`, {
+            console.log('2. Haciendo fetch a:', API_URL + endpoint);
+            
+            const response = await fetch(API_URL + endpoint, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(formData)
             });
+            
+            console.log('3. Respuesta status:', response.status);
 
             const data = await response.json();
-            console.log('Respuesta del servidor:', data);
+            console.log('4. Respuesta del servidor:', data);
 
             // guardar token si login exitoso
             if (data.success) {
+                console.log('🔐 5. Login exitoso, guardando token...');
+                
                 localStorage.setItem('authToken', data.token);
                 localStorage.setItem('userData', JSON.stringify(data.user));
-                alert(`¡${isLogin ? 'Login' : 'Registro'} exitoso! Bienvenid@ ${data.user.nombre}`);
+                console.log('🔐 6. Redirigiendo a /admin...');
+                navigate('/admin');
+                
                 // redirigir a la página principal
             } else {
-                alert(`Error: ${data.message}`);
+                console.log('🔐 7. Error en login:', data.error);
+                alert('Error de conexion con el servidor');
             }
         
         } catch (error) {
