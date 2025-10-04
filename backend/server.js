@@ -5,8 +5,19 @@ import db from './database.js';
 const app = express();
 
 // Configuración de CORS específica
+// Allow local development (vite on 5173) and keep the existing production origin.
+const allowedOrigins = [
+  process.env.FRONTEND_URL || 'http://localhost:5173',
+  'https://musical-waddle-g47wj5v56ppg2vxg9-5173.app.github.dev'
+];
+
 app.use(cors({
-  origin: 'https://musical-waddle-g47wj5v56ppg2vxg9-5173.app.github.dev',
+  origin: (origin, callback) => {
+    // Allow requests with no origin (e.g., server-to-server, curl, Postman).
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) return callback(null, true);
+    return callback(new Error('CORS policy: Origin not allowed'));
+  },
   credentials: true
 }));
 
