@@ -36,8 +36,16 @@ app.get('/api/services', async (req, res) => {
   }
 });
 
+app.post('/api/auth/register', (req, res) => {
+  console.log('📝 Registrando:', req.body);
+  res.json({ 
+    success: true, 
+    message: 'Usuario registrado en Replit!',
+    user: { id: 1, email: req.body.email, nombre: req.body.nombre }
+  });
+});
+
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Servidor corriendo en puerto ${PORT}`);
 });
-

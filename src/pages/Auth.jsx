@@ -20,8 +20,8 @@ function Auth() {
         e.preventDefault();
         console.log('Enviando:', formData);
 
-    const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-    const API_URL = `${API_BASE.replace(/\/+$/,'')}/api/auth`;
+    const API_BASE = 'http://localhost:3001';
+    const API_URL = `${API_BASE}/api/auth`;
 
         try {
             const endpoint = isLogin ? '/login' : '/register';
