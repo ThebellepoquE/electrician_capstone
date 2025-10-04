@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
-import { BrowserRouter, Routes, Route, Link, useNavigate, Navigate } from 'react-router-dom';
+import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 import logo from './assets/logo.png';
 import Home from './pages/Home.jsx';
 import AcercaDe from './pages/AcercaDe.jsx';
@@ -13,14 +13,12 @@ function App() {
   const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
 
-  // Verificar si hay usuario logueado al cargar app
   useEffect(() => {
     const user = localStorage.getItem('userData');
     if (user)
       setUserData(JSON.parse(user));
   }, []);
 
-  // Función para cerrar sesión
   const cerrarSesion = () => {
     localStorage.removeItem('authToken');
     localStorage.removeItem('userData');
@@ -29,72 +27,54 @@ function App() {
   };
   
   return (
-    <BrowserRouter>
-      <div className='App'>
-        <div className='header-wrapper'>
-          <header className='header'>
-            <div className='logo-section'>
-              <img src={logo} alt="Logo de la app" className="logo" />
-            </div>
-              <div className='nav-wrapper'>
-                <nav className='navigation'>
-                  <Link to='/'>INICIO</Link>
-                  <Link to='/acerca-de'>ACERCA DE</Link>
-                  <Link to='/servicios'>SERVICIOS</Link> 
-                  <Link to='/contacto'>CONTACTO</Link>
-                  <Link to='/auth'>LOGIN</Link>
-                  <Link to='/admin'>ADMIN</Link>
-                </nav>
+    <div className='App'>
+      <div className='header-wrapper'>
+        <header className='header'>
+          <div className='logo-section'>
+            <img src={logo} alt="Logo de la app" className="logo" />
+          </div>
+            <div className='nav-wrapper'>
+              <nav className='navigation'>
+                <Link to='/'>INICIO</Link>
+                <Link to='/acerca-de'>ACERCA DE</Link>
+                <Link to='/servicios'>SERVICIOS</Link> 
+                <Link to='/contacto'>CONTACTO</Link>
+                {!userData && <Link to='/auth'>LOGIN</Link>}
+                {userData && userData.role === 'admin' && <Link to='/admin'>ADMIN</Link>}
+              </nav>
 
-                {/* NAVEGACION INTELIGENTE AQUÍ */}
-                {!userData ? (
-                  // Usuario NO logueado - ve LOGIN
-                  <Link to='/auth'>Login</Link>
-                ) : (
-                  // Usuario SI logueado 
-                  <>
-                    {/* solo admin ve ADMIN */}
-                    {userData.role === 'admin' && (
-                      <Link to='/admin'>Admin</Link>
-                    )}
-                    {/* todos ven LOGOUT */}
-                    <button
-                      onClick={cerrarSesion}
-                      className='logout-btn'
-                      >
-                      CERRAR SESIÓN
-                    </button>
-                  </>
-                )}
-                
-                <div className='cta-wrapper'>
-                  <a href='tel:123456789' className='cta-btn'>Contacto 123456789</a>
-                </div>
+              {userData && (
+                <button onClick={cerrarSesion} className='logout-btn'>
+                  CERRAR SESIÓN
+                </button>
+              )}
+              
+              <div className='cta-wrapper'>
+                <a href='tel:123456789' className='cta-btn'>Contacto 123456789</a>
               </div>
-          </header>
-        </div>
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/acerca-de' element={<AcercaDe />} />
-          <Route path='/servicios' element={<Servicios />} />
-          <Route path='/contacto' element={<Contacto />} />
-          <Route path='/auth' element={<Auth />} />
-          <Route path='/admin' element={<Admin />} />
-          <Route 
-            path='/admin' 
-            element={
-              <ProtectedRoute>
-                <Admin />
-              </ProtectedRoute>
-            } 
-          />
-        </Routes>
-        
-        <footer className='footer'>
-          <p>© 2025 Electrician Services</p>
-        </footer>
+            </div>
+        </header>
       </div>
-    </BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/acerca-de' element={<AcercaDe />} />
+        <Route path='/servicios' element={<Servicios />} />
+        <Route path='/contacto' element={<Contacto />} />
+        <Route path='/auth' element={<Auth />} />
+        <Route 
+          path='/admin' 
+          element={
+            <ProtectedRoute>
+              <Admin />
+            </ProtectedRoute>
+          } 
+        />
+      </Routes>
+      
+      <footer className='footer'>
+        <p>© 2025 Electrician Services</p>
+      </footer>
+    </div>
   );
 }
 
