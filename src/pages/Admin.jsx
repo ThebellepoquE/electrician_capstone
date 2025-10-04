@@ -11,9 +11,16 @@ function Admin() {
 
     // Cargar servicios al montar el componente
     const cargarServicios = async () => {
-        const response = await fetch('/api/services');
-        const data = await response.json();
-        setServicios(data);
+        console.log('Cargando servicios...');
+        try {
+           const response = await fetch('http://localhost:3001/api/services');
+            console.log('📡 Respuesta:', response.status);
+            const data = await response.json();
+            console.log('📊 Servicios cargados:', data);
+            setServicios(data);
+        } catch (error) {
+          console.error('❌ Error cargando servicios:', error); 
+        }
     };
 
     // Añadir servicio
@@ -90,7 +97,7 @@ function Admin() {
                     <div key={servicio.id} className="servicio-card">
                     <div className="servicio-info">
                         <h4>{servicio.name}</h4>
-                        <p className="servicio-descripcion">{servicio.descripcion}</p>
+                        <p className="servicio-description">{servicio.description}</p>
                         <div className="servicio-meta">
                             <span className={`categoria ${servicio.category}`}>
                                 {servicio.category}
