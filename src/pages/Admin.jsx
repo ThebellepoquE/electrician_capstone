@@ -104,7 +104,7 @@ function Admin() {
                     </div>
                     <button
                         onClick={() => eliminarServicio(servicio.id)}
-                        className="brn-danger">
+                        className="btn-danger">
                         Eliminar
                     </button>
                     </div>

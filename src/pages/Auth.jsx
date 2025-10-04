@@ -23,7 +23,6 @@ function Auth() {
 
         console.log(' 1. Iniciando submit...')
 
-        const API_BASE = 'http://localhost:3001';
         const API_URL = '/api/auth';
         
         try {
