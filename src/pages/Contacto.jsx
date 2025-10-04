@@ -1,4 +1,5 @@
-const Contacto = () => {
+
+function Contacto() {
     return (
         <div>
             <h1>Contacto</h1>

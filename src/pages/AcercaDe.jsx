@@ -1,4 +1,6 @@
-const AcercaDe = () => {
+
+
+function AcercaDe() {
     return (
         <div>
             <h1>Acerca De</h1>

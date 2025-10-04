@@ -1,4 +1,3 @@
-import React from 'react';
 import { useState, useEffect } from 'react';
 
 function Servicios() {
@@ -10,17 +9,17 @@ function Servicios() {
     const fetchServicios = async () => {
       try {
         console.log('🔌 Conectando con el backend...');
-        const response = await fetch('https://musical-waddle-g47wj5v56ppg2vxg9-5000.app.github.dev/api/services');
+        const response = await fetch('/api/services');
         
         if (!response.ok) {
           throw new Error(`Error HTTP: ${response.status}`);
         }
         
         const data = await response.json();
-        console.log('✅ Servicios cargados:', data);
+        console.log('Servicios cargados:', data);
         setServicios(data);
       } catch (err) {
-        console.error('❌ Error:', err);
+        console.error('Error:', err);
         setError(err.message);
       } finally {
         setLoading(false);
@@ -33,7 +32,7 @@ function Servicios() {
   if (loading) {
     return (
       <div>
-        <h2>⚡ Cargando servicios eléctricos...</h2>
+        <h2>Cargando servicios eléctricos...</h2>
         <p>Conectando con nuestra base de datos</p>
       </div>
     );
@@ -42,7 +41,7 @@ function Servicios() {
   if (error) {
     return (
       <div>
-        <h2>❌ Error al cargar servicios</h2>
+        <h2>Error al cargar servicios</h2>
         <p><strong>Mensaje:</strong> {error}</p>
         <p>🔧 Asegúrate de que el backend está corriendo en puerto 5000</p>
       </div>

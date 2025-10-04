@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import '../styles/admin.scss';
+import { data } from 'react-router-dom';
 
 function Admin() {
     const [servicios, setServicios] = useState([]);
@@ -11,15 +12,20 @@ function Admin() {
 
     // Cargar servicios al montar el componente
     const cargarServicios = async () => {
-        console.log('Cargando servicios...');
         try {
-           const response = await fetch('http://localhost:3001/api/services');
-            console.log('📡 Respuesta:', response.status);
+            console.log('🔌 Cargando servicios...');
+            const response = await fetch('/api/services');
+            
+            if (!response.ok)
+                throw new Error(`Error HTTP: ${response.status}`);
+            
             const data = await response.json();
             console.log('📊 Servicios cargados:', data);
             setServicios(data);
+        
         } catch (error) {
           console.error('❌ Error cargando servicios:', error); 
+          setServicios(data);
         }
     };
 
