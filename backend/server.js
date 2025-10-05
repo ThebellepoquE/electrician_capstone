@@ -10,7 +10,7 @@ app.use(cors({
 }));
 app.use(express.json());
 
-// Mock data users an services
+// Mock data users solo para auth por ahora (sin MySQL)
 const mockUsers = [
   {
     id: 1, 
@@ -28,46 +28,90 @@ const mockUsers = [
   }
 ];
 
-const mockServices = [
-  {
-    id: 1,
-    name: 'Localización de Fallos Eléctricos',
-    description: 'Diagnóstico y reparación de problemas eléctricos, cortocircuitos y fallos en instalaciones',
-    category: 'reparación',
-    is_emergency: true,
-    is_active: true,
-    created_at: new Date().toISOString()
-  },
-  {
-    id: 2, 
-    name: 'Instalación de Iluminación',
-    description: 'Instalación de nuevos puntos de luz, lámparas, sistemas de iluminación interior y exterior',
-    category: 'instalación',
-    is_emergency: false,
-    is_active: true,
-    created_at: new Date().toISOString()
-  }
-  // ... añadir los otros 6 servicios
-];
-
-// Endpoints
-app.get('/', (req, res) => {
-  res.json({ message: 'Backend electricista funcionando!' });
+// Endpoints de servicios 
+app.get('/', (_req, res) => {
+  res.json({ message: 'Backend electricista funcionando'});
 });
 
-app.get('/api/services', async (req, res) => {
+// ENDPOINTS MYSQL DE SERVICIOS
+
+// GET /api/services - desde MySQL
+app.get('/api/services', async (_req, res) => {
   try {
-    const [services] = await db.execute('SELECT * FROM services WHERE is_active = true');
+    const [services] = await db.execute(
+  'SELECT * FROM services WHERE is_active = true ORDER BY created_at DESC'
+    );
     res.json(services);
   } catch (error) {
-    // Si falla MySQL, USAR MOCK DATA
-    res.json(mockServices.filter(services => services.is_active));
+    console.error('Error al obtener servicios:', error);
+    res.status(500).json({ error: 'Error obteniendo servicios' });
   }
 });
 
-app.post('/api/auth/login', (req, res) => {
+// POST /api/services - crear en MySQL
+app.post('/api/services', async(req, res) => {
+  try {
+    const { name, description, category } = req.body;
+    const [result] = await db.execute(
+      'INSERT INTO services (name, description, category) VALUES (?, ?, ?)',
+      [name, description, category]
+    );
+
+    const [newService] = await db.execute(
+      'SELECT * FROM services WHERE id = ?',
+      [result.insertId]);
+      res.json(newService[0]);
+  } catch (error) {
+    console.error('Error creando servicio:', error);
+    res.status(500).json({ error: 'Error creando servicio' });
+  }
+});
+
+// PUT /api/services/:id - actualizar en MySQL
+app.put('/api/services/:id', async (req, res) => {
+  try {
+    const serviceId = req.params.id;
+    const { name, description, category } = req.body;
+
+    const [result] = await db.execute(
+      'UPDATE services SET name = ?, description = ?, category = ? WHERE id = ?',
+      [name, description, category, serviceId]
+    );
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: 'Servicio no encontrado' });
+    }
+
+    res.json({ sucess: true, message: 'Servicio actualizado' });
+  } catch (error) {
+    console.error('Error actualizando servicio:', error);
+    res.status(500).json({ error: 'Error actualizando servicio' });
+  }
+});
+
+app.delete('/api/services/:id', async (req, res) => {
+  try {
+    const serviceId = req.params.id;
+    const [result] = await db.execute
+      ('UPDATE services SET is_active = false WHERE id = ?',
+      [serviceId]
+    );
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: 'Servicio no encontrado' });
+    }
+
+    res.json({ success: true, message: 'Servicio eliminado' });
+  } catch (error) {
+    console.error('Error eliminando servicio:', error);
+    res.status(500).json({ error: 'Error eliminando servicio'});
+  }
+});
+    
+ // ENDPOINTS AUTH MOCK
+app.post('/api/auth/login', (req, res) => { 
   const { email, password } = req.body;
-  console.log('Intento de login:', email);
+  console.log('Intento de login:', email, password);
 
   const user = mockUsers.find(user => user.email === email);
 
@@ -93,12 +137,21 @@ app.post('/api/auth/login', (req, res) => {
 
 app.post('/api/auth/register', (req, res) => {
   const { email, password, nombre } = req.body;
-  console.log('Intento de registro:', email);
+  console.log('Registro de usuario:', email);
+
+  // Verificar si el usuario ya existe
+  const userExists = mockUsers.find(user => user.email === email);
+  if (userExists) {
+    return res.status(400).json({
+      sucess: false,
+      message: 'El usuario ya existe'
+    });
+  }
 
   const newUser = {
     id: mockUsers.length + 1,
     email,
-    password_hash: 'mock_hash_' + Date.now(),
+    password_hash: password,
     nombre,
     role: 'cliente'
   };
@@ -116,41 +169,6 @@ app.post('/api/auth/register', (req, res) => {
       role: newUser.role    
     }  
   });
-});
-
-// CRUD SERVICES
-app.post('/api/services', (req, res) => {
-  const newService = {
-    id: mockServices.length + 1,
-    ...req.body,
-    created_at: new Date().toISOString()
-  };
-  mockServices.push(newService);
-  res.json({ success: true, service: newService });
-});
-
-app.put('/api/services/:id', (req, res) => {
-  const id = parseInt(req.params.id);
-  const index = mockServices.findIndex(s => s.id === id);
-  
-  if (index !== -1) {
-    mockServices[index] = { ...mockServices[index], ...req.body };
-    res.json({ success: true, service: mockServices[index] });
-  } else {
-    res.status(404).json({ success: false, message: 'Servicio no encontrado' });
-  }
-});
-
-app.delete('/api/services/:id', (req, res) => {
-  const id = parseInt(req.params.id);
-  const index = mockServices.findIndex(s => s.id === id);
-
-  if (index !== -1) {
-    mockServices.splice(index, 1);
-    res.json({ success: true, message: 'Servicio eliminado' });
-  } else {
-    res.status(404).json({ success: false, message: 'Servicio no encontrado' });
-  }
 });
 
 // PUERTO ( luego )

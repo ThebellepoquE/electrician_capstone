@@ -22,14 +22,8 @@
   border-radius: 8px;
   margin-bottom: 2rem;
 
-  h3 {
+  h2 {
     margin-top: 0;
-    color: v.$charcoal;
-    font-family: v.$font-family-principal;
-  }
-
-  .form-group {
-    display: flex;
     color: v.$charcoal;
     font-family: v.$font-family-principal;
   }
@@ -39,6 +33,11 @@
     gap: 1rem;
     align-items: flex-end;
     flex-wrap: wrap;
+  }
+
+  .form-actions {
+    display: flex;
+    gap: 0.5rem;
   }
 
   .form-input {
@@ -71,6 +70,14 @@
   }
 }
 
+.servicios-list {
+  h3 {
+    color: v.$charcoal;
+    margin-bottom: 1rem;
+    font-family: v.$font-family-principal;
+  }
+}
+
 .servicio-card {
   display: flex;
   justify-content: space-between;
@@ -86,7 +93,7 @@
 
     h4 {
       margin: 0 0 0.5rem 0;
-      color: v.$font-family-principal;
+      color: v.$charcoal;
       font-family: v.$font-family-principal;
     }
 
@@ -102,6 +109,13 @@
       flex-wrap: wrap;
     }
   }
+
+  .servicio-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-direction: column;
+    min-width: 120px;
+  }
 }
 
 .categoria {
@@ -112,41 +126,99 @@
   color: v.$charcoal;
 
   &.reparación {
-    background: lighten(v.$warning, 30%);
-    color: darken(v.$warning, 20%);
+    background: #fff3cd;
+    color: #856404;
   }
   &.instalación {
-    background: lighten(v.$blue, 40%);
-    color: v.$blue;
+    background: #d1ecf1;
+    color: #0c5460;
   }
   &.emergencia {
-    background: lighten(v.$warning, 20%);
-    color: darken(v.$warning, 30%);
+    background: #f8d7da;
+    color: #721c24;
+  }
+  &.mantenimiento {
+    background-color: #d4edda;
+    color: #155724;
   }
 }
 
 .emergencia-tag {
-  background: lighten(v.$warning, 20%);
-  color: darken(v.$warning, 30%);
+  background: #f8d7da;
+  color: #721c24;
   padding: 0.25rem 0.5rem;
   border-radius: 4px;
   font-size: 0.875rem;
+  font-weight: bold;
+}
+
+.btn-dark {
+  @include m.btn-dark;
 }
 
 .btn-primary {
   @include m.btn-dark;
+  background: v.$blue;
+
+  &:hover {
+    background: v.$light-blue;
+  }
+}
+
+.btn-secondary {
+  @include m.btn-dark;
+  background: v.$grey;
+  color: v.$charcoal;
+
+  &:hover {
+    background: v.$light-blue;
+  }
+}
+
+.btn-edit {
+  @include m.btn-dark;
+  background: #ffc107;
+  color: #000;
+
+  &:hover {
+    background: #e0a800;
+  }
 }
 
 btn-danger {
   @include m.btn-dark;
   background: v.$warning;
-  font-family: v.$font-family-principal;
+  font-family: white;
 
   &:hover {
-    background: darken(v.$warning, 20%);
+    background: white;
     border-color: v.$warning;
   }
 }
+
+// Responsive
+@media (max-width: 768px) {
+  .admin-form .form-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .servicio-card {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .servicio-actions {
+    flex-direction: row !important;
+    justify-content: flex-end;
+  }
+}
+
+  
+
+
+
+
 
 
 

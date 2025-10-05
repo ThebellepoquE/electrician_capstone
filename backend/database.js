@@ -27,7 +27,7 @@ if (useMock) {
     password: process.env.DB_PASS || '',
     database: process.env.DB_NAME || 'electrician_capstone',
     // socketPath may be irrelevant on Windows; keep if provided
-    socketPath: process.env.DB_SOCKET || '/var/run/mysqld/mysqld.sock',
+    // socketPath: process.env.DB_SOCKET || '/var/run/mysqld/mysqld.sock',
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0
@@ -42,8 +42,55 @@ if (useMock) {
       connection.release();
     }
   });
-
+  
   exportedPool = pool.promise();
 }
+
+// Funcion para actualizar servicios
+export const updateService = async (id, serviceData) => {
+  try {
+    const [result] = await exportedPool.execute(
+      'UPDATE services SET ? WHERE id = ?,description = ?, category = ? WHERE id = ?',
+      [serviceData.name, serviceData.description, serviceData.category, id]
+    );
+    return result.affectedRows > 0;
+  } catch (error) {
+    console.error('Error actualizando servicio:', error);
+    throw error;
+  }
+};
+
+// TEMPORAL: Crear tablas si no existen (borrar despues)
+  const createTables = async () => {
+    try {
+      await exportedPool.execute(`
+        CREATE TABLE IF NOT EXISTS users (
+          id INT AUTO_INCREMENT PRIMARY KEY,
+          name VARCHAR(255),
+          email VARCHAR(255) UNIQUE,
+          password VARCHAR(255),
+          role ENUM('admin', 'client') DEFAULT 'client',
+          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+      `);
+
+      await exportedPool.execute(`
+        CREATE TABLE IF NOT EXISTS services (
+          id INT AUTO_INCREMENT PRIMARY KEY,
+          name VARCHAR(255),
+          description TEXT,
+          category VARCHAR(100),
+          is_active BOOLEAN DEFAULT true,
+          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+      `);
+
+      console.log('Tablas users y services creadas/existen');
+    } catch (error) {
+      console.error('Error creando tablas:', error);
+    }  
+  };
+
+createTables();
 
 export default exportedPool;

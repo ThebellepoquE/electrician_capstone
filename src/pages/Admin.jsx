@@ -31,12 +31,13 @@ function Admin() {
 
     // Añadir servicio
     const agregarServicio = async () => {
-        await fetch('/api/services', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(nuevoServicio)
+        try {
+            await fetch('/api/services', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(nuevoServicio)
         });
         cargarServicios();
         setNuevoServicio({
@@ -44,7 +45,10 @@ function Admin() {
             description: '',
             category: 'instalación'
         });
-    };
+    } catch (error) {
+        console.error('Error añadiendo servicio:', error);
+    }
+};
 
     // Eliminar servicio
     const eliminarServicio = async (id) => {
@@ -99,7 +103,7 @@ function Admin() {
             {/* Lista de servicios */}
             <div className="servicios-list">
                 <h3>Servicios Existentes ({servicios.length})</h3>
-                {servicios.map((servicio) => (
+                    {servicios.map((servicio) => (
                     <div key={servicio.id} className="servicio-card">
                     <div className="servicio-info">
                         <h4>{servicio.name}</h4>
