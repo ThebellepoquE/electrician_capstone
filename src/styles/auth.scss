@@ -19,7 +19,7 @@
         justify-content: center;
         padding: 2rem;
         height: 100%;
-        border-top: solid 2px v.$blue;
+    border-top: solid 2px v.$color-primary;
 
         img {
             max-width: 100%;
@@ -37,16 +37,27 @@
         justify-content: center;
         align-items: center;
         padding: 2rem;
-        background-color: v.$offwhite;
+    background-color: v.$color-offwhite;
         height: 100%;
-        border-top: solid 2px v.$light-blue;
-        border-bottom: solid 2px v.$blue;
+    border-top: solid 2px v.$color-accent;
+    border-bottom: solid 2px v.$color-primary;
 
         h2 {
             font-size: v.$font-size-titulo;
             font-weight: v.$font-weight-bold;
-            color: v.$dark;
+            color: v.$color-dark;
             margin-bottom: 1.5rem;
+        }
+
+        .error {
+            color: #e74c3c;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            padding: 0.75rem;
+            border-radius: v.$border-radius;
+            margin-bottom: 1rem;
+            text-align: center;
+            font-weight: v.$font-weight-medium;
         }
 
         form {
@@ -64,7 +75,7 @@
 
             label {
                 font-size: v.$font-size-base;
-                color: v.$dark;
+                color: v.$color-dark;
                 margin-bottom: 0.5rem;
                 display: block;
             }
@@ -82,7 +93,7 @@
 
                 &:focus {
                     outline: none;
-                    border-color: v.$blue;
+                    border-color: v.$color-primary;
                     box-shadow: 0 0 5px rgba(110, 206, 208, 0.5);
                 }
             }
@@ -115,10 +126,10 @@
         /* Light variant: cuando quites el fondo, añade la clase .light a .auth-form */
         &.light {
             background: transparent;
-            color: v.$grey; 
+            color: v.$color-muted; 
 
             label, h2 {
-                color: v.$grey;
+                color: v.$color-muted;
             }
 
             input {
@@ -128,15 +139,15 @@
             }
 
             .auth-switch, .auth-button {
-                color: v.$dark; 
+                color: v.$color-dark; 
             }
         }
         
         /* Botón de cambio (fuera del form) - ocupa ancho opcional y separado del submit */
         > .auth-switch {
             display: inline-block;
-            background-color: v.$offwhite; 
-            color: v.$dark; 
+            background-color: v.$color-offwhite; 
+            color: v.$color-dark; 
             padding: 0.5rem 1rem;
             border-radius: v.$border-radius-total;
             border: 1px solid transparent;
@@ -147,12 +158,12 @@
             align-self: center; /* centrar respecto al formulario */
 
             &:hover {
-                background-color: v.$blue;
-                border-color: v.$offwhite; 
+                background-color: v.$color-primary;
+                border-color: v.$color-offwhite; 
             }
 
             &:focus {
-                outline: 2px solid v.$blue;
+                outline: 2px solid v.$color-primary;
                 outline-offset: 2px;
             }
         }

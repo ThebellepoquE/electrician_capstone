@@ -5,7 +5,7 @@ import db from './database.js';
 const app = express();
 
 app.use(cors({
-  origin: 'https://musical-waddle-g47wj5v56ppg2vxg9-5173.app.github.dev',
+  origin: 'http://localhost:5000',
   credentials: true
 }));
 app.use(express.json());
@@ -92,8 +92,8 @@ app.put('/api/services/:id', async (req, res) => {
 app.delete('/api/services/:id', async (req, res) => {
   try {
     const serviceId = req.params.id;
-    const [result] = await db.execute
-      ('UPDATE services SET is_active = false WHERE id = ?',
+    const [result] = await db.execute(
+      'UPDATE services SET is_active = false WHERE id = ?',
       [serviceId]
     );
 

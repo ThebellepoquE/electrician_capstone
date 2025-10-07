@@ -8,7 +8,7 @@
   margin: 0 auto;
 
   h1 {
-    color: v.$charcoal;
+  color: v.$color-charcoal;
     margin-bottom: 2 rem;
     text-align: center;
     font-size: v.$font-size-titulo;
@@ -17,14 +17,14 @@
 }
 
 .admin-form {
-  background: v.$offwhite;
+  background: v.$color-offwhite;
   padding: 1.5rem;
   border-radius: 8px;
   margin-bottom: 2rem;
 
   h2 {
     margin-top: 0;
-    color: v.$charcoal;
+  color: v.$color-charcoal;
     font-family: v.$font-family-principal;
   }
 
@@ -42,7 +42,7 @@
 
   .form-input {
     padding: 0.75rem;
-    border: 1px solid v.$grey;
+  border: 1px solid v.$color-muted;
     border-radius: 4px;
     font-size: v.$font-size-base;
     font-family: v.$font-family-principal;
@@ -55,7 +55,7 @@
 
   .form-select {
     padding: 0.75;
-    border: 1px solid v.$grey;
+  border: 1px solid v.$color-muted;
     border-radius: 4px;
     font-size: v.$font-size-base;
     font-family: v.$font-family-principal;
@@ -64,7 +64,7 @@
 
 .servicios-list {
   h3 {
-    color: v.$charcoal;
+  color: v.$color-charcoal;
     margin-bottom: 1rem;
     font-family: v.$font-family-principal;
   }
@@ -72,7 +72,7 @@
 
 .servicios-list {
   h3 {
-    color: v.$charcoal;
+  color: v.$color-charcoal;
     margin-bottom: 1rem;
     font-family: v.$font-family-principal;
   }
@@ -82,7 +82,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  border: 1px solid v.$grey;
+  border: 1px solid v.$color-muted;
   border-radius: 8px;
   padding: 1.5rem;
   margin-bottom: 1rem;
@@ -93,12 +93,12 @@
 
     h4 {
       margin: 0 0 0.5rem 0;
-      color: v.$charcoal;
+  color: v.$color-charcoal;
       font-family: v.$font-family-principal;
     }
 
     .servicio-descripcion {
-      color: v.$grey;
+  color: v.$color-muted;
       margin: 0 0 1rem 0;
       line-height: 1.4;
     }
@@ -119,11 +119,11 @@
 }
 
 .categoria {
-  background: v.$grey;
+  background: v.$color-muted;
   padding: 0.25rem 0.5rem;
   border-radius: 4px;
   font-size: 0.875rem;
-  color: v.$charcoal;
+  color: v.$color-charcoal;
 
   &.reparación {
     background: #fff3cd;
@@ -158,20 +158,20 @@
 
 .btn-primary {
   @include m.btn-dark;
-  background: v.$blue;
+  background: v.$color-primary;
 
   &:hover {
-    background: v.$light-blue;
+  background: v.$color-accent;
   }
 }
 
 .btn-secondary {
   @include m.btn-dark;
-  background: v.$grey;
-  color: v.$charcoal;
+  background: v.$color-muted;
+  color: v.$color-charcoal;
 
   &:hover {
-    background: v.$light-blue;
+  background: v.$color-accent;
   }
 }
 

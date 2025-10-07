@@ -36,3 +36,8 @@ backend/*.log
 # env locals
 .env.local
 .env
+
+# Styles
+*.css.map
+*.css
+tmp.css

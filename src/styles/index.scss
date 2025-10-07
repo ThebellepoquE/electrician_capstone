@@ -9,13 +9,14 @@
 
 body {
   font-family: v.$font-family-principal;
-  color: v.$offwhite;
+  background-color: v.$color-offwhite;
+  color: v.$color-dark;
 }
 
 h1 {
   font-size: v.$font-size-titulo;
   font-weight: v.$font-weight-bold;
-  color: v.$grey;
+  color: v.$color-muted;
 }
 
 .App {
@@ -26,7 +27,7 @@ h1 {
 
 .header-wrapper {
   display: flex;
-  background-color: v.$dark;
+  background-color: v.$color-dark;
   align-items: center;
   height: 83px;
   padding: 0 1rem;
@@ -81,7 +82,7 @@ h1 {
         transform: translateX(0.55rem);
 
         a {
-          color: v.$offwhite;
+          color: v.$color-offwhite;
           text-decoration: underline;
           text-decoration-color: rgba(110, 206, 208, 0.5);
           text-decoration-thickness: 1px;
@@ -93,10 +94,10 @@ h1 {
           padding: v.$padding-boton;
 
           &:hover {
-            color: v.$offwhite;
+            color: v.$color-offwhite;
             opacity: 0.4;
             transform: scale(1.05);
-            text-decoration-color: v.$light-blue;
+            text-decoration-color: v.$color-accent;
           }
         }
       }
@@ -116,7 +117,7 @@ h1 {
           @include m.btn-light;
 
         &:hover {
-          border: 2px solid v.$blue;
+          border: 2px solid v.$color-primary;
         }
       }
     }
@@ -125,7 +126,7 @@ h1 {
       background: transparent;
       border: 2px solid v.$warning;
       color: v.$warning;
-      border-radius: v.$padding-boton;
+      border-radius: v.$border-radius;
       cursor: pointer;
       transition: v.$transition-boton;
 

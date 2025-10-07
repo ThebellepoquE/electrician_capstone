@@ -2,8 +2,8 @@
 
 // Mixin para botones con fondo oscuro (por defecto)
 @mixin btn-dark {
-  background: v.$charcoal;
-  color: v.$offwhite;
+  background: v.$color-charcoal;
+  color: v.$color-offwhite;
   border: 2px solid transparent;
   border-radius: v.$border-radius-total;
   padding: v.$padding-boton;
@@ -13,16 +13,16 @@
   transition: v.$transition-boton;
 
   &:hover {
-    background: v.$dark;
-    color: v.$light-blue;
-    border-color: v.$light-blue;
+  background: v.$color-dark;
+  color: v.$color-accent;
+  border-color: v.$color-accent;
   }
 }
 
 // Mixin para botones con fondo claro/azul
 @mixin btn-light {
-  background: v.$blue;
-  color: v.$offwhite;
+  background: v.$color-primary;
+  color: v.$color-offwhite;
   border: 2px solid transparent;
   border-radius: v.$border-radius-total;
   padding: v.$padding-boton;
@@ -32,8 +32,8 @@
   transition: v.$transition-boton;
 
   &:hover {
-    background: v.$light-blue;
-    border-color: v.$blue;
+  background: v.$color-accent;
+  border-color: v.$color-primary;
   }
 }
 

@@ -9,7 +9,7 @@ const useMock = process.env.USE_MOCK_DB === '1';
 let exportedPool;
 
 if (useMock) {
-  console.warn('⚠️ USANDO MOCK DB: No se usará MySQL real. Set USE_MOCK_DB=0 para usar la DB real.');
+  console.warn('USANDO MOCK DB: No se usará MySQL real. Set USE_MOCK_DB=0 para usar la DB real.');
 
   // Mock con datos en memoria (users y services) y un execute() que
   // responde a operaciones básicas (SELECT, UPDATE, CREATE TABLE ignorado).
