@@ -1,4 +1,4 @@
-
+import '../styles/home.scss';
 
 // Home.jsx - ahora será la página completa
 import '../styles/home.scss';

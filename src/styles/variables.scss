@@ -3,18 +3,19 @@
 // -----------------------------
 
 // Colores
-$color-primary: #0B3D91;    // Azul oscuro (principal)
+$color-primary: #212c3f;    // Azul oscuro (principal)
 $color-accent: #FFCC00;     // Amarillo (acento)
 $color-dark: #0b1220;       // Color de texto principal (oscuro, no puro negro)
 $color-surface: #ffffff;    // Superficies blancas
 $color-offwhite: #F7F9FC;   // Fondo claro (offwhite)
 $color-warning: #FF6B6B;    // Estados de error / warning (mantengo)
-$color-muted: #9AA3AD;      // Gris secundario / texto suave
+$color-muted: #797979; 
+$color-light-grey: hsla(0,0%,100%,1);   // Gris secundario / texto suave
 
 // Color oscuro de superficie (charcoal) - para mixins antiguos
 $color-charcoal: #1A1A2E;
 
-// Tipografda
+// Tipografía
 $font-family-base: 'Futura PT', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
 $font-size-base: 1rem;
 $font-size-title: 2rem;

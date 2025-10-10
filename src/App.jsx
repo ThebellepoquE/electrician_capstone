@@ -2,10 +2,8 @@ import { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
 import Navbar from './components/Navbar.jsx';
-import Home from './pages/Home.jsx';
-import AcercaDe from './pages/AcercaDe.jsx';
+import Home from './pages/Home.jsx';;
 import Servicios from './pages/Servicios.jsx';
-import Contacto from './pages/Contacto.jsx';
 import Auth from './pages/Auth.jsx';
 import Admin from './pages/Admin.jsx';
 
@@ -40,9 +38,9 @@ function App() {
       <Navbar userData={userData} onCerrarSesion={cerrarSesion} />
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/acerca-de' element={<AcercaDe />} />
+        <Route path='/contacto' element={<Home />} />
+        <Route path='/acerca-de' element={<Home />} />
         <Route path='/servicios' element={<Servicios />} />
-        <Route path='/contacto' element={<Contacto />} />
         <Route path='/auth' element={<Auth />} />
         <Route
           path='/admin'

@@ -14,10 +14,10 @@ function Navbar({ userData, onCerrarSesion }) {
 
                 <div className='nav-wrapper'>
                     <nav className='navigation'>
-                        <Link to='/'>INICIO</Link>
-                        <Link to='/acerca-de'>ACERCA DE</Link>
-                        <Link to='/servicios'>SERVICIOS</Link>
-                        <Link to='/contacto'>CONTACTO</Link>
+                        <a href='/'>INICIO</a>
+                        <a href='/acerca-de'>ACERCA DE</a>
+                        <a href='/servicios'>SERVICIOS</a>
+                        <a href='/contacto'>CONTACTO</a>
                         {userData && userData.role === 'admin' && <Link to='/admin'>ADMIN</Link>}
                     </nav>
                     <div className="user-actions">
