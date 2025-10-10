@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import '../styles/servicios.scss';
 
 function Servicios() {
   const [servicios, setServicios] = useState([]);
@@ -10,11 +11,11 @@ function Servicios() {
       try {
         console.log('🔌 Conectando con el backend...');
         const response = await fetch('/api/services');
-        
+
         if (!response.ok) {
           throw new Error(`Error HTTP: ${response.status}`);
         }
-        
+
         const data = await response.json();
         console.log('Servicios cargados:', data);
         setServicios(data);
@@ -51,7 +52,7 @@ function Servicios() {
   return (
     <div>
       <h1>Nuestros Servicios Eléctricos</h1>
-      
+
       {servicios.map(servicio => (
         <div key={servicio.id}>
           <h3>{servicio.name}</h3>
