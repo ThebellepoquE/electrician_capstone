@@ -50,21 +50,30 @@ function Servicios() {
   }
 
   return (
-    <div>
-      <h1>Nuestros Servicios Eléctricos</h1>
+    <div className="servicios-page">
+      <div className="servicios-header">
+        <h1>Nuestros Servicios Eléctricos</h1>
+        <p>Profesionales para todas tus necesidades eléctricas</p>
+      </div>
 
-      {servicios.map(servicio => (
-        <div key={servicio.id}>
-          <h3>{servicio.name}</h3>
-          <p>{servicio.description}</p>
-          <div>
-            <span>Categoría: {servicio.category}</span>
-            {servicio.is_emergency && (
-              <span> 🚨 Servicio de Emergencia</span>
-            )}
+      <div className="servicios-grid">
+        {servicios.map(servicio => (
+          <div key={servicio.id} className="servicio-card">
+            <div className="servicio-icon">⚡</div>
+            <h3>{servicio.name}</h3>
+            <p>{servicio.description}</p>
+
+            <div className="servicio-meta">
+              <span className={`categoria ${servicio.category}`}>
+                {servicio.category}
+              </span>
+              {servicio.is_emergency && (
+                <span className="emergencia-tag">🚨 24/7 Emergency</span>
+              )}
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }
