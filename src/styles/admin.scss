@@ -54,8 +54,8 @@
   }
 
   .form-select {
-    padding: 0.75;
-  border: 1px solid v.$color-muted;
+    padding: 0.75rem;
+    border: 1px solid v.$color-muted;
     border-radius: 4px;
     font-size: v.$font-size-base;
     font-family: v.$font-family-principal;
@@ -64,7 +64,7 @@
 
 .servicios-list {
   h3 {
-  color: v.$color-charcoal;
+    color: v.$color-charcoal;
     margin-bottom: 1rem;
     font-family: v.$font-family-principal;
   }
@@ -72,7 +72,7 @@
 
 .servicios-list {
   h3 {
-  color: v.$color-charcoal;
+    color: v.$color-charcoal;
     margin-bottom: 1rem;
     font-family: v.$font-family-principal;
   }
@@ -93,12 +93,12 @@
 
     h4 {
       margin: 0 0 0.5rem 0;
-  color: v.$color-charcoal;
+      color: v.$color-charcoal;
       font-family: v.$font-family-principal;
     }
 
     .servicio-descripcion {
-  color: v.$color-muted;
+      color: v.$color-muted;
       margin: 0 0 1rem 0;
       line-height: 1.4;
     }

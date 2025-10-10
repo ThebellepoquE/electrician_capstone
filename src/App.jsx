@@ -19,6 +19,15 @@ function App() {
       setUserData(JSON.parse(user));
   }, []);
 
+  useEffect(() => {
+    const onUserChanged = (e) => {
+      setUserData(e.detail || null);
+    };
+
+    window.addEventListener('userChanged', onUserChanged);
+    return () => window.removeEventListener('userChanged', onUserChanged);
+  }, []);
+
   const cerrarSesion = () => {
     localStorage.removeItem('authToken');
     localStorage.removeItem('userData');

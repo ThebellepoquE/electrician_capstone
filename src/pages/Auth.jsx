@@ -20,7 +20,7 @@ function Auth() {
     e.preventDefault();
 
     console.log(' Iniciando login...');
-    
+
     try {
       const response = await fetch('/api/auth/login', {
         method: 'POST',
@@ -29,7 +29,7 @@ function Auth() {
         },
         body: JSON.stringify(formData)
       });
-      
+
       console.log(' Respuesta del servidor:', response.status);
 
       const data = await response.json();
@@ -39,6 +39,8 @@ function Auth() {
         console.log(' Login exitoso, guardando token...');
         localStorage.setItem('authToken', data.token);
         localStorage.setItem('userData', JSON.stringify(data.user));
+        // Notify other parts of the app that user data changed (so Navbar updates immediately)
+        window.dispatchEvent(new CustomEvent('userChanged', { detail: data.user }));
         console.log(' Redirigiendo a /admin...');
         navigate('/admin');
       } else {
@@ -55,7 +57,7 @@ function Auth() {
     <div className="auth-container">
       {/* Sección de imagen */}
       <div className="auth-image">
-        <img 
+        <img
           src="images/auth_page.jpg"
           alt="Electricista profesional"
         />

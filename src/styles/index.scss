@@ -69,6 +69,7 @@ h1 {
       align-items: center;
       flex: 1; /* ocupa el espacio entre logo y CTA */
       position: relative;
+      gap: 1rem;
 
       .navigation {
         /* Unificada: ocupa espacio y centra el menú */
@@ -83,16 +84,16 @@ h1 {
 
         a {
           color: v.$color-offwhite;
-          text-decoration: underline;
-          text-decoration-color: rgba(110, 206, 208, 0.5);
+          //text-decoration: underline;
+          text-decoration-color: rgba(199, 174, 61, 0.5);
           text-decoration-thickness: 1px;
           text-underline-offset: 4px;
           font-size: v.$font-size-base;
           font-weight: normal;
-          //display: inline-block;
+          display: inline-block;
           transition: opacity 0.2s ease, text-decoration-color 0.3s ease, transform 0.1s ease;
           padding: v.$padding-boton;
-
+          
           &:hover {
             color: v.$color-offwhite;
             opacity: 0.4;
@@ -102,19 +103,14 @@ h1 {
         }
       }
 
-      .cta-wrapper {
-        margin-left: auto; /* empuja el botón a la derecha */
-        display: flex;
-        align-items: center;
-      }
-    }
-
-    
     .cta-wrapper {
+      margin-left: auto; /* empuja el botón a la derecha */
+      display: flex;
+      align-items: center;
       flex: 0 0 auto;
 
-        .cta-btn {
-          @include m.btn-light;
+      .cta-button {
+        @include m.btn-dark;
 
         &:hover {
           border: 2px solid v.$color-primary;
@@ -135,13 +131,45 @@ h1 {
         color: white;
       }
     }
+
+    .user-actions {
+      display: flex;
+      align-items: center;
+      margin-left: 0.3rem; /* separación desde el menú */
+      margin-right: 1rem;
+      gap: 0.5rem;
+    }
+
+    .user-login, .user-logout {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: v.$color-accent;
+      font-size: 0.9rem;
+      text-decoration: none;
+      background: transparent;
+      border-radius: v.$border-radius;
+      padding: 0.4rem 0.75rem; /* algo más pequeño que CTA */
+      cursor: pointer;
+      transition: all 0.2s ease;
+
+      &:hover {
+        opacity: 0.8;
+      }
+
+      svg {
+        width: 1.1em;
+        height: 1.1em;
+        /* ensure icon inherits text color and is visible */
+        fill: currentColor;
+      }
+    }
+
+    /* slightly push the login link away from the CTA button */
+    .user-login {
+      margin-right: 0.75rem;
+    }
+  }
   }
 }
-
-
-
-
-
-
-
 

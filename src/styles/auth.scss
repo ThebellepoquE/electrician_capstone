@@ -19,7 +19,7 @@
         justify-content: center;
         padding: 2rem;
         height: 100%;
-    border-top: solid 2px v.$color-primary;
+        border-top: solid 2px v.$color-accent;
 
         img {
             max-width: 100%;
@@ -37,10 +37,10 @@
         justify-content: center;
         align-items: center;
         padding: 2rem;
-    background-color: v.$color-offwhite;
+        background-color: rgba(228, 167, 11, 0.9);
         height: 100%;
-    border-top: solid 2px v.$color-accent;
-    border-bottom: solid 2px v.$color-primary;
+        border-top: solid 2px v.$color-accent;
+        border-bottom: solid 2px v.$color-primary;
 
         h2 {
             font-size: v.$font-size-titulo;
@@ -144,7 +144,7 @@
         }
         
         /* Botón de cambio (fuera del form) - ocupa ancho opcional y separado del submit */
-        > .auth-switch {
+         .auth-switch {
             display: inline-block;
             background-color: v.$color-offwhite; 
             color: v.$color-dark; 
