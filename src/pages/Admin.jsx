@@ -10,6 +10,9 @@ function Admin() {
         category: 'instalación'
     });
 
+    const [servicioToEdit, setServicioToEdit] = useState(null);
+    const [modalOpen, setModalOpen] = useState(false);
+
     // Cargar servicios al montar el componente
     const cargarServicios = async () => {
         try {
@@ -62,6 +65,39 @@ function Admin() {
         cargarServicios();
     }, []);
 
+    // const actualizarServicio
+    const actualizarServicio = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await fetch(`/api/services/${servicioToEdit.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(servicioToEdit)
+            });
+
+            if (!response.ok) {
+                throw new Error(`Error al actualizar el servicio}`);
+            }
+
+            // Actualizar lista local
+            const updatedService = servicios.map(serv =>
+                serv.id === servicioToEdit.id ? servicioToEdit : serv
+            );
+            setServicios(updatedService);
+
+            // Cerrar modal
+            setModalOpen(false);
+            setServicioToEdit(null);
+
+            console.log('Servicio actualizado correctamente')
+
+        } catch (error) {
+            console.error('Error al actualizar:', error);
+            alert('Error al actualizar el servicio.'); 
+        }
+    };
     return (
         <div className="admin-container">
             <h1>Panel de Administración - Gestión de Servicios</h1>
@@ -119,8 +155,18 @@ function Admin() {
                             )}
                         </div>
                     </div>
+                    <button 
+                        onClick={() => {
+                            setServicioToEdit(servicio)
+                            setModalOpen(true);
+                        }} 
+                        className="btn-warning">
+                        Editar
+                            </button>
                     <button
-                        onClick={() => eliminarServicio(servicio.id)}
+                        onClick={() => {
+                            eliminarServicio(servicio.id)
+                        }}
                         className="btn-danger">
                         Eliminar
                     </button>

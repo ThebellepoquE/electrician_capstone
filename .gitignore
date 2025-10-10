@@ -18,6 +18,11 @@ dist-ssr
 !.vscode/extensions.json
 .idea
 .DS_Store
+
+# Replit files (not needed for local development)
+.replit
+replit.nix
+replit.md
 *.suo
 *.ntvs*
 *.njsproj
