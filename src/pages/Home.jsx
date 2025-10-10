@@ -2,8 +2,24 @@
 
 // Home.jsx - ahora será la página completa
 import '../styles/home.scss';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 function Home() {
+  const location = useLocation();
+
+  useEffect(() => {
+    // scroll to section when route matches the anchored routes
+    const { pathname } = location;
+    let id = null;
+    if (pathname === '/contacto') id = 'contact';
+    if (pathname === '/acerca-de') id = 'about';
+
+    if (id) {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [location]);
   return (
     <div className="home-page">
       {/* SECCIÓN HOME/HERO */}
