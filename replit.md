@@ -15,13 +15,13 @@ Preferred communication style: Simple, everyday language.
 **Technology Stack:**
 - **Framework:** React 19.1.1 with React Router DOM for client-side routing
 - **Build Tool:** Vite 7.1.7 for fast development and optimized production builds
-- **Styling:** Sass and Tailwind CSS for component styling and utility-first CSS
+- **Styling:** Sass for component styling and utility-first CSS
 - **Language:** JavaScript (JSX) with ES2020+ features
 
 **Design Decisions:**
 - **Vite over Create React App:** Chosen for faster hot module replacement (HMR) and better build performance
 - **React Router:** Enables single-page application navigation with multiple views
-- **Dual styling approach:** Sass for custom component styles, Tailwind for rapid UI development with utility classes
+- **Dual styling approach:** Sass for custom component styles
 - **Modern React:** Uses React 17+ features (no need for explicit React imports in JSX)
 
 ### Backend Architecture
@@ -36,7 +36,7 @@ Preferred communication style: Simple, everyday language.
 - **Mock Database Mode:** Includes a USE_MOCK_DB environment flag that allows the application to run without MySQL (useful for Windows/Codespaces development environments). When enabled, database queries return empty arrays instead of real data
 - **Connection Pooling:** Uses MySQL connection pools for efficient database connection management (10 concurrent connections, unlimited queue)
 - **Socket Path Support:** Configurable MySQL socket path for Unix-based systems
-- **Role-Based Access:** User system with 'admin' and 'cliente' (client) roles for authorization
+- **Role-Based Access:** User system with 'admin' role for authorization
 - **Service Categories:** Services are categorized (reparación, instalación) with emergency service flags
 
 **API Proxy:**
