@@ -3,7 +3,7 @@
 
 .header-wrapper {
   display: flex;
-  background-color: v.$color-dark;
+  background-color: v.$color-accent;
   align-items: center;
   height: 83px;
   padding: 0 1rem;
@@ -55,21 +55,15 @@
         transform: translateX(0.55rem);
 
         a {
-          color: v.$color-offwhite;
-          text-decoration: underline;
-          text-decoration-color: v.$color-accent;
-          text-decoration-thickness: 1px;
-          text-underline-offset: 4px;
+          color: v.$color-primary;
           font-size: v.$font-size-base;
-          font-weight: normal;
+          font-weight: v.$font-weight-bold;
           transition: opacity 0.2s ease, text-decoration-color 0.3s ease, transform 0.1s ease;
           padding: v.$padding-boton;
 
           &:hover {
-            color: v.$color-accent;
-            opacity: 0.4;
-            transform: scale(1.05);
-            text-decoration-color: v.$color-offwhite;
+            color: v.$color-offwhite;
+            //transform: scale(1.05);
           }
         }
       }

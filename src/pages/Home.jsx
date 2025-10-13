@@ -1,12 +1,47 @@
-import '../styles/home.scss';
-
-// Home.jsx - ahora será la página completa
-import '../styles/home.scss';
-import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import '../styles/home.scss';
 
 function Home() {
   const location = useLocation();
+  const [servicios, setServicios] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // Cargar servicios desde la API
+  useEffect(() => {
+    const fetchServicios = async () => {
+      try {
+        const response = await fetch('/api/services');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setServicios(data);
+      } catch (error) {
+        console.error('Error al cargar servicios:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchServicios();
+  }, []);
+
+  // Handle smooth scroll with navbar offset
+  const handleScrollToSection = (e, sectionId) => {
+    e.preventDefault();
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const navbarHeight = 83;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = window.pageYOffset + elementPosition - navbarHeight;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   useEffect(() => {
     // scroll to section when route matches the anchored routes
@@ -14,12 +49,33 @@ function Home() {
     let id = null;
     if (pathname === '/contacto') id = 'contact';
     if (pathname === '/acerca-de') id = 'about';
+    if (pathname === '/servicios') id = 'services';
 
     if (id) {
-      const el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Small delay to ensure DOM is fully rendered
+      const timeoutId = setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) {
+          // Offset for sticky navbar height (83px)
+          const navbarHeight = 83;
+          const elementPosition = el.getBoundingClientRect().top;
+          const offsetPosition = window.pageYOffset + elementPosition - navbarHeight;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }, 100);
+
+      return () => clearTimeout(timeoutId);
+    } else if (pathname === '/') {
+      // Scroll to top for home route
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }, [location]);
+
+
   return (
     <div className="home-page">
       {/* SECCIÓN HOME/HERO */}
@@ -28,37 +84,30 @@ function Home() {
           <h1>Lorem Ipsum Electrical Solutions</h1>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
           <div className="hero-buttons">
-            <button className="btn-primary">Get Started</button>
-            <button className="btn-secondary">Learn More</button>
+            <a href="#services" className="btn-primary" onClick={(e) => handleScrollToSection(e, 'services')}>Get Started</a>
+            <a href="#about" className="btn-secondary" onClick={(e) => handleScrollToSection(e, 'about')}>Learn More</a>
           </div>
         </div>
       </section>
 
-      {/* SECCIÓN SERVICIOS */}
+      {/* SECCIÓN SERVICIOS DINÁMICA */}
       <section id="services" className="services-preview">
         <div className="container">
           <h2>Our Services</h2>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 
-          <div className="services-grid">
-            <div className="service-card">
-              <div className="service-icon">⚡</div>
-              <h3>Electrical Installations</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          {loading ? (
+            <p>Loading services...</p>
+          ) : (
+            <div className="services-grid">
+              {servicios.slice(0, 6).map(servicio => (
+                <div key={servicio.id} className="service-card">
+                  <h3>{servicio.name}</h3>
+                  <p>{servicio.description}</p>
+                </div>
+              ))}
             </div>
-
-            <div className="service-card">
-              <div className="service-icon">🔧</div>
-              <h3>Maintenance & Repair</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-
-            <div className="service-card">
-              <div className="service-icon">🚨</div>
-              <h3>Emergency Services</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-          </div>
+          )}
         </div>
       </section>
 

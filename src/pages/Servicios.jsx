@@ -6,6 +6,14 @@ function Servicios() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // Añadir clase al body para prevenir scroll
+  useEffect(() => {
+    document.body.classList.add('servicios-page-active');
+    return () => {
+      document.body.classList.remove('servicios-page-active');
+    };
+  }, []);
+
   useEffect(() => {
     const fetchServicios = async () => {
       try {
@@ -44,7 +52,7 @@ function Servicios() {
       <div>
         <h2>Error al cargar servicios</h2>
         <p><strong>Mensaje:</strong> {error}</p>
-        <p>🔧 Asegúrate de que el backend está corriendo en puerto 5000</p>
+        <p>Asegúrate de que el backend está corriendo en puerto 5000</p>
       </div>
     );
   }
@@ -59,16 +67,14 @@ function Servicios() {
       <div className="servicios-grid">
         {servicios.map(servicio => (
           <div key={servicio.id} className="servicio-card">
-            <div className="servicio-icon">⚡</div>
             <h3>{servicio.name}</h3>
             <p>{servicio.description}</p>
-
             <div className="servicio-meta">
               <span className={`categoria ${servicio.category}`}>
                 {servicio.category}
               </span>
               {servicio.is_emergency && (
-                <span className="emergencia-tag">🚨 24/7 Emergency</span>
+                <span className="emergencia-tag">24/7 Emergency</span>
               )}
             </div>
           </div>

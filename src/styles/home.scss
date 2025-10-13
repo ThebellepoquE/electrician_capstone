@@ -3,6 +3,9 @@
 @use './mixins' as m;
 
 .home-page {
+  margin: 0;
+  padding: 0;
+
   .hero-section {
     display: flex;
     flex-direction: column;
@@ -10,13 +13,14 @@
     justify-content: center;
     text-align: center;
     padding: 6rem 2rem;
+    margin: 0;
     background: linear-gradient(135deg, v.$color-primary 0%, color.adjust(v.$color-primary, $lightness: -10%) 100%);
     color: v.$color-offwhite;
-    min-height: 80vh;
+    min-height: calc(100vh - 83px);
 
-    .hero-content {
-      max-width: 800px;
-      margin: 0 auto;
+        .hero-content {
+        max-width: 800px;
+        margin: 0 auto;
 
       h1 {
         font-size: 3rem;
@@ -124,7 +128,7 @@
   }
 
   .services-preview {
-    padding: 5rem 2rem;
+    padding: 4.5rem 2rem 4.5rem;
     background: v.$color-offwhite;
 
     .container {
@@ -136,14 +140,16 @@
     h2 {
       font-size: 2.5rem;
       color: v.$color-dark;
-      margin-bottom: 1rem;
+      margin-bottom: 0.75rem;
+      margin-top: 0;
       font-weight: v.$font-weight-bold;
     }
 
     p {
       font-size: 1.1rem;
       color: v.$color-muted;
-      margin-bottom: 3rem;
+      margin-bottom: 2rem;
+      margin-top: 0;
       line-height: 1.6;
       max-width: 600px;
       margin-left: auto;
@@ -152,30 +158,26 @@
 
     .services-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
       gap: 2rem;
-      margin-top: 3rem;
+      margin-top: 0;
+      margin-bottom: 0;
     }
 
+    .servicio-card,
     .service-card {
-      background: white;
+      background-color: v.$color-surface;
       border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-      padding: 2.5rem 2rem;
+      padding: 2rem;
       text-align: center;
+      box-shadow: 0 4px 20px rgba(11, 61, 145, 0.08);
+      border: 1px solid rgba(11, 61, 145, 0.1);
       transition: all 0.3s ease;
-      border: 1px solid rgba(v.$color-primary, 0.1);
 
       &:hover {
         transform: translateY(-5px);
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-        border-color: v.$color-primary;
-      }
-
-      .service-icon {
-        font-size: 3rem;
-        margin-bottom: 1.5rem;
-        color: v.$color-primary;
+        box-shadow: 0 8px 30px rgba(11, 61, 145, 0.15);
+        border-color: v.$color-accent;
       }
 
       h3 {
@@ -193,10 +195,10 @@
       }
     }
   }
-
-  .contact-section {
-    padding: 5rem 2rem;
-    background: white;
+  
+    .contact-section {
+      padding: 3.5rem 2rem 4.5rem;
+      background: white;
 
     .container {
       max-width: 1200px;
@@ -206,7 +208,8 @@
     h2 {
       text-align: center;
       font-size: 2.5rem;
-      margin-bottom: 3rem;
+      margin-top: 0;
+      margin-bottom: 1.5rem;
       color: v.$color-dark;
       font-weight: v.$font-weight-bold;
     }
@@ -215,6 +218,8 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 4rem;
+      margin-top: 0.5rem;
+      margin-bottom: 0;
     }
 
     .contact-info {

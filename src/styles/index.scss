@@ -7,11 +7,25 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 83px; // Offset for sticky navbar
+  overflow-x: hidden;
+  height: 100%;
+}
+
 body {
   font-family: v.$font-family-principal;
   background-color: v.$color-offwhite;
   color: v.$color-dark;
   line-height: 1.6;
+  overflow-x: hidden;
+  height: 100%;
+}
+
+body.servicios-page-active {
+  overflow: hidden;
+  height: 100vh;
 }
 
 h1 {
