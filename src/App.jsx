@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
 import Navbar from './components/Navbar.jsx';
+import Footer from './components/Footer.jsx';
 import Home from './pages/Home.jsx';;
 import Servicios from './pages/Servicios.jsx';
 import Auth from './pages/Auth.jsx';
@@ -52,9 +53,7 @@ function App() {
         />
       </Routes>
 
-      <footer className='footer'>
-        <p>© 2025 Electrician Services</p>
-      </footer>
+      <Footer />
     </div>
   );
 }
