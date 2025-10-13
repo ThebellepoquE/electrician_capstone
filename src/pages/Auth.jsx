@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/auth.scss';
+import authImage from '../assets/images/auth_page.jpg';
 
 function Auth() {
   const navigate = useNavigate();
@@ -18,7 +19,6 @@ function Auth() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     console.log(' Iniciando login...');
 
     try {
@@ -30,21 +30,15 @@ function Auth() {
         body: JSON.stringify(formData)
       });
 
-      console.log(' Respuesta del servidor:', response.status);
-
       const data = await response.json();
       console.log(' Datos recibidos:', data);
 
       if (data.success) {
-        console.log(' Login exitoso, guardando token...');
         localStorage.setItem('authToken', data.token);
         localStorage.setItem('userData', JSON.stringify(data.user));
-        // Notify other parts of the app that user data changed (so Navbar updates immediately)
         window.dispatchEvent(new CustomEvent('userChanged', { detail: data.user }));
-        console.log(' Redirigiendo a /admin...');
         navigate('/admin');
       } else {
-        console.log(' Error en login:', data.error);
         alert('Error: ' + data.error);
       }
     } catch (error) {
@@ -54,47 +48,51 @@ function Auth() {
   };
 
   return (
-    <div className="auth-container">
-      {/* Sección de imagen */}
-      <div className="auth-image">
-        <img
-          src="images/auth_page.jpg"
-          alt="Electricista profesional"
-        />
-      </div>
+    <div className="auth-page">
+      <div className="auth-container">
+        {/* 👇 SECCIÓN IMAGEN QUE FALTA */}
+        <div className="auth-image">
+          <img className="auth-img" src={authImage} alt="Electrician" />
+        </div>
 
-      {/* Sección del formulario */}
-      <div className="auth-form">
-        <h2>Acceso Administrativo</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label>Email</label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              placeholder='admin@electricista.com'
-              required
-            />
+        {/* 👇 CAMBIAR auth-form por auth-form-section */}
+        <div className="auth-form-section">
+          <div className="auth-header">
+            <h1>Acceso Profesionales</h1>
+            <p>Accede a tu panel de administración</p>
           </div>
 
-          <div className="form-group">
-            <label>Contraseña</label>
-            <input
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              placeholder="••••••••"
-              required
-            />
-          </div>
+          <form onSubmit={handleSubmit} className="auth-form">
+            <div className="form-group">
+              <label>Email</label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="tu@email.com"
+                required
+              />
+            </div>
 
-          <button type="submit" className='auth-button'>
-            Acceder al Panel
-          </button>
-        </form>
+            <div className="form-group">
+              <label>Contraseña</label>
+              <input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                placeholder="••••••••"
+                required
+              />
+            </div>
+
+            {/* 👇 BOTÓN QUE FALTABA */}
+            <button type="submit" className="auth-btn">
+              Acceder
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );

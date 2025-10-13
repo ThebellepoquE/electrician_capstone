@@ -1,17 +1,46 @@
 @use './variables' as v;
+@use './mixins' as m;
 
 .footer {
   background: v.$color-dark;
   color: v.$color-offwhite;
-  padding: 2rem 1rem;
+  padding: 3rem 1rem 2rem;
   margin-top: auto; // Para que se quede abajo en el layout flex
   
   .footer-content {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 2rem;
+    
+    p {
+      margin: 0;
+      opacity: 0.8;
+      font-size: 0.9rem;
+    }
+  }
+
+    .cta-wrapper {
+        display: flex;
+        align-items: center;
+        flex: 0 0 auto;
+
+      .cta-button {
+        @include m.btn-light;
+
+        &:hover {
+          border: 2px solid v.$color-primary;
+        }
+      }
+    } 
+
+  .footer-info {
+    display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
     flex-wrap: wrap;
     gap: 1rem;
     

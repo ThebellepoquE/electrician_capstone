@@ -34,7 +34,7 @@ function Home() {
         </div>
       </section>
 
-      {/* SECCIÓN SERVICIOS (la que ya tenías) */}
+      {/* SECCIÓN SERVICIOS */}
       <section id="services" className="services-preview">
         <div className="container">
           <h2>Our Services</h2>
@@ -62,7 +62,7 @@ function Home() {
         </div>
       </section>
 
-      {/* NUEVA SECCIÓN ACERCA DE */}
+      {/* SECCIÓN ACERCA DE */}
       <section id="about" className="about-section">
         <div className="container">
           <h2>About Us</h2>
@@ -90,7 +90,7 @@ function Home() {
         </div>
       </section>
 
-      {/* NUEVA SECCIÓN CONTACTO */}
+      {/* SECCIÓN CONTACTO */}
       <section id="contact" className="contact-section">
         <div className="container">
           <h2>Contact Us</h2>

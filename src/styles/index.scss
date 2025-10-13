@@ -11,6 +11,7 @@ body {
   font-family: v.$font-family-principal;
   background-color: v.$color-offwhite;
   color: v.$color-dark;
+  line-height: 1.6;
 }
 
 h1 {
@@ -25,151 +26,17 @@ h1 {
   min-height: 100vh;
 }
 
-.header-wrapper {
-  display: flex;
-  background-color: v.$color-dark;
-  align-items: center;
-  height: 83px;
-  padding: 0 1rem;
-  width: 100%;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+// Reset de enlaces
+a {
+  color: inherit;
+  text-decoration: none;
+}
 
-  .header {
-    padding: 1rem;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    position: relative;
-
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      /* extender fuera del padding para que llegue de borde a borde */
-      left: -1rem;
-      right: -1rem;
-      height: 1px; /* más sutil */
-      background-color: rgba(255,255,255,0.15); /* línea tenue */
-    }
-
-    .logo-section {
-      flex: 0 0 auto;
-
-      .logo {
-        height: 48px;
-        width: auto;
-        object-fit: contain;
-      }
-    }
-
-    .nav-wrapper {
-      display: flex;
-      align-items: center;
-      flex: 1; /* ocupa el espacio entre logo y CTA */
-      position: relative;
-      gap: 1rem;
-
-      .navigation {
-        /* Unificada: ocupa espacio y centra el menú */
-        flex: 1;
-        margin: 0 auto; /* centra el menú dentro del espacio disponible */
-        display: flex;
-        gap: 3rem;
-        align-items: center;
-        justify-content: center;
-        /* Pequeño desplazamiento a la derecha: se ajusta este valor según necesites */
-        transform: translateX(0.55rem);
-
-        a {
-          color: v.$color-offwhite;
-          //text-decoration: underline;
-          text-decoration-color: rgba(199, 174, 61, 0.5);
-          text-decoration-thickness: 1px;
-          text-underline-offset: 4px;
-          font-size: v.$font-size-base;
-          font-weight: normal;
-          display: inline-block;
-          transition: opacity 0.2s ease, text-decoration-color 0.3s ease, transform 0.1s ease;
-          padding: v.$padding-boton;
-          
-          &:hover {
-            color: v.$color-offwhite;
-            opacity: 0.4;
-            transform: scale(1.05);
-            text-decoration-color: v.$color-accent;
-          }
-        }
-      }
-
-    .cta-wrapper {
-      margin-left: auto; /* empuja el botón a la derecha */
-      display: flex;
-      align-items: center;
-      flex: 0 0 auto;
-
-      .cta-button {
-        @include m.btn-dark;
-
-        &:hover {
-          border: 2px solid v.$color-primary;
-        }
-      }
-    }
-
-    .logout-btn {
-      background: transparent;
-      border: 2px solid v.$warning;
-      color: v.$warning;
-      border-radius: v.$border-radius;
-      cursor: pointer;
-      transition: v.$transition-boton;
-
-      &:hover {
-        background: v.$warning;
-        color: white;
-      }
-    }
-
-    .user-actions {
-      display: flex;
-      align-items: center;
-      margin-left: 0.3rem; /* separación desde el menú */
-      margin-right: 1rem;
-      gap: 0.5rem;
-    }
-
-    .user-login, .user-logout {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: v.$color-accent;
-      font-size: 0.9rem;
-      text-decoration: none;
-      background: transparent;
-      border-radius: v.$border-radius;
-      padding: 0.4rem 0.75rem; /* algo más pequeño que CTA */
-      cursor: pointer;
-      transition: all 0.2s ease;
-
-      &:hover {
-        opacity: 0.8;
-      }
-
-      svg {
-        width: 1.1em;
-        height: 1.1em;
-        /* ensure icon inherits text color and is visible */
-        fill: currentColor;
-      }
-    }
-
-    /* slightly push the login link away from the CTA button */
-    .user-login {
-      margin-right: 0.75rem;
-    }
-  }
-  }
+// Reset de botones
+button {
+  font-family: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
 }
 

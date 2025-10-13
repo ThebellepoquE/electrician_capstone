@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
 import Navbar from './components/Navbar.jsx';
 import Footer from './components/Footer.jsx';
@@ -33,6 +33,7 @@ function App() {
     setUserData(null);
     navigate('/');
   };
+  const location = useLocation();
 
   return (
     <div className='App'>
@@ -48,12 +49,12 @@ function App() {
           element={
             <ProtectedRoute>
               <Admin />
-            </ProtectedRoute>
-          }
+            </ProtectedRoute> 
+            }
         />
       </Routes>
 
-      <Footer />
+      {location.pathname !== '/auth' && <Footer />}
     </div>
   );
 }
