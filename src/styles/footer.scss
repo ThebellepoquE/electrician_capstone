@@ -4,16 +4,23 @@
 .footer {
   background: v.$color-accent;
   color: v.$color-offwhite;
-  padding: 1.5rem 1rem 1rem;
+  /* Compact footer to reduce vertical footprint */
+  padding: 1.25rem 1rem 1rem;
+  /* Keep footer visually consistent across pages */
+  height: var(--footer-height, 88px); /* fixed height on desktop to ensure identical footprint */
+  display: flex;
+  align-items: center;
   margin-top: auto; // Para que se quede abajo en el layout flex
   
   .footer-content {
     max-width: 1200px;
     margin: 0 auto;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    gap: 1rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column; /* CTA centered above info */
+  gap: 1rem;
+  width: 100%;
+  justify-content: center;
     
     p {
       margin: 0;
@@ -23,9 +30,10 @@
   }
 
     .cta-wrapper {
-        display: flex;
-        align-items: center;
-        flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
 
       .cta-button {
         @include m.btn-light;
@@ -36,11 +44,11 @@
           border: 2px solid v.$color-primary;
         }
       }
-    } 
+    }
 
   .footer-info {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     width: 100%;
     flex-wrap: wrap;
@@ -76,6 +84,7 @@
 @media (max-width: 768px) {
   .footer {
     padding: 1.5rem 1rem;
+    height: auto; /* allow footer to grow on small screens */
     
     .footer-content {
       flex-direction: column;

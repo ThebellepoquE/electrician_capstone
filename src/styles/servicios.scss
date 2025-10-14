@@ -2,13 +2,15 @@
 @use './variables' as v;
 
 .servicios-page {
-    padding: 2rem 2rem;
+    /* Match the page container behavior used by home/about/contact so the
+       footer keeps the same footprint across all pages. */
+    padding: 2.5rem 2rem;
     background-color: v.$color-offwhite;
-    min-height: calc(100vh - 83px - 100px);
-    overflow-y: hidden;
     display: flex;
     flex-direction: column;
+    flex: 1 0 auto;
     box-sizing: border-box;
+    min-height: calc(100vh - var(--navbar-height) - var(--footer-height));
 }
 
 .servicios-header {
@@ -37,16 +39,20 @@
 .servicios-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
+    gap: 1rem; /* tightened gap to reduce overall height */
     max-width: 1200px;
     margin: 0 auto;
     width: 100%;
+    /* Allow the grid to take available space and scroll internally if needed */
+    flex: 1 1 auto;
+    overflow: auto;
+    padding-bottom: 1rem; /* avoid content touching footer */
 }
 
 .servicio-card {
     background-color: v.$color-surface;
     border-radius: 12px;
-    padding: 0.85rem;
+    padding: 0.6rem; /* reduced padding for compact cards */
     text-align: center;
     box-shadow: 0 4px 20px rgba(11, 61, 145, 0.08);
     border: 1px solid rgba(11, 61, 145, 0.1);
@@ -62,9 +68,9 @@
     }
 
     h3 {
-        font-size: 1.1rem;
+        font-size: 1rem;
         color: v.$color-dark;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.4rem;
         margin-top: 0;
         font-weight: v.$font-weight-medium;
         width: 100%;
@@ -73,8 +79,8 @@
     p {
         color: v.$color-muted;
         line-height: 1.4;
-        margin-bottom: 0.75rem;
-        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+        font-size: 0.875rem;
         width: 100%;
     }
 

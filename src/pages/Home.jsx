@@ -123,15 +123,15 @@ function Home() {
             </div>
             <div className="about-stats">
               <div className="stat">
-                <h4>10+</h4>
+                <h3>10+</h3>
                 <p>Years Experience</p>
               </div>
               <div className="stat">
-                <h4>500+</h4>
+                <h3>500+</h3>
                 <p>Projects Completed</p>
               </div>
               <div className="stat">
-                <h4>24/7</h4>
+                <h3>24/7</h3>
                 <p>Emergency Service</p>
               </div>
             </div>
@@ -145,7 +145,7 @@ function Home() {
           <h2>Contact Us</h2>
           <div className="contact-content">
             <div className="contact-info">
-              <h3>Get In Touch</h3>
+              <h2>Get In Touch</h2>
               <div className="contact-item">
                 <strong>Phone:</strong> 123-456-789
               </div>
@@ -157,7 +157,7 @@ function Home() {
               </div>
             </div>
             <div className="contact-form">
-              <h3>Send Message</h3>
+              <h4>Send Message</h4>
               <form>
                 <input type="text" placeholder="Your Name" />
                 <input type="email" placeholder="Your Email" />

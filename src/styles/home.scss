@@ -2,37 +2,47 @@
 @use 'sass:color' as color;
 @use './mixins' as m;
 
-.home-page {
+.home-page,
+.about-page,
+.contact-page,
+.servicios-page {
   margin: 0;
   padding: 0;
+  /* Make standalone pages fill available vertical space so footer
+     is pushed to bottom when content is short. */
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+  min-height: calc(100vh - var(--navbar-height) - var(--footer-height));
 
   .hero-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 6rem 2rem;
-    margin: 0;
-    background: linear-gradient(135deg, v.$color-primary 0%, color.adjust(v.$color-primary, $lightness: -10%) 100%);
-    color: v.$color-offwhite;
-    min-height: calc(100vh - 83px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  /* Reduced padding to decrease overall page height and avoid unnecessary scrollbar */
+  padding: 3rem 2rem;
+  margin: 0;
+  background: linear-gradient(135deg, v.$color-primary 0%, color.adjust(v.$color-primary, $lightness: -10%) 100%);
+  color: v.$color-offwhite;
+  min-height: calc(100vh - 83px);
 
         .hero-content {
         max-width: 800px;
         margin: 0 auto;
 
       h1 {
-        font-size: 3rem;
-        margin-bottom: 1.5rem;
+        font-size: 2.4rem;
+        margin-bottom: 1.25rem;
         font-weight: v.$font-weight-bold;
         line-height: 1.2;
       }
 
       p {
-        font-size: 1.25rem;
+        font-size: 1.15rem;
         max-width: 600px;
-        margin: 0 auto 2rem;
+        margin: 0 auto 1.5rem;
         line-height: 1.6;
       }
 
@@ -55,8 +65,13 @@
   }
 
   .about-section {
-    padding: 5rem 2rem;
+    /* Reduced vertical padding so About page fits better in viewport */
+    padding: 1.5rem 1.5rem;
     background: white;
+    /* Expand section to fill vertical space between navbar and footer */
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 auto;
 
     .container {
       max-width: 1200px;
@@ -65,8 +80,8 @@
 
     h2 {
       text-align: center;
-      font-size: 2.5rem;
-      margin-bottom: 3rem;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
       color: v.$color-dark;
       font-weight: v.$font-weight-bold;
     }
@@ -74,7 +89,7 @@
     .about-content {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 4rem;
+      gap: 2rem;
       align-items: center;
     }
 
@@ -87,8 +102,8 @@
       }     
 
       p {
-        font-size: 1.1rem;
-        margin-bottom: 1.5rem;
+        font-size: 1rem;
+        margin-bottom: 1rem;
         line-height: 1.6;
         color: v.$color-muted;
       }
@@ -101,7 +116,7 @@
 
       .stat {
         text-align: center;
-        padding: 2rem;
+        padding: 0.85rem;
         background: v.$color-offwhite;
         border-radius: 8px;
         transition: transform 0.3s ease;
@@ -111,9 +126,9 @@
         }
 
         h4 {
-          font-size: 2.5rem;
+          font-size: 1.8rem;
           color: v.$color-primary;
-          margin-bottom: 0.5rem;
+          margin-bottom: 0.25rem;
           font-weight: v.$font-weight-bold;
         }
 
@@ -128,7 +143,8 @@
   }
 
   .services-preview {
-    padding: 4.5rem 2rem 4.5rem;
+  /* Slightly reduced padding to keep services visible without forcing vertical scroll */
+  padding: 2.5rem 2rem;
     background: v.$color-offwhite;
 
     .container {
@@ -158,8 +174,8 @@
 
     .services-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
       margin-top: 0;
       margin-bottom: 0;
     }
@@ -196,9 +212,15 @@
     }
   }
   
-    .contact-section {
-      padding: 3.5rem 2rem 4.5rem;
-      background: white;
+   .contact-section {
+    /* Reduce padding to avoid page overflow on shorter viewports */
+    padding: 1.5rem 1.5rem;
+    background: white;
+    /* Do NOT expand the contact section to fill remaining space; instead
+      let its content be scrollable internally so the footer remains visible. */
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 auto;
 
     .container {
       max-width: 1200px;
@@ -207,32 +229,36 @@
 
     h2 {
       text-align: center;
-      font-size: 2.5rem;
+      font-size: 1.8rem;
       margin-top: 0;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
       color: v.$color-dark;
       font-weight: v.$font-weight-bold;
     }
 
-    .contact-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      margin-top: 0.5rem;
-      margin-bottom: 0;
+      .contact-content {
+        display: grid;
+        grid-template-columns: 1fr 360px;
+        gap: 1rem;
+        align-items: start;
+        width: 100%;
+        /* Limit the contact area so the page doesn't force a document scrollbar */
+        max-height: calc(100vh - 83px - 88px - 48px); /* viewport - navbar - footer - extra margin */
+        overflow: auto;
+        padding-right: 0.25rem; /* avoid inner scrollbar touching edge */
     }
 
     .contact-info {
       h3 {
-        font-size: 1.5rem;
-        margin-bottom: 2rem;
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
         color: v.$color-primary;
         font-weight: v.$font-weight-medium;
       }
 
       .contact-item {
-        margin-bottom: 1.5rem;
-        padding: 1.5rem;
+        margin-bottom: 0.6rem;
+        padding: 0.75rem;
         background: v.$color-offwhite;
         border-radius: 8px;
         border-left: 4px solid v.$color-primary;
@@ -255,10 +281,10 @@
       }
     }
 
-    .contact-form {
+      .contact-form {
       h3 {
-        font-size: 1.5rem;
-        margin-bottom: 2rem;
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
         color: v.$color-primary;
         font-weight: v.$font-weight-medium;
       }
@@ -266,11 +292,11 @@
       form {
         display: flex;
         flex-direction: column;
-        gap: 1.5rem;
+        gap: 1rem;
       }
 
       input, textarea {
-        padding: 1rem;
+        padding: 0.75rem;
         border: 1px solid #ddd;
         border-radius: 8px;
         font-size: 1rem;
@@ -284,7 +310,7 @@
       }
 
       textarea {
-        min-height: 150px;
+        min-height: 80px;
         resize: vertical;
       }
 
@@ -298,7 +324,7 @@
 
 // Responsive
 @media (max-width: 768px) {
-  .home-page {
+  .home-page, .about-page, .contact-page {
     .hero-section {
       padding: 4rem 1rem;
       min-height: 60vh;
@@ -348,7 +374,7 @@
 }
 
 @media (max-width: 480px) {
-  .home-page {
+  .home-page, .about-page, .contact-page {
     .hero-section {
       .hero-content {
         h1 {
