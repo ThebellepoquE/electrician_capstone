@@ -210,17 +210,15 @@
     }
   }
   
-    .contact-section {
-      /* Reduce padding to avoid page overflow on shorter viewports */
-      padding: 2.5rem 2rem;
-      background: white;
-      /* Expand contact section similarly */
-      display: flex;
-      flex-direction: column;
-      flex: 1 0 auto;
-      /* Ensure the contact section does not push footer off-screen: reserve
-         space for navbar (83px) and approximate footer height (~140px). */
-      min-height: calc(100vh - 83px - 140px);
+   .contact-section {
+    /* Reduce padding to avoid page overflow on shorter viewports */
+    padding: 2.5rem 2rem;
+    background: white;
+    /* Do NOT expand the contact section to fill remaining space; instead
+      let its content be scrollable internally so the footer remains visible. */
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 auto;
 
     .container {
       max-width: 1200px;
@@ -239,14 +237,14 @@
     .contact-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    /* Allow the content area to shrink and scroll internally so the
-      footer can remain visible when viewport is limited. */
-    flex: 1 1 auto;
+    gap: 1.5rem;
+    /* Allow the content area to scroll internally so the footer can remain
+       visible when the viewport is limited. */
     overflow: auto;
     /* Cap internal height so it never forces the page taller than the
-      available viewport area (navbar + footer considered). */
-    max-height: calc(100vh - 83px - 200px);
+       available viewport area (navbar + footer considered). We'll assume
+       a footer of ~120px to be conservative. */
+    max-height: calc(100vh - 83px - 120px);
       margin-top: 0.5rem;
       margin-bottom: 0;
     }
