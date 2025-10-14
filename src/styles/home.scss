@@ -63,7 +63,8 @@
   }
 
   .about-section {
-    padding: 5rem 2rem;
+    /* Reduced vertical padding so About page fits better in viewport */
+    padding: 2.5rem 2rem;
     background: white;
     /* Expand section to fill vertical space between navbar and footer */
     display: flex;
@@ -113,7 +114,7 @@
 
       .stat {
         text-align: center;
-        padding: 2rem;
+        padding: 1.25rem;
         background: v.$color-offwhite;
         border-radius: 8px;
         transition: transform 0.3s ease;
@@ -210,7 +211,8 @@
   }
   
     .contact-section {
-      padding: 3.5rem 2rem 4.5rem;
+      /* Reduce padding to avoid page overflow on shorter viewports */
+      padding: 2.5rem 2rem;
       background: white;
       /* Expand contact section similarly */
       display: flex;
