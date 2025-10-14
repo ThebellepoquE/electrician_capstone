@@ -236,7 +236,11 @@
     .contact-content {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 4rem;
+      gap: 2rem;
+      /* Allow the content area to shrink and scroll internally so the
+         footer can remain visible when viewport is limited. */
+      flex: 1 1 auto;
+      overflow: auto;
       margin-top: 0.5rem;
       margin-bottom: 0;
     }
@@ -250,8 +254,8 @@
       }
 
       .contact-item {
-        margin-bottom: 1.5rem;
-        padding: 1.5rem;
+        margin-bottom: 1rem;
+        padding: 1rem;
         background: v.$color-offwhite;
         border-radius: 8px;
         border-left: 4px solid v.$color-primary;
@@ -303,7 +307,7 @@
       }
 
       textarea {
-        min-height: 150px;
+        min-height: 100px;
         resize: vertical;
       }
 
