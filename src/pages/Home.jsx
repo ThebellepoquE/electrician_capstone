@@ -1,5 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import API_BASE_URL from '../config/api';
 import '../styles/home.scss';
 
 function Home() {
@@ -11,7 +12,7 @@ function Home() {
   useEffect(() => {
     const fetchServicios = async () => {
       try {
-        const response = await fetch('/api/services');
+        const response = await fetch(`${API_BASE_URL}/api/services`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }

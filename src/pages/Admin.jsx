@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import API_BASE_URL from '../config/api';
 import '../styles/admin.scss';
 import { data } from 'react-router-dom';
 
@@ -14,45 +15,45 @@ function Admin() {
     const cargarServicios = async () => {
         try {
             console.log(' Cargando servicios...');
-            const response = await fetch('/api/services');
-            
+            const response = await fetch(`${API_BASE_URL}/api/services`);
+
             if (!response.ok)
                 throw new Error(`Error HTTP: ${response.status}`);
-            
+
             const data = await response.json();
             console.log(' Servicios cargados:', data);
             setServicios(data);
-        
+
         } catch (error) {
-          console.error(' Error cargando servicios:', error); 
-          setServicios(data);
+            console.error(' Error cargando servicios:', error);
+            setServicios(data);
         }
     };
 
     // Añadir servicio
     const agregarServicio = async () => {
         try {
-            await fetch('/api/services', {
+            await fetch(`${API_BASE_URL}/api/services`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(nuevoServicio)
-        });
-        cargarServicios();
-        setNuevoServicio({
-            name: '',
-            description: '',
-            category: 'instalación'
-        });
-    } catch (error) {
-        console.error('Error añadiendo servicio:', error);
-    }
-};
+            });
+            cargarServicios();
+            setNuevoServicio({
+                name: '',
+                description: '',
+                category: 'instalación'
+            });
+        } catch (error) {
+            console.error('Error añadiendo servicio:', error);
+        }
+    };
 
     // Eliminar servicio
     const eliminarServicio = async (id) => {
-        await fetch(`/api/services/${id}`, {
+        await fetch(`${API_BASE_URL}/api/services/${id}`, {
             method: 'DELETE'
         });
         cargarServicios();
@@ -103,27 +104,27 @@ function Admin() {
             {/* Lista de servicios */}
             <div className="servicios-list">
                 <h3>Servicios Existentes ({servicios.length})</h3>
-                    {servicios.map((servicio) => (
+                {servicios.map((servicio) => (
                     <div key={servicio.id} className="servicio-card">
-                    <div className="servicio-info">
-                        <h4>{servicio.name}</h4>
-                        <p className="servicio-description">{servicio.description}</p>
-                        <div className="servicio-meta">
-                            <span className={`categoria ${servicio.category}`}>
-                                {servicio.category}
-                            </span>
-                            {servicio.is_emergency && (
-                            <span className="emergencia-tag"> 
-                                 Emergencia
-                            </span>
-                            )}
+                        <div className="servicio-info">
+                            <h4>{servicio.name}</h4>
+                            <p className="servicio-description">{servicio.description}</p>
+                            <div className="servicio-meta">
+                                <span className={`categoria ${servicio.category}`}>
+                                    {servicio.category}
+                                </span>
+                                {servicio.is_emergency && (
+                                    <span className="emergencia-tag">
+                                        Emergencia
+                                    </span>
+                                )}
+                            </div>
                         </div>
-                    </div>
-                    <button
-                        onClick={() => eliminarServicio(servicio.id)}
-                        className="btn-danger">
-                        Eliminar
-                    </button>
+                        <button
+                            onClick={() => eliminarServicio(servicio.id)}
+                            className="btn-danger">
+                            Eliminar
+                        </button>
                     </div>
                 ))}
             </div>

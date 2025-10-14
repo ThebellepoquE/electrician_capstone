@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import API_BASE_URL from '../config/api';
 import '../styles/services.scss';
 
 function Services() {
@@ -18,7 +19,7 @@ function Services() {
     const fetchServicios = async () => {
       try {
         console.log('🔌 Conectando con el backend...');
-        const response = await fetch('/api/services');
+        const response = await fetch(`${API_BASE_URL}/api/services`);
 
         if (!response.ok) {
           throw new Error(`Error HTTP: ${response.status}`);
