@@ -39,5 +39,4 @@ backend/*.log
 
 # Styles
 *.css.map
-*.css
 tmp.css
