@@ -4,8 +4,23 @@ import db from './database.js';
 
 const app = express();
 
+// CORS configuration for development and production
+const allowedOrigins = [
+  'http://localhost:5000',
+  'http://127.0.0.1:5000',
+  'https://thebellepoque.github.io'
+];
+
 app.use(cors({
-  origin: 'http://localhost:5000',
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 }));
 app.use(express.json());
@@ -13,8 +28,8 @@ app.use(express.json());
 // Mock data users solo para auth por ahora (sin MySQL)
 const mockUsers = [
   {
-    id: 1, 
-    email: 'admin@electricista.com', 
+    id: 1,
+    email: 'admin@electricista.com',
     password_hash: '$2a$10$examplehash',
     nombre: 'Administrador Principal',
     role: 'admin'
@@ -22,7 +37,7 @@ const mockUsers = [
   {
     id: 2,
     email: 'cliente@ejemplo.com',
-    password_hash: '$2a$10$examplehash', 
+    password_hash: '$2a$10$examplehash',
     nombre: 'Cliente Demo',
     role: 'cliente'
   }
@@ -30,7 +45,7 @@ const mockUsers = [
 
 // Endpoints de servicios 
 app.get('/', (_req, res) => {
-  res.json({ message: 'Backend electricista funcionando'});
+  res.json({ message: 'Backend electricista funcionando' });
 });
 
 // ENDPOINTS MYSQL DE SERVICIOS
@@ -39,7 +54,7 @@ app.get('/', (_req, res) => {
 app.get('/api/services', async (_req, res) => {
   try {
     const [services] = await db.execute(
-  'SELECT * FROM services WHERE is_active = true ORDER BY created_at DESC'
+      'SELECT * FROM services WHERE is_active = true ORDER BY created_at DESC'
     );
     res.json(services);
   } catch (error) {
@@ -49,7 +64,7 @@ app.get('/api/services', async (_req, res) => {
 });
 
 // POST /api/services - crear en MySQL
-app.post('/api/services', async(req, res) => {
+app.post('/api/services', async (req, res) => {
   try {
     const { name, description, category } = req.body;
     const [result] = await db.execute(
@@ -60,7 +75,7 @@ app.post('/api/services', async(req, res) => {
     const [newService] = await db.execute(
       'SELECT * FROM services WHERE id = ?',
       [result.insertId]);
-      res.json(newService[0]);
+    res.json(newService[0]);
   } catch (error) {
     console.error('Error creando servicio:', error);
     res.status(500).json({ error: 'Error creando servicio' });
@@ -104,12 +119,12 @@ app.delete('/api/services/:id', async (req, res) => {
     res.json({ success: true, message: 'Servicio eliminado' });
   } catch (error) {
     console.error('Error eliminando servicio:', error);
-    res.status(500).json({ error: 'Error eliminando servicio'});
+    res.status(500).json({ error: 'Error eliminando servicio' });
   }
 });
-    
- // ENDPOINTS AUTH MOCK
-app.post('/api/auth/login', (req, res) => { 
+
+// ENDPOINTS AUTH MOCK
+app.post('/api/auth/login', (req, res) => {
   const { email, password } = req.body;
   console.log('Intento de login:', email, password);
 
@@ -166,8 +181,8 @@ app.post('/api/auth/register', (req, res) => {
       id: newUser.id,
       email: newUser.email,
       nombre: newUser.nombre,
-      role: newUser.role    
-    }  
+      role: newUser.role
+    }
   });
 });
 
