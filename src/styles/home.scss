@@ -64,7 +64,7 @@
 
   .about-section {
     /* Reduced vertical padding so About page fits better in viewport */
-    padding: 2.5rem 2rem;
+    padding: 1.5rem 1.5rem;
     background: white;
     /* Expand section to fill vertical space between navbar and footer */
     display: flex;
@@ -78,8 +78,8 @@
 
     h2 {
       text-align: center;
-      font-size: 2.5rem;
-      margin-bottom: 3rem;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
       color: v.$color-dark;
       font-weight: v.$font-weight-bold;
     }
@@ -87,7 +87,7 @@
     .about-content {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 4rem;
+      gap: 2rem;
       align-items: center;
     }
 
@@ -100,8 +100,8 @@
       }     
 
       p {
-        font-size: 1.1rem;
-        margin-bottom: 1.5rem;
+        font-size: 1rem;
+        margin-bottom: 1rem;
         line-height: 1.6;
         color: v.$color-muted;
       }
@@ -114,7 +114,7 @@
 
       .stat {
         text-align: center;
-        padding: 1.25rem;
+        padding: 0.85rem;
         background: v.$color-offwhite;
         border-radius: 8px;
         transition: transform 0.3s ease;
@@ -124,9 +124,9 @@
         }
 
         h4 {
-          font-size: 2.5rem;
+          font-size: 1.8rem;
           color: v.$color-primary;
-          margin-bottom: 0.5rem;
+          margin-bottom: 0.25rem;
           font-weight: v.$font-weight-bold;
         }
 
@@ -212,7 +212,7 @@
   
    .contact-section {
     /* Reduce padding to avoid page overflow on shorter viewports */
-    padding: 2.5rem 2rem;
+    padding: 1.5rem 1.5rem;
     background: white;
     /* Do NOT expand the contact section to fill remaining space; instead
       let its content be scrollable internally so the footer remains visible. */
@@ -227,9 +227,9 @@
 
     h2 {
       text-align: center;
-      font-size: 2.5rem;
+      font-size: 1.8rem;
       margin-top: 0;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
       color: v.$color-dark;
       font-weight: v.$font-weight-bold;
     }
@@ -248,15 +248,15 @@
 
     .contact-info {
       h3 {
-        font-size: 1.5rem;
-        margin-bottom: 2rem;
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
         color: v.$color-primary;
         font-weight: v.$font-weight-medium;
       }
 
       .contact-item {
-        margin-bottom: 1rem;
-        padding: 1rem;
+        margin-bottom: 0.6rem;
+        padding: 0.75rem;
         background: v.$color-offwhite;
         border-radius: 8px;
         border-left: 4px solid v.$color-primary;
@@ -279,10 +279,10 @@
       }
     }
 
-    .contact-form {
+      .contact-form {
       h3 {
-        font-size: 1.5rem;
-        margin-bottom: 2rem;
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
         color: v.$color-primary;
         font-weight: v.$font-weight-medium;
       }
@@ -290,11 +290,11 @@
       form {
         display: flex;
         flex-direction: column;
-        gap: 1.5rem;
+        gap: 1rem;
       }
 
       input, textarea {
-        padding: 1rem;
+        padding: 0.75rem;
         border: 1px solid #ddd;
         border-radius: 8px;
         font-size: 1rem;
@@ -308,7 +308,7 @@
       }
 
       textarea {
-        min-height: 100px;
+        min-height: 80px;
         resize: vertical;
       }
 

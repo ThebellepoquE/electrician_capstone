@@ -2,12 +2,13 @@
 @use './variables' as v;
 
 .servicios-page {
-    padding: 2rem 2rem;
+    /* Match the page container behavior used by home/about/contact so the
+       footer keeps the same footprint across all pages. */
+    padding: 2.5rem 2rem;
     background-color: v.$color-offwhite;
-    min-height: calc(100vh - 83px - 100px);
-    overflow-y: hidden;
     display: flex;
     flex-direction: column;
+    flex: 1 0 auto;
     box-sizing: border-box;
 }
 
@@ -41,6 +42,10 @@
     max-width: 1200px;
     margin: 0 auto;
     width: 100%;
+    /* Allow the grid to take available space and scroll internally if needed */
+    flex: 1 1 auto;
+    overflow: auto;
+    padding-bottom: 1rem; /* avoid content touching footer */
 }
 
 .servicio-card {
