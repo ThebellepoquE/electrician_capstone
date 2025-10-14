@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../styles/home.scss';
 
 function Contact() {
+    useEffect(() => {
+        document.body.classList.add('contact-page-active');
+        return () => document.body.classList.remove('contact-page-active');
+    }, []);
+
     return (
         <div className="contact-page">
             <section className="contact-section">

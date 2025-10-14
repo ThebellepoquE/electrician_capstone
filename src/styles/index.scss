@@ -28,6 +28,13 @@ body.servicios-page-active {
   height: 100vh;
 }
 
+body.contact-page-active {
+  /* Hide page-level scrollbar for Contact page and let contact-content
+     handle internal scrolling. */
+  overflow: hidden;
+  height: 100vh;
+}
+
 h1 {
   font-size: v.$font-size-titulo;
   font-weight: v.$font-weight-bold;

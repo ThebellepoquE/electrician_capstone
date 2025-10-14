@@ -234,19 +234,16 @@
       font-weight: v.$font-weight-bold;
     }
 
-    .contact-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-    /* Allow the content area to scroll internally so the footer can remain
-       visible when the viewport is limited. */
-    overflow: auto;
-    /* Cap internal height so it never forces the page taller than the
-       available viewport area (navbar + footer considered). We'll assume
-       a footer of ~120px to be conservative. */
-    max-height: calc(100vh - 83px - 120px);
-      margin-top: 0.5rem;
-      margin-bottom: 0;
+      .contact-content {
+        display: grid;
+        grid-template-columns: 1fr 360px;
+        gap: 1rem;
+        align-items: start;
+        width: 100%;
+        /* Limit the contact area so the page doesn't force a document scrollbar */
+        max-height: calc(100vh - 83px - 88px - 48px); /* viewport - navbar - footer - extra margin */
+        overflow: auto;
+        padding-right: 0.25rem; /* avoid inner scrollbar touching edge */
     }
 
     .contact-info {
