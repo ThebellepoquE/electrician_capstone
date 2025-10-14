@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react';
-import '../styles/servicios.scss';
+import '../styles/services.scss';
 
-function Servicios() {
+function Services() {
   const [servicios, setServicios] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   // Añadir clase al body para prevenir scroll
   useEffect(() => {
-    document.body.classList.add('servicios-page-active');
+    document.body.classList.add('services-page-active');
     return () => {
-      document.body.classList.remove('servicios-page-active');
+      document.body.classList.remove('services-page-active');
     };
   }, []);
 
@@ -58,18 +58,18 @@ function Servicios() {
   }
 
   return (
-    <div className="servicios-page">
-      <div className="servicios-header">
+    <div className="services-page">
+      <div className="services-header">
         <h1>Nuestros Servicios Eléctricos</h1>
         <p>Profesionales para todas tus necesidades eléctricas</p>
       </div>
 
-      <div className="servicios-grid">
+      <div className="services-grid">
         {servicios.map(servicio => (
-          <div key={servicio.id} className="servicio-card">
+          <div key={servicio.id} className="service-card">
             <h3>{servicio.name}</h3>
             <p>{servicio.description}</p>
-            <div className="servicio-meta">
+            <div className="service-meta">
               <span className={`categoria ${servicio.category}`}>
                 {servicio.category}
               </span>
@@ -84,4 +84,4 @@ function Servicios() {
   );
 }
 
-export default Servicios;
+export default Services;

@@ -14,9 +14,9 @@ function Navbar({ userData, onCerrarSesion }) {
                 <div className='nav-wrapper'>
                     <nav className='navigation'>
                         <Link to='/'>INICIO</Link>
-                        <Link to='/acerca-de'>ACERCA DE</Link>
-                        <Link to='/servicios'>SERVICIOS</Link>
-                        <Link to='/contacto'>CONTACTO</Link>
+                        <Link to='/about-us'>ACERCA DE</Link>
+                        <Link to='/services'>SERVICIOS</Link>
+                        <Link to='/contact'>CONTACTO</Link>
                     </nav>
 
                     <div className='cta-wrapper'>

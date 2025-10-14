@@ -26,10 +26,10 @@ body {
   height: 100%;
 }
 
-body.servicios-page-active {
-  /* For the servicios page we intentionally hide the document scrollbar
-     and let the page component manage internal scrolling (servicios-grid).
-     This prevents the footer from shifting when the servicios grid overflows. */
+body.services-page-active {
+  /* For the services page we intentionally hide the document scrollbar
+     and let the page component manage internal scrolling (services-grid).
+     This prevents the footer from shifting when the services grid overflows. */
   overflow: hidden;
   height: 100vh;
 }

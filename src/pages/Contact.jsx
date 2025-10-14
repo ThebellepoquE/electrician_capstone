@@ -11,7 +11,6 @@ function Contact() {
         <div className="contact-page">
             <section className="contact-section">
                 <div className="container">
-                    <h2>Contact Us</h2>
                     <div className="contact-content">
                         <div className="contact-info">
                             <h3>Get In Touch</h3>

@@ -5,7 +5,7 @@
 .home-page,
 .about-page,
 .contact-page,
-.servicios-page {
+.services-page {
   margin: 0;
   padding: 0;
   /* Make standalone pages fill available vertical space so footer
@@ -21,8 +21,8 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  /* Reduced padding to decrease overall page height and avoid unnecessary scrollbar */
-  padding: 3rem 2rem;
+  /* Slightly larger hero to feel more spacious */
+  padding: 5rem 2.5rem;
   margin: 0;
   background: linear-gradient(135deg, v.$color-primary 0%, color.adjust(v.$color-primary, $lightness: -10%) 100%);
   color: v.$color-offwhite;
@@ -33,16 +33,16 @@
         margin: 0 auto;
 
       h1 {
-        font-size: 2.4rem;
-        margin-bottom: 1.25rem;
+        font-size: 3rem;
+        margin-bottom: 1.5rem;
         font-weight: v.$font-weight-bold;
         line-height: 1.2;
       }
 
       p {
-        font-size: 1.15rem;
-        max-width: 600px;
-        margin: 0 auto 1.5rem;
+        font-size: 1.2rem;
+        max-width: 720px;
+        margin: 0 auto 1.75rem;
         line-height: 1.6;
       }
 
@@ -65,22 +65,25 @@
   }
 
   .about-section {
-    /* Reduced vertical padding so About page fits better in viewport */
-    padding: 1.5rem 1.5rem;
+  /* Consistent padding and height across sections */
+    padding: 4rem 2rem;
     background: white;
-    /* Expand section to fill vertical space between navbar and footer */
     display: flex;
     flex-direction: column;
-    flex: 1 0 auto;
+    flex: 0 0 auto;
+    min-height: calc(100vh - var(--navbar-height));
+    justify-content: center;
+    align-items: center;
 
     .container {
       max-width: 1200px;
       margin: 0 auto;
+      width: 100%;
     }
 
     h2 {
       text-align: center;
-      font-size: 2rem;
+      font-size: 2.4rem;
       margin-bottom: 1.5rem;
       color: v.$color-dark;
       font-weight: v.$font-weight-bold;
@@ -109,31 +112,31 @@
       }
     }
 
-    .about-stats {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
+      .about-stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
 
       .stat {
         text-align: center;
-        padding: 0.85rem;
+        padding: 0.6rem;
         background: v.$color-offwhite;
         border-radius: 8px;
-        transition: transform 0.3s ease;
+        transition: transform 0.25s ease;
 
         &:hover {
-          transform: translateY(-3px);
+          transform: translateY(-2px);
         }
 
         h4 {
-          font-size: 1.8rem;
+          font-size: 1.4rem;
           color: v.$color-primary;
           margin-bottom: 0.25rem;
           font-weight: v.$font-weight-bold;
         }
 
         p {
-          font-size: 1.1rem;
+          font-size: 1rem;
           color: v.$color-muted;
           font-weight: v.$font-weight-medium;
           margin-bottom: 0;
@@ -143,20 +146,26 @@
   }
 
   .services-preview {
-  /* Slightly reduced padding to keep services visible without forcing vertical scroll */
-  padding: 2.5rem 2rem;
+  /* Consistent padding and height across sections */
+    padding: 4rem 2rem;
     background: v.$color-offwhite;
+    min-height: calc(100vh - var(--navbar-height));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
     .container {
       max-width: 1200px;
       margin: 0 auto;
       text-align: center;
+      width: 100%;
     }
 
     h2 {
-      font-size: 2.5rem;
+      font-size: 2.4rem;
       color: v.$color-dark;
-      margin-bottom: 0.75rem;
+      margin-bottom: 1.5rem;
       margin-top: 0;
       font-weight: v.$font-weight-bold;
     }
@@ -184,7 +193,7 @@
     .service-card {
       background-color: v.$color-surface;
       border-radius: 12px;
-      padding: 2rem;
+      padding: 1rem;
       text-align: center;
       box-shadow: 0 4px 20px rgba(11, 61, 145, 0.08);
       border: 1px solid rgba(11, 61, 145, 0.1);
@@ -213,52 +222,50 @@
   }
   
    .contact-section {
-    /* Reduce padding to avoid page overflow on shorter viewports */
-    padding: 1.5rem 1.5rem;
+    /* Consistent padding and height across sections */
+    padding: 4rem 2rem;
     background: white;
-    /* Do NOT expand the contact section to fill remaining space; instead
-      let its content be scrollable internally so the footer remains visible. */
     display: flex;
     flex-direction: column;
     flex: 0 0 auto;
+    min-height: calc(100vh - var(--navbar-height));
+    justify-content: center;
+    align-items: center;
 
     .container {
       max-width: 1200px;
       margin: 0 auto;
+      width: 100%;
     }
 
-    h2 {
-      text-align: center;
-      font-size: 1.8rem;
-      margin-top: 0;
-      margin-bottom: 1rem;
-      color: v.$color-dark;
-      font-weight: v.$font-weight-bold;
+      h2 {
+        text-align: center;
+        font-size: 2.4rem;
+        margin-top: 0;
+        margin-bottom: 1.5rem;
+        color: v.$color-dark;
+        font-weight: v.$font-weight-bold;
     }
 
       .contact-content {
         display: grid;
-        grid-template-columns: 1fr 360px;
-        gap: 1rem;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
         align-items: start;
         width: 100%;
-        /* Limit the contact area so the page doesn't force a document scrollbar */
-        max-height: calc(100vh - 83px - 88px - 48px); /* viewport - navbar - footer - extra margin */
-        overflow: auto;
-        padding-right: 0.25rem; /* avoid inner scrollbar touching edge */
     }
 
     .contact-info {
       h3 {
-        font-size: 1.25rem;
-        margin-bottom: 1rem;
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
         color: v.$color-primary;
         font-weight: v.$font-weight-medium;
       }
 
       .contact-item {
         margin-bottom: 0.6rem;
-        padding: 0.75rem;
+        padding: 1rem;
         background: v.$color-offwhite;
         border-radius: 8px;
         border-left: 4px solid v.$color-primary;
@@ -269,7 +276,7 @@
         }
 
         strong {
-          color: v.$color-dark;
+          color: v.$color-primary;
           font-weight: v.$font-weight-medium;
         }
 
@@ -283,8 +290,8 @@
 
       .contact-form {
       h3 {
-        font-size: 1.25rem;
-        margin-bottom: 1rem;
+        font-size: 1.5rem;
+        margin-bottom: 1.25rem;
         color: v.$color-primary;
         font-weight: v.$font-weight-medium;
       }
@@ -292,7 +299,7 @@
       form {
         display: flex;
         flex-direction: column;
-        gap: 1rem;
+        gap: 0.7rem;
       }
 
       input, textarea {
@@ -310,7 +317,7 @@
       }
 
       textarea {
-        min-height: 80px;
+        min-height: 115px; 
         resize: vertical;
       }
 

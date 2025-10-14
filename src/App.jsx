@@ -5,7 +5,7 @@ import Navbar from './components/Navbar.jsx';
 import Footer from './components/Footer.jsx';
 import Home from './pages/Home.jsx';
 import About from './pages/About.jsx';
-import Servicios from './pages/Servicios.jsx';
+import Services from './pages/Services.jsx';
 import Contact from './pages/Contact.jsx';
 import Auth from './pages/Auth.jsx';
 import Admin from './pages/Admin.jsx';
@@ -41,10 +41,10 @@ function App() {
     <div className='App'>
       <Navbar userData={userData} onCerrarSesion={cerrarSesion} />
       <Routes>
-        <Route path='/' element={<Home />} />   
-        <Route path='/acerca-de' element={<About />} />
-        <Route path='/servicios' element={<Servicios />} />
-        <Route path='/contacto' element={<Contact />} />
+        <Route path='/' element={<Home />} />
+        <Route path='/about-us' element={<About />} />
+        <Route path='/services' element={<Services />} />
+        <Route path='/contact' element={<Contact />} />
         <Route path='/auth' element={<Auth />} />
         <Route
           path='/admin'

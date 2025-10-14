@@ -47,9 +47,9 @@ function Home() {
     // scroll to section when route matches the anchored routes
     const { pathname } = location;
     let id = null;
-    if (pathname === '/contacto') id = 'contact';
-    if (pathname === '/acerca-de') id = 'about';
-    if (pathname === '/servicios') id = 'services';
+    if (pathname === '/contact') id = 'contact';
+    if (pathname === '/about-us') id = 'about';
+    if (pathname === '/services') id = 'services';
 
     if (id) {
       // Small delay to ensure DOM is fully rendered
@@ -85,29 +85,8 @@ function Home() {
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
           <div className="hero-buttons">
             <a href="#services" className="btn-primary" onClick={(e) => handleScrollToSection(e, 'services')}>Get Started</a>
-            <a href="#about" className="btn-secondary" onClick={(e) => handleScrollToSection(e, 'about')}>Learn More</a>
+            <a href="#contact" className="btn-secondary" onClick={(e) => handleScrollToSection(e, 'about')}>Learn More</a>
           </div>
-        </div>
-      </section>
-
-      {/* SECCIÓN SERVICIOS DINÁMICA */}
-      <section id="services" className="services-preview">
-        <div className="container">
-          <h2>Our Services</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-
-          {loading ? (
-            <p>Loading services...</p>
-          ) : (
-            <div className="services-grid">
-              {servicios.slice(0, 6).map(servicio => (
-                <div key={servicio.id} className="service-card">
-                  <h3>{servicio.name}</h3>
-                  <p>{servicio.description}</p>
-                </div>
-              ))}
-            </div>
-          )}
         </div>
       </section>
 
@@ -127,8 +106,12 @@ function Home() {
                 <p>Years Experience</p>
               </div>
               <div className="stat">
-                <h3>500+</h3>
+                <h3>100+</h3>
                 <p>Projects Completed</p>
+              </div>
+              <div className="stat">
+                <h3>50+</h3>
+                <p>Partners</p>
               </div>
               <div className="stat">
                 <h3>24/7</h3>
@@ -136,6 +119,27 @@ function Home() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* SECCIÓN SERVICIOS DINÁMICA */}
+      <section id="services" className="services-preview">
+        <div className="container">
+          <h2>Services</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+
+          {loading ? (
+            <p>Loading services...</p>
+          ) : (
+            <div className="services-grid">
+              {servicios.slice(0, 6).map(servicio => (
+                <div key={servicio.id} className="service-card">
+                  <h3>{servicio.name}</h3>
+                  <p>{servicio.description}</p>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -157,7 +161,7 @@ function Home() {
               </div>
             </div>
             <div className="contact-form">
-              <h4>Send Message</h4>
+              <h2>Send Message</h2>
               <form>
                 <input type="text" placeholder="Your Name" />
                 <input type="email" placeholder="Your Email" />

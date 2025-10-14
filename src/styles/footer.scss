@@ -15,12 +15,12 @@
   .footer-content {
     max-width: 1200px;
     margin: 0 auto;
-  display: flex;
-  align-items: center;
-  flex-direction: column; /* CTA centered above info */
-  gap: 1rem;
-  width: 100%;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column; /* CTA centered above info */
+    gap: 0.5rem; /* tighten gap so content fits */
+    width: 100%;
+    justify-content: center;
     
     p {
       margin: 0;
@@ -37,8 +37,8 @@
 
       .cta-button {
         @include m.btn-light;
-        padding: 0.6rem 1.5rem;
-        font-size: 0.9rem;
+        padding: 0.45rem 1rem;
+        font-size: 0.85rem;
 
         &:hover {
           border: 2px solid v.$color-primary;
