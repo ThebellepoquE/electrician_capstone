@@ -13,18 +13,18 @@ function Admin() {
     // Cargar servicios al montar el componente
     const cargarServicios = async () => {
         try {
-            console.log('🔌 Cargando servicios...');
+            console.log(' Cargando servicios...');
             const response = await fetch('/api/services');
             
             if (!response.ok)
                 throw new Error(`Error HTTP: ${response.status}`);
             
             const data = await response.json();
-            console.log('📊 Servicios cargados:', data);
+            console.log(' Servicios cargados:', data);
             setServicios(data);
         
         } catch (error) {
-          console.error('❌ Error cargando servicios:', error); 
+          console.error(' Error cargando servicios:', error); 
           setServicios(data);
         }
     };
@@ -114,7 +114,7 @@ function Admin() {
                             </span>
                             {servicio.is_emergency && (
                             <span className="emergencia-tag"> 
-                                🆘 Emergencia
+                                 Emergencia
                             </span>
                             )}
                         </div>

@@ -8,12 +8,9 @@ $color-accent: #FFCC00;     // Amarillo (acento)
 $color-dark: #0b1220;       // Color de texto principal (oscuro, no puro negro)
 $color-surface: #ffffff;    // Superficies blancas
 $color-offwhite: #F7F9FC;   // Fondo claro (offwhite)
-$color-warning: #FF6B6B;    // Estados de error / warning (mantengo)
-$color-muted: #797979; 
-$color-light-grey: hsla(0,0%,100%,1);   // Gris secundario / texto suave
-
-// Color oscuro de superficie (charcoal) - para mixins antiguos
-$color-charcoal: #1A1A2E;
+$color-warning: #FF6B6B;    // Estados de error / warning
+$color-muted: #797979;      // Gris secundario / texto suave
+$color-charcoal: #1A1A2E;   // Color oscuro de superficie (usado en admin)
 
 // Tipografía
 $font-family-base: 'Futura PT', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
@@ -23,14 +20,9 @@ $font-weight-regular: 400;
 $font-weight-medium: 500;
 $font-weight-bold: 700;
 
-// Espaciado y sizes
-$space-sm: 0.5rem;
-$space-md: 1rem;
-$space-lg: 2rem;
-
 // Bordes / radios
-$radius: 8px;              // radio base
-$radius-pill: 999px;       // radio para botones pill
+$radius: 8px;              // Radio base
+$radius-pill: 999px;       // Radio para botones pill
 
 // Botones y elementos de formulario
 $btn-padding: 0.7rem 1.5rem;
@@ -44,25 +36,11 @@ $breakpoint-desktop: 1024px;  // Small desktops
 $breakpoint-wide: 1200px;     // Wide screens
 
 // -----------------------------
-// Aliases / compatibilidad con nombres anteriores
-// Mantener estos para no romper imports existentes en SCSS
+// Aliases legacy (compatibilidad con código existente)
 // -----------------------------
-$blue: $color-primary !default;
-$light-blue: $color-accent !default;
-$dark: $color-dark !default;
-$offwhite: $color-offwhite !default;
-$warning: $color-warning !default;
-$grey: $color-muted !default;
-$charcoal: $color-charcoal !default;
-
 $font-family-principal: $font-family-base !default;
-$font-size-titulo: $font-size-title !default;
-$font-weight-bold: $font-weight-bold !default;
-$font-weight-medium: $font-weight-medium !default;
-
 $border-radius-total: $radius-pill !default;
-$border-radius: $radius !default;
-
 $padding-boton: $btn-padding !default;
 $font-size-boton: $btn-font-size !default;
 $transition-boton: $btn-transition !default;
+$warning: $color-warning !default;
