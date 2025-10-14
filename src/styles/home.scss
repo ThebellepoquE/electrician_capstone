@@ -7,6 +7,11 @@
 .contact-page {
   margin: 0;
   padding: 0;
+  /* Make standalone pages fill available vertical space so footer
+     is pushed to bottom when content is short. */
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
 
   .hero-section {
   display: flex;
@@ -60,6 +65,10 @@
   .about-section {
     padding: 5rem 2rem;
     background: white;
+    /* Expand section to fill vertical space between navbar and footer */
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 auto;
 
     .container {
       max-width: 1200px;
@@ -200,9 +209,13 @@
     }
   }
   
-  .contact-section {
+    .contact-section {
       padding: 3.5rem 2rem 4.5rem;
       background: white;
+      /* Expand contact section similarly */
+      display: flex;
+      flex-direction: column;
+      flex: 1 0 auto;
 
     .container {
       max-width: 1200px;
