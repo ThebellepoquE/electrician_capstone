@@ -114,7 +114,7 @@ function Home() {
       {/* SECCIÓN ACERCA DE */}
       <section id="about" className="about-section">
         <div className="container">
-          <h2>About Us</h2>
+          <h3>About Us</h3>
           <div className="about-content">
             <div className="about-text">
               <h3>Lorem Ipsum Electrical</h3>
@@ -142,7 +142,7 @@ function Home() {
       {/* SECCIÓN CONTACTO */}
       <section id="contact" className="contact-section">
         <div className="container">
-          <h2>Contact Us</h2>
+          <h3>Contact Us</h3>
           <div className="contact-content">
             <div className="contact-info">
               <h3>Get In Touch</h3>
