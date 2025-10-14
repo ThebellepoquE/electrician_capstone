@@ -29,21 +29,22 @@ function Home() {
 
   // Handle smooth scroll with navbar offset
   const handleScrollToSection = (e, sectionId) => {
-    e.preventDefault();
+    if (e) e.preventDefault();
+    console.log('🔍 Scrolling to section:', sectionId);
+
     const element = document.getElementById(sectionId);
+    console.log('📍 Element found:', element);
+
     if (element) {
-      const navbarHeight = 83;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = window.pageYOffset + elementPosition - navbarHeight;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
+      // Use scrollIntoView which respects scroll-padding-top from CSS
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
       });
+    } else {
+      console.error('❌ Element not found with id:', sectionId);
     }
-  };
-
-  useEffect(() => {
+  }; useEffect(() => {
     // scroll to section when route matches the anchored routes
     const { pathname } = location;
     let id = null;
@@ -84,8 +85,8 @@ function Home() {
           <h1>Lorem Ipsum Electrical Solutions</h1>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
           <div className="hero-buttons">
-            <a href="#services" className="btn-primary" onClick={(e) => handleScrollToSection(e, 'services')}>Get Started</a>
-            <a href="#contact" className="btn-secondary" onClick={(e) => handleScrollToSection(e, 'about')}>Learn More</a>
+            <button type="button" className="btn-primary" onClick={(e) => handleScrollToSection(e, 'about')}>Get Started</button>
+            <button type="button" className="btn-secondary" onClick={(e) => handleScrollToSection(e, 'services')}>Learn More</button>
           </div>
         </div>
       </section>
