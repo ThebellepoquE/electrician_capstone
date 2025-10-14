@@ -19,8 +19,12 @@ function About() {
                 <p>Years Experience</p>
               </div>
               <div className="stat">
-                <h4>500+</h4>
+                <h4>50+</h4>
                 <p>Projects Completed</p>
+              </div>
+              <div className="stat">
+                <h4>40+</h4>
+                <p>Customer Satisficed</p>
               </div>
               <div className="stat">
                 <h4>24/7</h4>
