@@ -1,9 +1,9 @@
 import React from 'react';
 import '../styles/home.scss';
 
-function Contacto() {
+function Contact() {
   return (
-    <div className="contacto-page">
+    <div className="contact-page">
       <section className="contact-section">
         <div className="container">
           <h2>Contact Us</h2>
@@ -36,4 +36,4 @@ function Contacto() {
   );
 }
 
-export default Contacto;
+export default Contact;
