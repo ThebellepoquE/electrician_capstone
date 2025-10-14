@@ -330,8 +330,8 @@
 }
 
 // Responsive
-@media (max-width: 768px) {
-  .home-page, .about-page, .contact-page {
+@media (max-width: v.$breakpoint-tablet) {
+  .home-page, .about-page, .contact-page, .services-page {
     .hero-section {
       padding: 4rem 1rem;
       min-height: 60vh;
@@ -349,8 +349,7 @@
           flex-direction: column;
           align-items: center;
           
-          .btn-primary,
-          .btn-secondary {
+          button {
             width: 100%;
             max-width: 280px;
           }
@@ -380,8 +379,8 @@
   }
 }
 
-@media (max-width: 480px) {
-  .home-page, .about-page, .contact-page {
+@media (max-width: v.$breakpoint-mobile) {
+  .home-page, .about-page, .contact-page, .services-page {
     .hero-section {
       .hero-content {
         h1 {

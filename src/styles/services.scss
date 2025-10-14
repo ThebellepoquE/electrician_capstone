@@ -118,23 +118,23 @@
 }
 
 // Responsive
-@media (max-width: 1024px) {
-  .servicios-grid {
+@media (max-width: v.$breakpoint-desktop) {
+  .services-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (max-width: 768px) {
-  .servicios-page {
+@media (max-width: v.$breakpoint-tablet) {
+  .services-page {
     padding: 2rem 1rem;
   }
   
-  .servicios-grid {
+  .services-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
   
-  .servicios-header h1 {
+  .services-header h1 {
     font-size: 1.3rem;
   }
 }

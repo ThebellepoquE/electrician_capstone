@@ -37,6 +37,12 @@ $btn-padding: 0.7rem 1.5rem;
 $btn-font-size: 1rem;
 $btn-transition: background 0.2s, color 0.2s, border 0.2s;
 
+// Breakpoints responsive (mobile-first)
+$breakpoint-mobile: 480px;    // Phones
+$breakpoint-tablet: 768px;    // Tablets
+$breakpoint-desktop: 1024px;  // Small desktops
+$breakpoint-wide: 1200px;     // Wide screens
+
 // -----------------------------
 // Aliases / compatibilidad con nombres anteriores
 // Mantener estos para no romper imports existentes en SCSS

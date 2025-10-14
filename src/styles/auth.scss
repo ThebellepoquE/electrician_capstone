@@ -106,7 +106,7 @@
 }
 
 // RESPONSIVE
-@media (max-width: 968px) {
+@media (max-width: v.$breakpoint-tablet) {
   .auth-container {
     grid-template-columns: 1fr;
     height: auto;
@@ -130,7 +130,7 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: v.$breakpoint-mobile) {
   .auth-page {
     margin-top: 83px;
     padding: 0;

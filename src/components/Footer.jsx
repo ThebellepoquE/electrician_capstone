@@ -13,13 +13,8 @@ function Footer() {
         
         <div className="footer-info">
             <p className="copyright">
-                © 2025 Electrician Services - Todos los derechos reservados
+                © 2025 Electrician Services | All rights reserved.
             </p>
-          <div className="footer-links">
-            <a href="#privacy">Política de Privacidad</a>
-            <a href="#terms">Términos de Servicio</a>
-            <a href="#contact">Contacto</a>
-          </div>
         </div>
       </div>
     </footer>

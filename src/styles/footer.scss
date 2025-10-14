@@ -4,55 +4,52 @@
 .footer {
   background: v.$color-accent;
   color: v.$color-offwhite;
-  /* Compact footer to reduce vertical footprint */
   padding: 1.25rem 1rem 1rem;
-  /* Keep footer visually consistent across pages */
-  height: var(--footer-height, 88px); /* fixed height on desktop to ensure identical footprint */
+  height: var(--footer-height, 88px); 
   display: flex;
   align-items: center;
-  margin-top: auto; // Para que se quede abajo en el layout flex
+  margin-top: auto; 
   
   .footer-content {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
+    flex-direction: column; 
     align-items: center;
-    flex-direction: column; /* CTA centered above info */
-    gap: 0.5rem; /* tighten gap so content fits */
-    width: 100%;
     justify-content: center;
+    gap: 0.5rem; 
+    width: 100%;
     
     p {
       margin: 0;
       opacity: 0.8;
-      font-size: 0.85rem;
+      font-size: 0.9rem;
     }
   }
 
-    .cta-wrapper {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex: 0 0 auto;
+  .cta-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-      .cta-button {
-        @include m.btn-light;
-        padding: 0.45rem 1rem;
-        font-size: 0.85rem;
+    .cta-button {
+      @include m.btn-light;
+      padding: 0.45rem 1rem;
+      font-size: 0.85rem;
 
-        &:hover {
-          border: 2px solid v.$color-primary;
-        }
+      &:hover {
+        border: 2px solid v.$color-primary;
       }
     }
+  }
 
   .footer-info {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    flex-wrap: wrap;
+    color: v.$color-primary;
     gap: 0.75rem;
+    flex-wrap: wrap;
     
     p {
       margin: 0;
@@ -60,31 +57,13 @@
       font-size: 0.85rem;
     }
   }
-  
-  .footer-links {
-    display: flex;
-    gap: 1.5rem;
-    
-    a {
-      color: v.$color-offwhite;
-      text-decoration: none;
-      opacity: 0.7;
-      transition: all 0.3s ease;
-      font-size: 0.85rem;
-      
-      &:hover {
-        opacity: 1;
-        color: v.$color-accent;
-      }
-    }
-  }
 }
 
 // Responsive
-@media (max-width: 768px) {
+@media (max-width: v.$breakpoint-tablet) {
   .footer {
     padding: 1.5rem 1rem;
-    height: auto; /* allow footer to grow on small screens */
+    height: auto; 
     
     .footer-content {
       flex-direction: column;

@@ -13,10 +13,10 @@ function Navbar({ userData, onCerrarSesion }) {
 
                 <div className='nav-wrapper'>
                     <nav className='navigation'>
-                        <Link to='/'>INICIO</Link>
-                        <Link to='/about-us'>ACERCA DE</Link>
-                        <Link to='/services'>SERVICIOS</Link>
-                        <Link to='/contact'>CONTACTO</Link>
+                        <Link to='/'>HOME</Link>
+                        <Link to='/about-us'>ABOUT US</Link>
+                        <Link to='/services'>SERVICES</Link>
+                        <Link to='/contact'>CONTACT</Link>
                     </nav>
 
                     <div className='cta-wrapper'>

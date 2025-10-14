@@ -197,7 +197,7 @@ btn-danger {
 }
 
 // Responsive
-@media (max-width: 768px) {
+@media (max-width: v.$breakpoint-tablet) {
   .admin-form .form-group {
     flex-direction: column;
     align-items: stretch;
