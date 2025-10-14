@@ -9,7 +9,10 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 83px; // Offset for sticky navbar
+  /* Expose common layout sizes as CSS variables for consistency */
+  --navbar-height: 83px;
+  --footer-height: 88px;
+  scroll-padding-top: var(--navbar-height); // Offset for sticky navbar
   overflow-x: hidden;
   height: 100%;
 }
@@ -24,15 +27,19 @@ body {
 }
 
 body.servicios-page-active {
+  /* For the servicios page we intentionally hide the document scrollbar
+     and let the page component manage internal scrolling (servicios-grid).
+     This prevents the footer from shifting when the servicios grid overflows. */
   overflow: hidden;
   height: 100vh;
 }
 
 body.contact-page-active {
-  /* Hide page-level scrollbar for Contact page and let contact-content
-     handle internal scrolling. */
-  overflow: hidden;
-  height: 100vh;
+  /* Do not force overflow:hidden or fixed height here — allow the contact
+     page component to handle internal scrolling. This keeps layout consistent
+     across pages (Home/About/Contact/Servicios). */
+  overflow: auto;
+  height: auto;
 }
 
 h1 {

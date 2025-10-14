@@ -7,7 +7,7 @@
   /* Compact footer to reduce vertical footprint */
   padding: 1.25rem 1rem 1rem;
   /* Keep footer visually consistent across pages */
-  height: 88px; /* fixed height on desktop to ensure identical footprint */
+  height: var(--footer-height, 88px); /* fixed height on desktop to ensure identical footprint */
   display: flex;
   align-items: center;
   margin-top: auto; // Para que se quede abajo en el layout flex

@@ -4,7 +4,8 @@
 
 .home-page,
 .about-page,
-.contact-page {
+.contact-page,
+.servicios-page {
   margin: 0;
   padding: 0;
   /* Make standalone pages fill available vertical space so footer
@@ -12,6 +13,7 @@
   display: flex;
   flex-direction: column;
   flex: 1 0 auto;
+  min-height: calc(100vh - var(--navbar-height) - var(--footer-height));
 
   .hero-section {
   display: flex;
@@ -322,7 +324,7 @@
 
 // Responsive
 @media (max-width: 768px) {
-  .home-page {
+  .home-page, .about-page, .contact-page {
     .hero-section {
       padding: 4rem 1rem;
       min-height: 60vh;
@@ -372,7 +374,7 @@
 }
 
 @media (max-width: 480px) {
-  .home-page {
+  .home-page, .about-page, .contact-page {
     .hero-section {
       .hero-content {
         h1 {
