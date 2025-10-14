@@ -41,10 +41,10 @@ function App() {
     <div className='App'>
       <Navbar userData={userData} onCerrarSesion={cerrarSesion} />
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/contacto' element={<Contact />} />
+        <Route path='/' element={<Home />} />   
         <Route path='/acerca-de' element={<About />} />
         <Route path='/servicios' element={<Servicios />} />
+        <Route path='/contacto' element={<Contact />} />
         <Route path='/auth' element={<Auth />} />
         <Route
           path='/admin'
