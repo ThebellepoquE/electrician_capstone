@@ -7,32 +7,33 @@
   padding: 0;
 
   .hero-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 6rem 2rem;
-    margin: 0;
-    background: linear-gradient(135deg, v.$color-primary 0%, color.adjust(v.$color-primary, $lightness: -10%) 100%);
-    color: v.$color-offwhite;
-    min-height: calc(100vh - 83px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  /* Reduced padding to decrease overall page height and avoid unnecessary scrollbar */
+  padding: 3rem 2rem;
+  margin: 0;
+  background: linear-gradient(135deg, v.$color-primary 0%, color.adjust(v.$color-primary, $lightness: -10%) 100%);
+  color: v.$color-offwhite;
+  min-height: calc(100vh - 83px);
 
         .hero-content {
         max-width: 800px;
         margin: 0 auto;
 
       h1 {
-        font-size: 3rem;
-        margin-bottom: 1.5rem;
+        font-size: 2.4rem;
+        margin-bottom: 1.25rem;
         font-weight: v.$font-weight-bold;
         line-height: 1.2;
       }
 
       p {
-        font-size: 1.25rem;
+        font-size: 1.15rem;
         max-width: 600px;
-        margin: 0 auto 2rem;
+        margin: 0 auto 1.5rem;
         line-height: 1.6;
       }
 
@@ -128,7 +129,8 @@
   }
 
   .services-preview {
-    padding: 4.5rem 2rem 4.5rem;
+  /* Slightly reduced padding to keep services visible without forcing vertical scroll */
+  padding: 2.5rem 2rem;
     background: v.$color-offwhite;
 
     .container {
@@ -158,8 +160,8 @@
 
     .services-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
       margin-top: 0;
       margin-bottom: 0;
     }
