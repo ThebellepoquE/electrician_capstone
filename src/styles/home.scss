@@ -2,7 +2,9 @@
 @use 'sass:color' as color;
 @use './mixins' as m;
 
-.home-page {
+.home-page,
+.about-page,
+.contact-page {
   margin: 0;
   padding: 0;
 
@@ -198,7 +200,7 @@
     }
   }
   
-    .contact-section {
+  .contact-section {
       padding: 3.5rem 2rem 4.5rem;
       background: white;
 
