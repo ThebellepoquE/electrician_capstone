@@ -1,9 +1,20 @@
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import logo from '../assets/light-bulb.svg';
 import '../styles/navbar.scss';
 
 
 function Navbar({ userData, onCerrarSesion }) {
+    const [menuOpen, setMenuOpen] = useState(false);
+
+    const toggleMenu = () => {
+        setMenuOpen(!menuOpen);
+    };
+
+    const closeMenu = () => {
+        setMenuOpen(false);
+    };
+
     return (
         <div className='header-wrapper'>
             <div className='header'>
@@ -11,12 +22,22 @@ function Navbar({ userData, onCerrarSesion }) {
                     <img src={logo} alt='Logo' className='logo' />
                 </div>
 
-                <div className='nav-wrapper'>
+                <button
+                    className='mobile-menu-toggle'
+                    onClick={toggleMenu}
+                    aria-label='Toggle menu'
+                >
+                    <span className={menuOpen ? 'open' : ''}></span>
+                    <span className={menuOpen ? 'open' : ''}></span>
+                    <span className={menuOpen ? 'open' : ''}></span>
+                </button>
+
+                <div className={`nav-wrapper ${menuOpen ? 'mobile-open' : ''}`}>
                     <nav className='navigation'>
-                        <Link to='/'>HOME</Link>
-                        <Link to='/about-us'>ABOUT US</Link>
-                        <Link to='/services'>SERVICES</Link>
-                        <Link to='/contact'>CONTACT</Link>
+                        <Link to='/' onClick={closeMenu}>HOME</Link>
+                        <Link to='/about-us' onClick={closeMenu}>ABOUT US</Link>
+                        <Link to='/services' onClick={closeMenu}>SERVICES</Link>
+                        <Link to='/contact' onClick={closeMenu}>CONTACT</Link>
                     </nav>
 
                     <div className='cta-wrapper'>
