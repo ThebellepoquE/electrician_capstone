@@ -1,6 +1,5 @@
 import express from 'express';
 import cors from 'cors';
-import db from './database.js';
 
 const app = express();
 
@@ -25,7 +24,7 @@ app.use(cors({
 }));
 app.use(express.json());
 
-// Mock data users solo para auth por ahora (sin MySQL)
+// Mock data users
 const mockUsers = [
   {
     id: 1,
@@ -43,79 +42,118 @@ const mockUsers = [
   }
 ];
 
+// Mock data services
+let mockServices = [
+  {
+    id: 1,
+    name: 'Instalación Eléctrica Residencial',
+    description: 'Instalación completa de sistemas eléctricos para hogares, incluyendo cableado, tableros y puntos de luz.',
+    category: 'instalación',
+    is_active: true,
+    created_at: new Date().toISOString()
+  },
+  {
+    id: 2,
+    name: 'Mantenimiento Preventivo',
+    description: 'Revisión y mantenimiento de instalaciones eléctricas para prevenir fallas y garantizar seguridad.',
+    category: 'mantenimiento',
+    is_active: true,
+    created_at: new Date().toISOString()
+  },
+  {
+    id: 3,
+    name: 'Reparación de Averías',
+    description: 'Diagnóstico y reparación de problemas eléctricos, cortocircuitos y fallas en el sistema.',
+    category: 'reparación',
+    is_active: true,
+    created_at: new Date().toISOString()
+  },
+  {
+    id: 4,
+    name: 'Instalación de Sistemas de Iluminación',
+    description: 'Diseño e instalación de sistemas de iluminación LED, decorativa y de emergencia.',
+    category: 'instalación',
+    is_active: true,
+    created_at: new Date().toISOString()
+  }
+];
+
 // Endpoints de servicios 
 app.get('/', (_req, res) => {
   res.json({ message: 'Backend electricista funcionando' });
 });
 
-// ENDPOINTS MYSQL DE SERVICIOS
+// ENDPOINTS DE SERVICIOS CON MOCK DATA
 
-// GET /api/services - desde MySQL
-app.get('/api/services', async (_req, res) => {
+// GET /api/services
+app.get('/api/services', (_req, res) => {
   try {
-    const [services] = await db.execute(
-      'SELECT * FROM services WHERE is_active = true ORDER BY created_at DESC'
-    );
-    res.json(services);
+    const activeServices = mockServices.filter(s => s.is_active);
+    res.json(activeServices);
   } catch (error) {
     console.error('Error al obtener servicios:', error);
     res.status(500).json({ error: 'Error obteniendo servicios' });
   }
 });
 
-// POST /api/services - crear en MySQL
-app.post('/api/services', async (req, res) => {
+// POST /api/services
+app.post('/api/services', (req, res) => {
   try {
     const { name, description, category } = req.body;
-    const [result] = await db.execute(
-      'INSERT INTO services (name, description, category) VALUES (?, ?, ?)',
-      [name, description, category]
-    );
+    const newService = {
+      id: mockServices.length + 1,
+      name,
+      description,
+      category,
+      is_active: true,
+      created_at: new Date().toISOString()
+    };
 
-    const [newService] = await db.execute(
-      'SELECT * FROM services WHERE id = ?',
-      [result.insertId]);
-    res.json(newService[0]);
+    mockServices.push(newService);
+    res.json(newService);
   } catch (error) {
     console.error('Error creando servicio:', error);
     res.status(500).json({ error: 'Error creando servicio' });
   }
 });
 
-// PUT /api/services/:id - actualizar en MySQL
-app.put('/api/services/:id', async (req, res) => {
+// PUT /api/services/:id
+app.put('/api/services/:id', (req, res) => {
   try {
-    const serviceId = req.params.id;
+    const serviceId = parseInt(req.params.id);
     const { name, description, category } = req.body;
 
-    const [result] = await db.execute(
-      'UPDATE services SET name = ?, description = ?, category = ? WHERE id = ?',
-      [name, description, category, serviceId]
-    );
+    const serviceIndex = mockServices.findIndex(s => s.id === serviceId);
 
-    if (result.affectedRows === 0) {
+    if (serviceIndex === -1) {
       return res.status(404).json({ error: 'Servicio no encontrado' });
     }
 
-    res.json({ sucess: true, message: 'Servicio actualizado' });
+    mockServices[serviceIndex] = {
+      ...mockServices[serviceIndex],
+      name,
+      description,
+      category
+    };
+
+    res.json({ success: true, message: 'Servicio actualizado' });
   } catch (error) {
     console.error('Error actualizando servicio:', error);
     res.status(500).json({ error: 'Error actualizando servicio' });
   }
 });
 
-app.delete('/api/services/:id', async (req, res) => {
+// DELETE /api/services/:id
+app.delete('/api/services/:id', (req, res) => {
   try {
-    const serviceId = req.params.id;
-    const [result] = await db.execute(
-      'UPDATE services SET is_active = false WHERE id = ?',
-      [serviceId]
-    );
+    const serviceId = parseInt(req.params.id);
+    const serviceIndex = mockServices.findIndex(s => s.id === serviceId);
 
-    if (result.affectedRows === 0) {
+    if (serviceIndex === -1) {
       return res.status(404).json({ error: 'Servicio no encontrado' });
     }
 
+    mockServices[serviceIndex].is_active = false;
     res.json({ success: true, message: 'Servicio eliminado' });
   } catch (error) {
     console.error('Error eliminando servicio:', error);
