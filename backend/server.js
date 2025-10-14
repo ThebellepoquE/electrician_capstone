@@ -75,6 +75,22 @@ let mockServices = [
     category: 'instalación',
     is_active: true,
     created_at: new Date().toISOString()
+  },
+  {
+    id: 5,
+    name: 'Instalación de Paneles Solares',
+    description: 'Instalación y configuración de sistemas de energía solar fotovoltaica para hogares y empresas.',
+    category: 'instalación',
+    is_active: true,
+    created_at: new Date().toISOString()
+  },
+  {
+    id: 6,
+    name: 'Actualización de Instalaciones',
+    description: 'Modernización de instalaciones eléctricas antiguas para cumplir con normativas actuales de seguridad.',
+    category: 'mantenimiento',
+    is_active: true,
+    created_at: new Date().toISOString()
   }
 ];
 
