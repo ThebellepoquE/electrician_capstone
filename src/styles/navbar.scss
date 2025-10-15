@@ -208,3 +208,37 @@
     }
   }
 }
+
+// Mobile landscape optimization
+@media (max-height: 500px) and (orientation: landscape) {
+  .header-wrapper {
+    .header {
+      .nav-wrapper {
+        padding: 1rem;
+        max-height: calc(100vh - 60px);
+        
+        .navigation {
+          gap: 0.75rem;
+          
+          a {
+            font-size: 1rem;
+            padding: 0.35rem 0;
+          }
+        }
+
+        .cta-wrapper {
+          margin-top: 0.5rem;
+
+          .cta-button {
+            padding: 0.75rem;
+            font-size: 0.9rem;
+            width: auto;
+            max-width: 250px;
+            margin: 0 auto;
+            display: block;
+          }
+        }
+      }
+    }
+  }
+}
