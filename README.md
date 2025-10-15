@@ -1,6 +1,7 @@
 # Electrician Capstone Project
 
-Full-stack web app for a self-employed electrician . Built with React, Vite and Express. Featuring a responsive design, dynamic service management and admin dashboard.
+Full-stack web app for a self-employed electrician . Built with React, Vite and Express. 
+Featuring a responsive design, dynamic service management and admin dashboard.
 
 ## Features
 
@@ -56,7 +57,7 @@ DB_HOST=localhost
 DB_USER=your_mysql_user
 DB_PASSWORD=your_mysql_password
 DB_NAME=electrician_db
-PORT=5000
+PORT=3001
 
 4. Setup the database
 
@@ -71,13 +72,13 @@ Development Mode
 cd backend
 node server.js
 
-Server runs on http://localhost:5001
+Server runs on http://localhost:3001
 
 2. Start the frontend dev server (in a new terminal)
 
 npm run dev
 
-App runs on http://localhost:5000
+App runs on http://localhost:5001
 
 **Production Build**
 npm run build
