@@ -78,7 +78,7 @@ Server runs on http://localhost:3001
 
 npm run dev
 
-App runs on http://localhost:5001
+App runs on http://localhost:5000
 
 **Production Build**
 npm run build
