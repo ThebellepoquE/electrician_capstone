@@ -1,8 +1,18 @@
 import express from 'express';
 import cors from 'cors';
 import bcrypt from 'bcrypt';
+import rateLimit from 'express-rate-limit';
 import { getActiveServices } from './services.js';
 import { createTables } from './database.js';
+import {
+  createServiceSchema,
+  updateServiceSchema,
+  loginSchema,
+  registerSchema,
+  contactSchema,
+} from './validation.js';
+
+const isTest = process.env.NODE_ENV === 'test';
 
 export const app = express();
 
@@ -26,6 +36,21 @@ app.use(cors({
   credentials: true
 }));
 app.use(express.json());
+
+// Rate limiting (disabled in test environment)
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 5,
+  message: { error: 'Too many requests, please try again later.' },
+  skip: () => isTest,
+});
+
+const contactLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 3,
+  message: { error: 'Too many requests, please try again later.' },
+  skip: () => isTest,
+});
 
 // Mock data users (password_hash is bcrypt of "admin123" and "cliente123")
 const BCRYPT_SALT_ROUNDS = 10;
@@ -119,7 +144,11 @@ app.get('/api/services', async (_req, res) => {
 // POST /api/services
 app.post('/api/services', (req, res) => {
   try {
-    const { name, description, category } = req.body;
+    const result = createServiceSchema.safeParse(req.body);
+    if (!result.success) {
+      return res.status(400).json({ error: result.error.errors[0].message });
+    }
+    const { name, description, category } = result.data;
     const newService = {
       id: mockServices.length + 1,
       name,
@@ -141,19 +170,23 @@ app.post('/api/services', (req, res) => {
 app.put('/api/services/:id', (req, res) => {
   try {
     const serviceId = parseInt(req.params.id);
-    const { name, description, category } = req.body;
+    if (isNaN(serviceId)) {
+      return res.status(400).json({ error: 'ID inválido' });
+    }
+
+    const result = updateServiceSchema.safeParse(req.body);
+    if (!result.success) {
+      return res.status(400).json({ error: result.error.errors[0].message });
+    }
 
     const serviceIndex = mockServices.findIndex(s => s.id === serviceId);
-
     if (serviceIndex === -1) {
       return res.status(404).json({ error: 'Servicio no encontrado' });
     }
 
     mockServices[serviceIndex] = {
       ...mockServices[serviceIndex],
-      name,
-      description,
-      category
+      ...result.data,
     };
 
     res.json({ success: true, message: 'Servicio actualizado' });
@@ -167,6 +200,9 @@ app.put('/api/services/:id', (req, res) => {
 app.delete('/api/services/:id', (req, res) => {
   try {
     const serviceId = parseInt(req.params.id);
+    if (isNaN(serviceId)) {
+      return res.status(400).json({ error: 'ID inválido' });
+    }
     const serviceIndex = mockServices.findIndex(s => s.id === serviceId);
 
     if (serviceIndex === -1) {
@@ -181,10 +217,15 @@ app.delete('/api/services/:id', (req, res) => {
   }
 });
 
-// ENDPOINTS AUTH
-app.post('/api/auth/login', async (req, res) => {
+// ENDPOINTS AUTH (rate limited)
+app.post('/api/auth/login', authLimiter, async (req, res) => {
   const { email, password } = req.body;
   console.log('Intento de login:', email);
+
+  const loginResult = loginSchema.safeParse({ email, password });
+  if (!loginResult.success) {
+    return res.status(400).json({ success: false, message: loginResult.error.errors[0].message });
+  }
 
   const user = mockUsers.find(user => user.email === email);
 
@@ -216,9 +257,14 @@ app.post('/api/auth/login', async (req, res) => {
   });
 });
 
-app.post('/api/auth/register', async (req, res) => {
+app.post('/api/auth/register', authLimiter, async (req, res) => {
   const { email, password, nombre } = req.body;
   console.log('Registro de usuario:', email);
+
+  const registerResult = registerSchema.safeParse({ email, password, nombre });
+  if (!registerResult.success) {
+    return res.status(400).json({ success: false, message: registerResult.error.errors[0].message });
+  }
 
   // Verificar si el usuario ya existe
   const userExists = mockUsers.find(user => user.email === email);
@@ -253,15 +299,13 @@ app.post('/api/auth/register', async (req, res) => {
   });
 });
 
-// ENDPOINTS CONTACT
-app.post('/api/contact', (req, res) => {
-  const { name, email, message } = req.body;
-  if (!name || !email || !message) {
-    return res.status(400).json({
-      success: false,
-      error: 'Name, email and message are required'
-    });
+// ENDPOINTS CONTACT (rate limited)
+app.post('/api/contact', contactLimiter, (req, res) => {
+  const result = contactSchema.safeParse(req.body);
+  if (!result.success) {
+    return res.status(400).json({ success: false, error: result.error.errors[0].message });
   }
+  const { name, email, message } = result.data;
   console.log('Contact form submission:', { name, email, message });
   res.json({ success: true, message: 'Message received' });
 });
