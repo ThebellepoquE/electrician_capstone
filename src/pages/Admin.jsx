@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import API_BASE_URL from '../config/api';
 import '../styles/admin.scss';
-import { data } from 'react-router-dom';
 
 function Admin() {
     const [servicios, setServicios] = useState([]);
@@ -26,7 +25,7 @@ function Admin() {
 
         } catch (error) {
             console.error(' Error cargando servicios:', error);
-            setServicios(data);
+            setServicios([]);
         }
     };
 

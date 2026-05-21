@@ -9,7 +9,7 @@
 
   h1 {
   color: v.$color-charcoal;
-    margin-bottom: 2 rem;
+    margin-bottom: 2rem;
     text-align: center;
     font-size: v.$font-size-title;
     font-family: v.$font-family-principal;
@@ -58,14 +58,6 @@
     border: 1px solid v.$color-muted;
     border-radius: 4px;
     font-size: v.$font-size-base;
-    font-family: v.$font-family-principal;
-  }
-}
-
-.servicios-list {
-  h3 {
-    color: v.$color-charcoal;
-    margin-bottom: 1rem;
     font-family: v.$font-family-principal;
   }
 }
@@ -185,10 +177,10 @@
   }
 }
 
-btn-danger {
+.btn-danger {
   @include m.btn-dark;
   background: v.$warning;
-  font-family: white;
+  color: white;
 
   &:hover {
     background: white;
