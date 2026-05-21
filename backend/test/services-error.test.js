@@ -1,7 +1,15 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import request from 'supertest';
 import express from 'express';
 import cors from 'cors';
+
+// Mock bcrypt before importing any module that uses it
+vi.mock('bcrypt', () => ({
+  default: {
+    compare: async () => true,
+    hash: async (pw) => 'mock_hash_' + pw,
+  },
+}));
 
 // Mock the database module to simulate errors
 vi.mock('../database.js', () => ({

@@ -1,6 +1,6 @@
 # Electrician Capstone Project
 
-Full-stack web app for a self-employed electrician . Built with React, Vite and Express. 
+Full-stack web app for a self-employed electrician. Built with React, Vite and Express.
 Featuring a responsive design, dynamic service management and admin dashboard.
 
 ## Features
@@ -35,9 +35,9 @@ Featuring a responsive design, dynamic service management and admin dashboard.
 
 ### Prerequisites
 
-- Node.js (v16 or higher)
+- Node.js (v20 or higher)
 - MySQL (v8 or higher)
-- npm or yarn
+- pnpm (v10 or higher)
 
 ### Setup
 
@@ -48,7 +48,7 @@ cd electrician_capstone
 
 2. Install dependencies
 
-npm install
+pnpm install
 
 3. Configure de database
 Create a .env file in the root directory:
@@ -76,13 +76,13 @@ Server runs on http://localhost:3001
 
 2. Start the frontend dev server (in a new terminal)
 
-npm run dev
+pnpm dev
 
 App runs on http://localhost:5000
 
 **Production Build**
-npm run build
-npm run preview
+pnpm run build
+pnpm preview
 
 **Design System** 
 Color palette
@@ -104,7 +104,8 @@ Color palette
 The app includes a simple authenticantion system:
 
 - Login page at /auth
-- Protected admin routes with **ProtectedRoute** component
+- Protected admin routes with **ProtectedRoute** component (admin role required)
+- Password hashing with bcrypt
 - Session management via **LocalStorage**
 
 **API Endpoints**
@@ -128,7 +129,7 @@ POST	            /api/login	                User authentication
 
 **License**
 
-This project is created for educational purposes.
+This project is created for educational purposes and as a capstone for learning full-stack development.
 
 **Author**
 ThebellepoquE 
