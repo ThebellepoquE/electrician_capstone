@@ -1,5 +1,14 @@
-import { describe, it, expect, beforeAll, afterAll } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import request from 'supertest';
+
+// Mock bcrypt before importing server.js (which imports bcrypt)
+import { vi } from 'vitest';
+vi.mock('bcrypt', () => ({
+  default: {
+    compare: async () => true,
+    hash: async (pw) => 'mock_hash_' + pw,
+  },
+}));
 
 // Set mock DB mode BEFORE importing server/database
 process.env.USE_MOCK_DB = '1';

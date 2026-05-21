@@ -106,8 +106,8 @@ export const updateService = async (id, serviceData) => {
   }
 };
 
-// TEMPORAL: Crear tablas si no existen (borrar despues)
-const createTables = async () => {
+// Initialize database tables (call explicitly from server startup)
+export const createTables = async () => {
   try {
     await exportedPool.execute(`
         CREATE TABLE IF NOT EXISTS users (
@@ -136,7 +136,5 @@ const createTables = async () => {
     console.error('Error creando tablas:', error);
   }
 };
-
-createTables();
 
 export default exportedPool;

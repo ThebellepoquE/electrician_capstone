@@ -1,6 +1,8 @@
 import express from 'express';
 import cors from 'cors';
+import bcrypt from 'bcrypt';
 import { getActiveServices } from './services.js';
+import { createTables } from './database.js';
 
 export const app = express();
 
@@ -25,19 +27,20 @@ app.use(cors({
 }));
 app.use(express.json());
 
-// Mock data users
+// Mock data users (password_hash is bcrypt of "admin123" and "cliente123")
+const BCRYPT_SALT_ROUNDS = 10;
 const mockUsers = [
   {
     id: 1,
     email: 'admin@electricista.com',
-    password_hash: '$2a$10$examplehash',
+    password_hash: '$2b$10$duVpfvoAt1yF5HNtskI0Y.Qrzt1bUCGnBjgBtncBxAn3lZMpzDQBm',
     nombre: 'Administrador Principal',
     role: 'admin'
   },
   {
     id: 2,
     email: 'cliente@ejemplo.com',
-    password_hash: '$2a$10$examplehash',
+    password_hash: '$2b$10$7GwX48wXq0aiF7Vm4AzjYunIa4CoASOnSttLMYbgCMrIbQ8f9jBo2',
     nombre: 'Cliente Demo',
     role: 'cliente'
   }
@@ -178,34 +181,42 @@ app.delete('/api/services/:id', (req, res) => {
   }
 });
 
-// ENDPOINTS AUTH MOCK
-app.post('/api/auth/login', (req, res) => {
+// ENDPOINTS AUTH
+app.post('/api/auth/login', async (req, res) => {
   const { email, password } = req.body;
-  console.log('Intento de login:', email, password);
+  console.log('Intento de login:', email);
 
   const user = mockUsers.find(user => user.email === email);
 
-  if (user) {
-    res.json({
-      success: true,
-      message: 'login exitoso',
-      token: 'mock_jwt_token_' + user.id,
-      user: {
-        id: user.id,
-        email: user.email,
-        nombre: user.nombre,
-        role: user.role
-      }
-    });
-  } else {
-    res.status(401).json({
+  if (!user) {
+    return res.status(401).json({
       success: false,
       message: 'Usuario no encontrado. Usa: admin@electricista.com o cliente@ejemplo.com'
     });
   }
+
+  const validPassword = await bcrypt.compare(password, user.password_hash);
+  if (!validPassword) {
+    return res.status(401).json({
+      success: false,
+      message: 'Contraseña incorrecta'
+    });
+  }
+
+  res.json({
+    success: true,
+    message: 'login exitoso',
+    token: 'mock_jwt_token_' + user.id,
+    user: {
+      id: user.id,
+      email: user.email,
+      nombre: user.nombre,
+      role: user.role
+    }
+  });
 });
 
-app.post('/api/auth/register', (req, res) => {
+app.post('/api/auth/register', async (req, res) => {
   const { email, password, nombre } = req.body;
   console.log('Registro de usuario:', email);
 
@@ -213,15 +224,16 @@ app.post('/api/auth/register', (req, res) => {
   const userExists = mockUsers.find(user => user.email === email);
   if (userExists) {
     return res.status(400).json({
-      sucess: false,
+      success: false,
       message: 'El usuario ya existe'
     });
   }
 
+  const hashedPassword = await bcrypt.hash(password, BCRYPT_SALT_ROUNDS);
   const newUser = {
     id: mockUsers.length + 1,
     email,
-    password_hash: password,
+    password_hash: hashedPassword,
     nombre,
     role: 'cliente'
   };
@@ -244,8 +256,11 @@ app.post('/api/auth/register', (req, res) => {
 // PUERTO ( solo cuando se ejecuta directamente, no al importar para tests )
 const isDirect = process.argv[1] && process.argv[1].includes('server.js');
 if (isDirect) {
-  const PORT = process.env.PORT || 3001;
-  app.listen(PORT, '0.0.0.0', () => {
-    console.log(`Servidor corriendo en puerto ${PORT}`);
-  });
+  (async () => {
+    await createTables();
+    const PORT = process.env.PORT || 3001;
+    app.listen(PORT, '0.0.0.0', () => {
+      console.log(`Servidor corriendo en puerto ${PORT}`);
+    });
+  })();
 }
