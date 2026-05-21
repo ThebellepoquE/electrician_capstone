@@ -44,6 +44,14 @@ function Navbar({ userData, onCerrarSesion }) {
                         <a href='tel:123456789' className='cta-button'>
                             Contacto 123456789
                         </a>
+                        {userData && (
+                            <button
+                                onClick={() => { onCerrarSesion(); closeMenu(); }}
+                                className='logout-button'
+                            >
+                                Logout
+                            </button>
+                        )}
                     </div>
                 </div>
             </div>
