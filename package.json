@@ -44,7 +44,6 @@
     "vitest": "^4.1.7"
   },
   "description": "Full-stack web app for a self-employed electrician . Built with React, Vite and Express.  Featuring a responsive design, dynamic service management and admin dashboard.",
-  "main": "eslint.config.js",
   "keywords": [],
   "author": "",
   "license": "ISC"
