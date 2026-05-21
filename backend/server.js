@@ -253,6 +253,19 @@ app.post('/api/auth/register', async (req, res) => {
   });
 });
 
+// ENDPOINTS CONTACT
+app.post('/api/contact', (req, res) => {
+  const { name, email, message } = req.body;
+  if (!name || !email || !message) {
+    return res.status(400).json({
+      success: false,
+      error: 'Name, email and message are required'
+    });
+  }
+  console.log('Contact form submission:', { name, email, message });
+  res.json({ success: true, message: 'Message received' });
+});
+
 // PUERTO ( solo cuando se ejecuta directamente, no al importar para tests )
 const isDirect = process.argv[1] && process.argv[1].includes('server.js');
 if (isDirect) {

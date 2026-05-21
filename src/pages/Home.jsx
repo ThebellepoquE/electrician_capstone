@@ -7,6 +7,8 @@ function Home() {
   const location = useLocation();
   const [servicios, setServicios] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [contactForm, setContactForm] = useState({ name: '', email: '', message: '' });
+  const [contactStatus, setContactStatus] = useState({ type: '', text: '' });
 
   // Cargar servicios desde la API
   useEffect(() => {
@@ -76,6 +78,28 @@ function Home() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }, [location]);
+
+  // Contact form handler
+  const handleContactSubmit = async (e) => {
+    e.preventDefault();
+    setContactStatus({ type: '', text: '' });
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/contact`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(contactForm),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setContactStatus({ type: 'success', text: 'Message sent! We\'ll get back to you soon.' });
+        setContactForm({ name: '', email: '', message: '' });
+      } else {
+        setContactStatus({ type: 'error', text: data.error || 'Failed to send message.' });
+      }
+    } catch {
+      setContactStatus({ type: 'error', text: 'Connection error. Please try again.' });
+    }
+  };
 
 
   return (
@@ -164,12 +188,33 @@ function Home() {
             </div>
             <div className="contact-form">
               <h2>Send Message</h2>
-              <form>
-                <input type="text" placeholder="Your Name" />
-                <input type="email" placeholder="Your Email" />
-                <textarea placeholder="Your Message" rows="4"></textarea>
+              <form onSubmit={handleContactSubmit}>
+                <input
+                  type="text"
+                  placeholder="Your Name"
+                  value={contactForm.name}
+                  onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
+                  required
+                />
+                <input
+                  type="email"
+                  placeholder="Your Email"
+                  value={contactForm.email}
+                  onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
+                  required
+                />
+                <textarea
+                  placeholder="Your Message"
+                  rows="4"
+                  value={contactForm.message}
+                  onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
+                  required
+                ></textarea>
                 <button type="submit" className="btn-primary">Send Message</button>
               </form>
+              {contactStatus.text && (
+                <p className={`form-status ${contactStatus.type}`}>{contactStatus.text}</p>
+              )}
             </div>
           </div>
         </div>
