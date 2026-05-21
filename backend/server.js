@@ -1,7 +1,8 @@
 import express from 'express';
 import cors from 'cors';
+import { getActiveServices } from './services.js';
 
-const app = express();
+export const app = express();
 
 // CORS configuration for development and production
 const allowedOrigins = [
@@ -102,10 +103,10 @@ app.get('/', (_req, res) => {
 // ENDPOINTS DE SERVICIOS CON MOCK DATA
 
 // GET /api/services
-app.get('/api/services', (_req, res) => {
+app.get('/api/services', async (_req, res) => {
   try {
-    const activeServices = mockServices.filter(s => s.is_active);
-    res.json(activeServices);
+    const services = await getActiveServices();
+    res.json(services);
   } catch (error) {
     console.error('Error al obtener servicios:', error);
     res.status(500).json({ error: 'Error obteniendo servicios' });
@@ -240,8 +241,11 @@ app.post('/api/auth/register', (req, res) => {
   });
 });
 
-// PUERTO ( luego )
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Servidor corriendo en puerto ${PORT}`);
-});
+// PUERTO ( solo cuando se ejecuta directamente, no al importar para tests )
+const isDirect = process.argv[1] && process.argv[1].includes('server.js');
+if (isDirect) {
+  const PORT = process.env.PORT || 3001;
+  app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Servidor corriendo en puerto ${PORT}`);
+  });
+}
