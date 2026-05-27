@@ -1,6 +1,7 @@
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import API_BASE_URL from '../config/api';
+import { siteStats } from '../config/stats';
 import '../styles/home.scss';
 
 function Home() {
@@ -131,14 +132,12 @@ function Home() {
                 <h3>10+</h3>
                 <p>Years Experience</p>
               </div>
-              <div className="stat">
-                <h3>100+</h3>
-                <p>Projects Completed</p>
-              </div>
-              <div className="stat">
-                <h3>50+</h3>
-                <p>Partners</p>
-              </div>
+              {siteStats.map((stat) => (
+                <div className="stat" key={stat.label}>
+                  <h3>{stat.value}</h3>
+                  <p>{stat.label}</p>
+                </div>
+              ))}
               <div className="stat">
                 <h3>24/7</h3>
                 <p>Emergency Service</p>
