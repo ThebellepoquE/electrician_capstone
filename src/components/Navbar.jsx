@@ -45,12 +45,16 @@ function Navbar({ userData, onCerrarSesion }) {
                             Contacto 123456789
                         </a>
                         {userData && (
-                            <button
-                                onClick={() => { onCerrarSesion(); closeMenu(); }}
-                                className='logout-button'
-                            >
-                                Logout
-                            </button>
+                            <div className='user-section'>
+                                <span className='user-name' title={userData.nombre}>{userData.nombre}</span>
+                                <button
+                                    onClick={() => { onCerrarSesion(); closeMenu(); }}
+                                    className='logout-button'
+                                    aria-label='Cerrar sesión'
+                                >
+                                    Logout
+                                </button>
+                            </div>
                         )}
                     </div>
                 </div>
