@@ -123,7 +123,40 @@ let mockServices = [
   }
 ];
 
-// Endpoints de servicios 
+// Auth middleware — validates Bearer token against mockUsers
+function requireAuth(req, res, next) {
+  const authHeader = req.headers.authorization;
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+
+  const token = authHeader.slice(7); // strip 'Bearer '
+  const tokenPrefix = 'mock_jwt_token_';
+  if (!token.startsWith(tokenPrefix)) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+
+  const userId = parseInt(token.slice(tokenPrefix.length), 10);
+  const user = mockUsers.find(u => u.id === userId);
+  if (!user) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+
+  req.user = user;
+  next();
+}
+
+// Admin middleware — requires authenticated user with admin role
+function requireAdmin(req, res, next) {
+  requireAuth(req, res, () => {
+    if (req.user.role !== 'admin') {
+      return res.status(403).json({ error: 'Forbidden: admin access required' });
+    }
+    next();
+  });
+}
+
+// Endpoints de servicios
 app.get('/', (_req, res) => {
   res.json({ message: 'Backend electricista funcionando' });
 });
@@ -142,7 +175,7 @@ app.get('/api/services', async (_req, res) => {
 });
 
 // POST /api/services
-app.post('/api/services', (req, res) => {
+app.post('/api/services', requireAdmin, (req, res) => {
   try {
     const result = createServiceSchema.safeParse(req.body);
     if (!result.success) {
@@ -167,7 +200,7 @@ app.post('/api/services', (req, res) => {
 });
 
 // PUT /api/services/:id
-app.put('/api/services/:id', (req, res) => {
+app.put('/api/services/:id', requireAdmin, (req, res) => {
   try {
     const serviceId = parseInt(req.params.id);
     if (isNaN(serviceId)) {
@@ -197,7 +230,7 @@ app.put('/api/services/:id', (req, res) => {
 });
 
 // DELETE /api/services/:id
-app.delete('/api/services/:id', (req, res) => {
+app.delete('/api/services/:id', requireAdmin, (req, res) => {
   try {
     const serviceId = parseInt(req.params.id);
     if (isNaN(serviceId)) {
