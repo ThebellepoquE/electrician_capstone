@@ -17,11 +17,13 @@ const isTest = process.env.NODE_ENV === 'test';
 export const app = express();
 
 // CORS configuration for development and production
-const allowedOrigins = [
-  'http://localhost:5000',
-  'http://127.0.0.1:5000',
-  'https://thebellepoque.github.io'
-];
+const allowedOrigins = process.env.CORS_ORIGINS
+  ? process.env.CORS_ORIGINS.split(',').map(s => s.trim())
+  : [
+      'http://localhost:5000',
+      'http://127.0.0.1:5000',
+      'https://thebellepoque.github.io',
+    ];
 
 app.use(cors({
   origin: function (origin, callback) {

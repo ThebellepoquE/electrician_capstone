@@ -2,6 +2,7 @@ import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import API_BASE_URL from '../config/api';
 import { siteStats } from '../config/stats';
+import { CONTACT_INFO } from '../config/contact';
 import '../styles/home.scss';
 
 function Home() {
@@ -176,13 +177,13 @@ function Home() {
             <div className="contact-info">
               <h2>Get In Touch</h2>
               <div className="contact-item">
-                <strong>Phone:</strong> 123-456-789
+                <strong>Phone:</strong> {CONTACT_INFO.phoneDisplay}
               </div>
               <div className="contact-item">
-                <strong>Email:</strong> info@loremipsum.com
+                <strong>Email:</strong> {CONTACT_INFO.email}
               </div>
               <div className="contact-item">
-                <strong>Address:</strong> Lorem Ipsum Street, 123
+                <strong>Address:</strong> {CONTACT_INFO.address}
               </div>
             </div>
             <div className="contact-form">

@@ -1,3 +1,4 @@
+import { CONTACT_INFO } from '../config/contact';
 import '../styles/footer.scss';
 
 function Footer() {
@@ -6,8 +7,8 @@ function Footer() {
       <div className="footer-content">
         {/* NUEVO CTA CENTRADO */}
         <div className='cta-wrapper'>
-            <a href='tel:123456789' className='cta-button'>
-                Contacto 123456789
+            <a href={`tel:${CONTACT_INFO.phone}`} className='cta-button'>
+                Contacto {CONTACT_INFO.phoneDisplay}
             </a>
         </div>
         
