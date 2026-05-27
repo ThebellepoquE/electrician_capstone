@@ -188,6 +188,18 @@
   }
 }
 
+.btn-cancel {
+  @include m.btn-dark;
+  background: transparent;
+  color: v.$color-muted;
+  border: 1px solid v.$color-muted;
+
+  &:hover {
+    background: v.$color-muted;
+    color: white;
+  }
+}
+
 // Responsive
 @media (max-width: v.$breakpoint-tablet) {
   .admin-form .form-group {

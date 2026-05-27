@@ -9,11 +9,7 @@
 
 > **Update 2026-05-27:** Issues #2, #3, #4 have been resolved.
 
-### 1. Admin.jsx: catch block sets state to wrong variable (runtime crash)
-- **File:** `src/pages/Admin.jsx` (lines 4, 29)
-- **Description:** `import { data } from 'react-router-dom'` shadows the `data` variable from the fetch response. In the catch block at line 29, `setServicios(data)` calls the router's `data` function (a utility, not an array) instead of setting services to `[]` or an error state.
-- **Why it matters:** Any API failure on the admin page will crash React or render garbage. The admin page is unusable when the backend is down.
-- **Fix:** Remove `import { data } from 'react-router-dom'` (unused). In catch, use `setServicios([])`.
+### 1. ~~Admin.jsx crash~~ ✅ RESOLVED (commit `e6e727f`)
 
 ### 2. ~~Auth passwords logged in plaintext~~ ✅ RESOLVED
 - **File:** `backend/server.js`
@@ -30,33 +26,23 @@
 - **Status:** Fixed — Frontend `ProtectedRoute` already checks `userData.role === 'admin'`. Backend now has `requireAuth` + `requireAdmin` middleware on POST/PUT/DELETE `/api/services`. Returns 401 without token, 403 for non-admin users.
 - **Resolved:** 2026-05-27 (auth-role-check SDD change)
 
-### 5. `.btn-danger` CSS selector missing dot prefix — styles never apply
-- **File:** `src/styles/admin.scss` (line 188)
-- **Description:** `btn-danger { ... }` targets a `<btn-danger>` HTML element, not a `.btn-danger` class. The Admin page uses `className="btn-danger"` (line 120 of Admin.jsx) but the styles never apply.
-- **Why it matters:** Delete buttons have no styling. Also, the rule has `font-family: white;` (line 191) which is nonsensical — should be `color: white;`.
-- **Fix:** Change to `.btn-danger` and fix `font-family: white` → `color: white`.
+### 5. ~~`.btn-danger` CSS~~ ✅ RESOLVED (commit `e6e727f`)
 
-### 6. `rgba(11, 61, 145, 01)` — invalid alpha value in services.scss
-- **File:** `src/styles/services.scss` (line 90)
-- **Description:** `background-color: rgba(11, 61, 145, 01);` — alpha value `01` is not valid (should be `0`–`1`). Most browsers will treat this as `1` (fully opaque), but Sass may throw a build error.
-- **Why it matters:** Build failure or incorrect styling for category badges on the Services page.
-- **Fix:** Change to `0.1` or use a proper hex/rgba value.
+### 6. ~~`rgba(11, 61, 145, 01)`~~ ✅ RESOLVED (commit `e6e727f`)
 
 ---
 
 ## HIGH — Should fix soon, will cause pain later
 
-### 7. Navbar receives props but never uses them
-- **File:** `src/components/Navbar.jsx` (line 7)
-- **Description:** `function Navbar({ userData, onCerrarSesion })` — both props are destructured but never referenced in the JSX. There is no logout button, no user display, no conditional rendering based on auth state.
-- **Why it matters:** Logged-in users have no way to log out from the UI. The props passed from `App.jsx` are dead code.
-- **Fix:** Add a conditional logout button in the navbar that shows when `userData` exists and calls `onCerrarSesion`.
+### 7. ~~Navbar receives props but never uses them~~ ✅ RESOLVED (navbar-logout-session PR)
+- **File:** `src/components/Navbar.jsx`
+- **Status:** Fixed — `userData` now displays user name in navbar, `onCerrarSesion` triggers logout button.
+- **Resolved:** 2026-05-27
 
-### 8. No logout button exists anywhere in the UI
-- **File:** `src/App.jsx` (lines 28–32) + `src/components/Navbar.jsx`
-- **Description:** `cerrarSesion()` is defined in App.jsx and passed to Navbar, but Navbar never renders it. No other component provides logout.
-- **Why it matters:** Users must manually clear localStorage or close the browser to log out.
-- **Fix:** Same as #7 — add logout button to Navbar.
+### 8. ~~No logout button exists anywhere in the UI~~ ✅ RESOLVED (navbar-logout-session PR)
+- **File:** `src/App.jsx` + `src/components/Navbar.jsx`
+- **Status:** Fixed — logout button with user name display in Navbar. `cerrarSesion()` in App.jsx clears localStorage + redirects.
+- **Resolved:** 2026-05-27
 
 ### 9. Contact form has no submit handler — does nothing
 - **File:** `src/pages/Home.jsx` (lines 115–120) and `src/pages/Contact.jsx` (lines 16–21)
@@ -144,17 +130,9 @@
 - **Why it matters:** Inconsistent data damages credibility. "Satisficed" is not a word in this context.
 - **Fix:** Unify stats in a shared data file or component. Fix the typo.
 
-### 23. `admin.scss` has duplicate `.servicios-list h3` block
-- **File:** `src/styles/admin.scss` (lines 64–69 and 71–76)
-- **Description:** The `.servicios-list h3` selector is defined twice with identical content.
-- **Why it matters:** Dead/duplicated CSS. Increases bundle size (minor) and causes confusion.
-- **Fix:** Remove the duplicate block.
+### 23. ~~`admin.scss` duplicate `.servicios-list h3` block~~ ✅ RESOLVED (commit `e6e727f`)
 
-### 24. `admin.scss` has `margin-bottom: 2 rem` (space in value)
-- **File:** `src/styles/admin.scss` (line 12)
-- **Description:** `margin-bottom: 2 rem;` — the space between `2` and `rem` makes this an invalid CSS value. Sass may or may not catch this.
-- **Why it matters:** The h1 margin-bottom won't apply.
-- **Fix:** Change to `margin-bottom: 2rem;`.
+### 24. ~~`admin.scss` `margin-bottom: 2 rem`~~ ✅ RESOLVED (commit `e6e727f`)
 
 ### 25. Auth.jsx uses `alert()` for error messages
 - **File:** `src/pages/Auth.jsx` (lines 42, 47)
