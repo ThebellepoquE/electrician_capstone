@@ -10,6 +10,8 @@ function Auth() {
     email: '',
     password: ''
   });
+  const [error, setError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -20,7 +22,8 @@ function Auth() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(' Iniciando login...');
+    setError('');
+    setIsSubmitting(true);
 
     try {
       const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
@@ -32,7 +35,6 @@ function Auth() {
       });
 
       const data = await response.json();
-      console.log(' Datos recibidos:', data);
 
       if (data.success) {
         localStorage.setItem('authToken', data.token);
@@ -40,11 +42,12 @@ function Auth() {
         window.dispatchEvent(new CustomEvent('userChanged', { detail: data.user }));
         navigate('/admin');
       } else {
-        alert('Error: ' + data.error);
+        setError(data.message || data.error || 'Error al iniciar sesión');
       }
-    } catch (error) {
-      console.error(' Error de conexión:', error);
-      alert('Error al conectar con el servidor');
+    } catch {
+      setError('Error al conectar con el servidor. Inténtalo de nuevo.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -64,6 +67,8 @@ function Auth() {
           </div>
 
           <form onSubmit={handleSubmit} className="auth-form">
+            {error && <p className="auth-error" role="alert">{error}</p>}
+
             <div className="form-group">
               <label>Email</label>
               <input
@@ -89,8 +94,8 @@ function Auth() {
             </div>
 
             {/* 👇 BOTÓN QUE FALTABA */}
-            <button type="submit" className="auth-btn">
-              Acceder
+            <button type="submit" className="auth-btn" disabled={isSubmitting}>
+              {isSubmitting ? 'Ingresando...' : 'Acceder'}
             </button>
           </form>
         </div>
