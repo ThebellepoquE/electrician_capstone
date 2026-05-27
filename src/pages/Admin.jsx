@@ -9,6 +9,19 @@ function Admin() {
         description: '',
         category: 'instalación'
     });
+    const [modoEdicion, setModoEdicion] = useState(false);
+    const [editandoId, setEditandoId] = useState(null);
+
+    const getAuthHeaders = () => ({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('authToken') || ''}`,
+    });
+
+    const cancelarEdicion = () => {
+        setNuevoServicio({ name: '', description: '', category: 'instalación' });
+        setEditandoId(null);
+        setModoEdicion(false);
+    };
 
     // Cargar servicios al montar el componente
     const cargarServicios = async () => {
@@ -34,9 +47,7 @@ function Admin() {
         try {
             await fetch(`${API_BASE_URL}/api/services`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: getAuthHeaders(),
                 body: JSON.stringify(nuevoServicio)
             });
             cargarServicios();
@@ -50,12 +61,45 @@ function Admin() {
         }
     };
 
+    // Iniciar edición de un servicio
+    const iniciarEdicion = (servicio) => {
+        setNuevoServicio({
+            name: servicio.name,
+            description: servicio.description,
+            category: servicio.category,
+        });
+        setEditandoId(servicio.id);
+        setModoEdicion(true);
+    };
+
+    // Actualizar servicio
+    const actualizarServicio = async () => {
+        try {
+            const res = await fetch(`${API_BASE_URL}/api/services/${editandoId}`, {
+                method: 'PUT',
+                headers: getAuthHeaders(),
+                body: JSON.stringify(nuevoServicio),
+            });
+            if (res.ok) {
+                cargarServicios();
+                cancelarEdicion();
+            }
+        } catch (error) {
+            console.error('Error actualizando servicio:', error);
+        }
+    };
+
     // Eliminar servicio
     const eliminarServicio = async (id) => {
-        await fetch(`${API_BASE_URL}/api/services/${id}`, {
-            method: 'DELETE'
-        });
-        cargarServicios();
+        try {
+            await fetch(`${API_BASE_URL}/api/services/${id}`, {
+                method: 'DELETE',
+                headers: getAuthHeaders(),
+            });
+            cargarServicios();
+        } catch (error) {
+            console.error('Error eliminando servicio:', error);
+        }
     };
 
     useEffect(() => {
@@ -66,9 +110,9 @@ function Admin() {
         <div className="admin-container">
             <h1>Panel de Administración - Gestión de Servicios</h1>
 
-            {/* Formulario para añadir nuevo servicio */}
+            {/* Formulario para añadir/editar servicio */}
             <div className="admin-form">
-                <h2>Añadir Nuevo Servicio</h2>
+                <h2>{modoEdicion ? 'Editar Servicio' : 'Añadir Nuevo Servicio'}</h2>
                 <div className="form-group">
                     <input
                         type="text"
@@ -94,9 +138,14 @@ function Admin() {
                         <option value="mantenimiento">Mantenimiento</option>
                         <option value="emergencia">Emergencia</option>
                     </select>
-                    <button onClick={agregarServicio} className="btn-dark">
-                        Añadir Servicio
+                    <button onClick={modoEdicion ? actualizarServicio : agregarServicio} className="btn-dark">
+                        {modoEdicion ? 'Actualizar Servicio' : 'Añadir Servicio'}
                     </button>
+                    {modoEdicion && (
+                        <button onClick={cancelarEdicion} className="btn-cancel">
+                            Cancelar
+                        </button>
+                    )}
                 </div>
             </div>
 
@@ -119,11 +168,20 @@ function Admin() {
                                 )}
                             </div>
                         </div>
-                        <button
-                            onClick={() => eliminarServicio(servicio.id)}
-                            className="btn-danger">
-                            Eliminar
-                        </button>
+                        <div className="servicio-actions">
+                            <button
+                                onClick={() => iniciarEdicion(servicio)}
+                                className="btn-edit"
+                            >
+                                Editar
+                            </button>
+                            <button
+                                onClick={() => eliminarServicio(servicio.id)}
+                                className="btn-danger"
+                            >
+                                Eliminar
+                            </button>
+                        </div>
                     </div>
                 ))}
             </div>

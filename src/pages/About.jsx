@@ -1,4 +1,4 @@
-import React from 'react';
+import { siteStats } from '../config/stats';
 import '../styles/home.scss';
 
 function About() {
@@ -18,14 +18,12 @@ function About() {
                 <h4>10+</h4>
                 <p>Years Experience</p>
               </div>
-              <div className="stat">
-                <h4>50+</h4>
-                <p>Projects Completed</p>
-              </div>
-              <div className="stat">
-                <h4>40+</h4>
-                <p>Customer Satisficed</p>
-              </div>
+              {siteStats.map((stat) => (
+                <div className="stat" key={stat.label}>
+                  <h4>{stat.value}</h4>
+                  <p>{stat.label}</p>
+                </div>
+              ))}
               <div className="stat">
                 <h4>24/7</h4>
                 <p>Emergency Service</p>
