@@ -120,11 +120,10 @@
 - **Why it matters:** The register endpoint exists but is unusable from the frontend.
 - **Fix:** Add a tab or toggle on the Auth page to switch between Login and Register forms.
 
-### 19. Admin.jsx has no edit/update functionality
+### 19. ~~Admin.jsx has no edit/update functionality~~ ✅ RESOLVED
 - **File:** `src/pages/Admin.jsx`
-- **Description:** Only add and delete are implemented. The backend has `PUT /api/services/:id` but the admin page has no edit button or form.
-- **Why it matters:** Incomplete CRUD. Admins cannot fix typos or update service details.
-- **Fix:** Add an "Edit" button per service that populates the form and switches the submit action to PUT.
+- **Status:** Fixed — Edit button per service, edit mode with form population, cancel button, PUT request with auth token. Admin CRUD complete.
+- **Resolved:** 2026-05-27 (admin-edit-auth change)
 
 ### 20. `Home.jsx` does too much — routing, scrolling, data fetching, and four sections in one file
 - **File:** `src/pages/Home.jsx` (~130 lines)
